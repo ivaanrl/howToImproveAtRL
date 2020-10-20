@@ -1,3 +1,4 @@
+import SidebarItem from "./sidebarItem";
 import {
   SidebarContainer,
   SidebarItemContainer,
@@ -7,15 +8,14 @@ import {
 const Sidebar = () => {
   return (
     <SidebarContainer>
-      <SidebarItemContainer active={false}>
-        <p>This is a sidebar Item</p>
-        <DashIcon />
-      </SidebarItemContainer>
-
-      <SidebarItemContainer active={true}>
-        <p>This is a sidebar Item</p>
-        <DashIcon />
-      </SidebarItemContainer>
+      <SidebarItem
+        text="Training packs"
+        options={[{ urlPrefix: "/training_packs/", name: "Hard Redirects" }]}
+      />
+      <SidebarItem
+        text="Mechanics"
+        options={[{ urlPrefix: "/learn_mechanics/", name: "Kickoffs" }]}
+      />
     </SidebarContainer>
   );
 };
