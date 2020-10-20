@@ -60,7 +60,7 @@ const SidebarItem = ({ text, options }: Props) => {
         <p>{text}</p>
         <animated.div style={springProps}>
           {" "}
-          <ChevronDownIcon />{" "}
+          <ChevronDownIcon active={active} />{" "}
         </animated.div>
       </SidebarItemContainer>
 

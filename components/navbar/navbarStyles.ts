@@ -6,8 +6,9 @@ export const NavbarContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   background: ${(props) => (props.theme as ThemeInterface).bgColor};
-  height: 40px;
+  height: 50px;
 `;
 
 export const MenuButtonContainer = styled.button`
@@ -30,4 +31,18 @@ export const MenuOpenIcon = styled(MenuOpen)`
   color: ${(props) => (props.theme as ThemeInterface).mainTextColor};
   height: 40px;
   width: 40px;
+`;
+
+export const SteamLoginButtonContainer = styled.button`
+  background-color: transparent;
+  border: none;
+  outline: none;
+  margin-right: 20px;
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:active: {
+    outline: none;
+  }
 `;

@@ -27,8 +27,8 @@ export const SidebarItemContainer = styled.button<{ active: boolean }>`
   background: ${(props) => (props.theme as ThemeInterface).bgColor};
   border: none;
   border-bottom: 1px solid
-    ${(props) => (props.theme as ThemeInterface).mutedTextColor};
-  color: ${(props) => (props.theme as ThemeInterface).mutedTextColor};
+    ${(props) => (props.theme as ThemeInterface).mainTextColor};
+  color: ${(props) => (props.theme as ThemeInterface).mainTextColor};
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -52,8 +52,9 @@ export const SidebarItemContainer = styled.button<{ active: boolean }>`
   ${(props) =>
     props.active &&
     css`
-      color: ${(props) => (props.theme as ThemeInterface).mainTextColor};
-      border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+      color: ${(props) => (props.theme as ThemeInterface).highlightTextColor};
+      border-bottom: 1px solid
+        ${(props) => (props.theme as ThemeInterface).highlightTextColor};
     `};
 `;
 
@@ -70,9 +71,15 @@ export const SidebarOptionContainer = styled.div`
     font-weight: bold;
     color: ${(props) => (props.theme as ThemeInterface).mainTextColor};
   }
+
+  &:hover {
+    cursor: pointer;
+    background-color: ${(props) =>
+      (props.theme as ThemeInterface).bgColorDarkHighlight};
+  }
 `;
 
-export const ChevronDownIcon = styled(ChevronDown)`
+export const ChevronDownIcon = styled(ChevronDown)<{ active: boolean }>`
   color: ${(props) => (props.theme as ThemeInterface).mainTextColor};
   height: 40px;
   width: 40px;
@@ -81,6 +88,12 @@ export const ChevronDownIcon = styled(ChevronDown)`
   top: calc(50% - 23px);
   right: 0;
   display: inline-block;
+
+  ${(props) =>
+    props.active &&
+    css`
+      color: ${(props) => (props.theme as ThemeInterface).highlightTextColor};
+    `};
 `;
 
 export const SidebarButtonContainer = styled.div`
@@ -93,8 +106,4 @@ export const SidebarButtonContainer = styled.div`
   outline: none;
   padding-left: 10px;
   padding-right: 10px;
-
-  &:hover {
-    cursor: pointer;
-  }
 `;

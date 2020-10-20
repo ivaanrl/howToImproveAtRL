@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { useSpring, animated } from "react-spring";
-import { useMeasure } from "react-use";
 import Sidebar from "../sidebar/sidebar";
 import {
   NavbarContainer,
   MenuOpenIcon,
   MenuButtonContainer,
+  SteamLoginButtonContainer,
 } from "./navbarStyles";
 import useWindowDimensions from "../../shared/customHooks/useWindowsDimensions";
 
@@ -26,6 +26,9 @@ const Navbar = () => {
   };
 
   const [menuButtonSpringProps, setMenuButtonSpringProps] = useSpring(() => ({
+    from: {
+      transform: "rotate(180deg)",
+    },
     opacity: 1,
   }));
   const [navbarSpringProps, setNavbarSpringProps] = useSpring(() => ({
@@ -71,6 +74,10 @@ const Navbar = () => {
             <MenuOpenIcon />
           </animated.div>
         </MenuButtonContainer>
+
+        <SteamLoginButtonContainer>
+          <img src="/images/loginButtons/steam.png" />
+        </SteamLoginButtonContainer>
       </NavbarContainer>
 
       <animated.div style={navbarSpringProps}>
