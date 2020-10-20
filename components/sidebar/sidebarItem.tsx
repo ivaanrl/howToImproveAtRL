@@ -1,11 +1,11 @@
-import { useState } from "react";
-import { useTransition, animated } from "react-spring";
+import { useEffect, useState } from "react";
+import { useSpring, animated } from "react-spring";
 import {
   SidebarItemContainer,
-  DashIcon,
   ChevronDownIcon,
   SidebarOptionContainer,
 } from "./sidebarStyles";
+import { useMeasure } from "react-use";
 import Link from "next/link";
 
 interface Props {
@@ -17,50 +17,69 @@ interface Props {
 }
 
 const SidebarItem = ({ text, options }: Props) => {
+  const closedHeight = "0px";
+  const [ref, { height }] = useMeasure();
   const [active, setActive] = useState<boolean>(false);
+  const [contentHeight, setContentHeight] = useState<string | number>(
+    closedHeight
+  );
 
   const handleClick = () => {
+    if (active) {
+      setSpringProps({ transform: "rotateX(180deg)", marginBottom: "10px" });
+    } else {
+      setSpringProps({ transform: "rotateX(0deg)", marginBottom: "0px" });
+    }
     setActive(!active);
   };
 
-  const [toggle, setToggle] = useState<boolean>(false);
+  const [springProps, setSpringProps] = useSpring(() => ({
+    transform: "rotateX(180deg)",
+    marginBottom: "10px",
+  }));
 
-  const transitions = useTransition(active, null, {
-    enter: { opacity: 1, display: "inline-block", rotate: "100deg" },
-    leave: { opacity: 0 },
+  const expand = useSpring({
+    height: active ? `${contentHeight}px` : closedHeight,
+    opacity: active ? 1 : 0,
   });
+
+  useEffect(() => {
+    //Sets initial height
+    setContentHeight(height);
+
+    //Adds resize event listener
+    window.addEventListener("resize", () => setContentHeight(height));
+
+    // Clean-up
+    return window.removeEventListener("resize", () => setContentHeight(height));
+  }, [height]);
 
   return (
     <>
       <SidebarItemContainer active={active} onClick={handleClick}>
         <p>{text}</p>
-        {transitions.map(({ item, key, props }) =>
-          item ? (
-            <animated.div style={props} key={key}>
-              {" "}
-              <ChevronDownIcon />{" "}
-            </animated.div>
-          ) : (
-            <animated.div style={props} key={key}>
-              {" "}
-              <DashIcon />{" "}
-            </animated.div>
-          )
-        )}
+        <animated.div style={springProps}>
+          {" "}
+          <ChevronDownIcon />{" "}
+        </animated.div>
       </SidebarItemContainer>
 
-      {active
-        ? options.map((item, index) => {
-            const { urlPrefix, name } = item;
-            return (
-              <Link href={`${urlPrefix + name}`}>
-                <SidebarOptionContainer key={index}>
-                  <a>{item.name}</a>
-                </SidebarOptionContainer>
-              </Link>
-            );
-          })
-        : null}
+      <animated.div style={expand}>
+        <div ref={ref}>
+          {active
+            ? options.map((item, index) => {
+                const { urlPrefix, name } = item;
+                return (
+                  <Link href={`${urlPrefix + name}`}>
+                    <SidebarOptionContainer key={index}>
+                      <a>{item.name}</a>
+                    </SidebarOptionContainer>
+                  </Link>
+                );
+              })
+            : null}
+        </div>
+      </animated.div>
     </>
   );
 };

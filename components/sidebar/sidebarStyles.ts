@@ -92,4 +92,5 @@ export const ChevronDownIcon = styled(ChevronDown)`
   position: absolute;
   top: calc(50% - 23px);
   right: 0;
+  display: inline-block;
 `;
