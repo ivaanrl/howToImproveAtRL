@@ -8,8 +8,10 @@ import {
   SteamLoginButtonContainer,
 } from "./navbarStyles";
 import useWindowDimensions from "../../shared/customHooks/useWindowsDimensions";
+import { signIn, signOut, useSession } from "next-auth/client";
 
 const Navbar = () => {
+  const [session, loading] = useSession();
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const { width } = useWindowDimensions();
 
@@ -66,6 +68,10 @@ const Navbar = () => {
     setSidebarOpen(!sidebarOpen);
   };
 
+  const handleSteamAuth = () => {
+    signIn();
+  };
+
   return (
     <div>
       <NavbarContainer>
@@ -75,7 +81,8 @@ const Navbar = () => {
           </animated.div>
         </MenuButtonContainer>
 
-        <SteamLoginButtonContainer>
+        {session && <div style={{ color: "red" }}>Signed in!</div>}
+        <SteamLoginButtonContainer onClick={handleSteamAuth}>
           <img src="/images/loginButtons/steam.png" />
         </SteamLoginButtonContainer>
       </NavbarContainer>
