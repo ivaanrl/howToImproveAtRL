@@ -1,18 +1,16 @@
 import styled, { css } from "styled-components";
 import { ThemeInterface } from "../../styles/theme";
-import { Dash } from "@styled-icons/bootstrap/Dash";
 import { ChevronDown } from "@styled-icons/boxicons-regular/ChevronDown";
 
 export const SidebarContainer = styled.div`
   position: absolute;
-  top: 0;
   bottom: 0;
   left: 0;
   background: ${(props) => (props.theme as ThemeInterface).bgColor};
   width: 100%;
   height: 100%;
   box-shadow: 1;
-  @media (min-width: 600px) {
+  /*@media (min-width: 600px) {
     width: 35%;
   }
 
@@ -22,7 +20,7 @@ export const SidebarContainer = styled.div`
 
   @media (min-width: 1200px) {
     width: 18%;
-  }
+  }*/
 `;
 
 export const SidebarItemContainer = styled.button<{ active: boolean }>`
@@ -74,16 +72,6 @@ export const SidebarOptionContainer = styled.div`
   }
 `;
 
-export const DashIcon = styled(Dash)`
-  color: ${(props) => (props.theme as ThemeInterface).mutedTextColor};
-  height: 40px;
-  width: 40px;
-  padding-right: 10px;
-  position: absolute;
-  top: calc(50% - 23px);
-  right: 0;
-`;
-
 export const ChevronDownIcon = styled(ChevronDown)`
   color: ${(props) => (props.theme as ThemeInterface).mainTextColor};
   height: 40px;
@@ -93,4 +81,20 @@ export const ChevronDownIcon = styled(ChevronDown)`
   top: calc(50% - 23px);
   right: 0;
   display: inline-block;
+`;
+
+export const SidebarButtonContainer = styled.div`
+  background-color: ${(props) => (props.theme as ThemeInterface).bgColor};
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border: none;
+  outline: none;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;

@@ -70,8 +70,8 @@ const SidebarItem = ({ text, options }: Props) => {
             ? options.map((item, index) => {
                 const { urlPrefix, name } = item;
                 return (
-                  <Link href={`${urlPrefix + name}`}>
-                    <SidebarOptionContainer key={index}>
+                  <Link href={`${urlPrefix + name}`} key={index}>
+                    <SidebarOptionContainer>
                       <a>{item.name}</a>
                     </SidebarOptionContainer>
                   </Link>

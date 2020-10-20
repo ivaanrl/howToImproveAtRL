@@ -1,9 +1,19 @@
 import SidebarItem from "./sidebarItem";
-import { SidebarContainer } from "./sidebarStyles";
+import { SidebarContainer, SidebarButtonContainer } from "./sidebarStyles";
+import { MenuOpenIcon, MenuButtonContainer } from "../navbar/navbarStyles";
 
-const Sidebar = () => {
+interface Props {
+  closeSidebar: () => void;
+}
+
+const Sidebar = ({ closeSidebar }: Props) => {
   return (
     <SidebarContainer>
+      <SidebarButtonContainer>
+        <MenuButtonContainer onClick={closeSidebar}>
+          <MenuOpenIcon />
+        </MenuButtonContainer>
+      </SidebarButtonContainer>
       <SidebarItem
         text="Mechanics"
         options={[

@@ -6,8 +6,8 @@ export interface ThemeInterface {
 }
 
 export const theme: ThemeInterface = {
-  bgColor: "#002233",
-  bgColorDark: "#010c2e",
+  bgColorDark: "#002233",
+  bgColor: "#010c2e",
   mainTextColor: "#FFFFFF",
   mutedTextColor: "#ababab",
 };
