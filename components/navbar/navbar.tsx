@@ -1,15 +1,21 @@
 import { useState, useEffect } from "react";
 import { useSpring, animated } from "react-spring";
 import Sidebar from "../sidebar/sidebar";
+import NavbarPopper from "./navbarPopper";
 import {
   NavbarContainer,
   MenuOpenIcon,
   MenuButtonContainer,
-  SteamLoginButtonContainer,
+  SignInWithGoogleButton,
+  SignedInButton,
+  ProfilePictureContainer,
+  ChevronDownIcon,
 } from "./navbarStyles";
 import useWindowDimensions from "../../shared/customHooks/useWindowsDimensions";
+import { signIn, useSession } from "next-auth/client";
 
 const Navbar = () => {
+  const [session, loading] = useSession();
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const { width } = useWindowDimensions();
 
@@ -42,7 +48,6 @@ const Navbar = () => {
   }));
 
   useEffect(() => {
-    console.log(getSidebarWidth());
     setNavbarSpringProps({ width: `${getSidebarWidth()}px` });
   }, [width]);
 
@@ -66,6 +71,12 @@ const Navbar = () => {
     setSidebarOpen(!sidebarOpen);
   };
 
+  const handleSteamAuth = () => {
+    signIn("google");
+  };
+
+  console.log(session);
+
   return (
     <div>
       <NavbarContainer>
@@ -75,9 +86,14 @@ const Navbar = () => {
           </animated.div>
         </MenuButtonContainer>
 
-        <SteamLoginButtonContainer>
-          <img src="/images/loginButtons/steam.png" />
-        </SteamLoginButtonContainer>
+        {session ? (
+          <NavbarPopper />
+        ) : (
+          <SignInWithGoogleButton onClick={handleSteamAuth}>
+            {" "}
+            Sign in with Google
+          </SignInWithGoogleButton>
+        )}
       </NavbarContainer>
 
       <animated.div style={navbarSpringProps}>
