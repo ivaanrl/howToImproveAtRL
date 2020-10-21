@@ -19,7 +19,14 @@ const options = {
       clientSecret: process.env.google_secret,
     }),
   ],
-  database: process.env.mysql_host,
+  database: ({
+    type: "mysql",
+    host: process.env.mysql_host,
+    port: 3306,
+    username: process.env.mysql_user,
+    password: process.env.mysql_password,
+    database: process.env.mysql_database,
+  } as unknown) as string,
 };
 
 export default (req: NextApiRequest, res: NextApiResponse) => {
