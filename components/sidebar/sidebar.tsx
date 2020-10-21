@@ -9,7 +9,8 @@ interface Props {
 
 const Sidebar = ({ closeSidebar }: Props) => {
   const { state } = useContext(store);
-  const { training_packs } = state;
+  const { trainingPacks } = state;
+
   return (
     <SidebarContainer>
       <SidebarButtonContainer>
@@ -19,40 +20,83 @@ const Sidebar = ({ closeSidebar }: Props) => {
       </SidebarButtonContainer>
       <SidebarItem
         text="Mechanics"
-        options={[
-          { urlPrefix: "/learn_mechanics/", name: "Kickoffs" },
-          { urlPrefix: "/learn_mechanics/", name: "Fast Aerials" },
-          { urlPrefix: "/learn_mechanics/", name: "Flip Resets" },
-          { urlPrefix: "/learn_mechanics/", name: "Ceilling Shots" },
+        urlPrefix="/learn_mechanics/"
+        subItems={[
+          {
+            difficulty: "Hard",
+            featured: 1,
+            training_pack_author: "Poquito",
+            training_pack_name: "this is a name",
+            training_pack_id: 1,
+          },
+          {
+            difficulty: "Hard",
+            featured: 1,
+            training_pack_author: "Poquito",
+            training_pack_name: "this is a name",
+            training_pack_id: 1,
+          },
+          {
+            difficulty: "Hard",
+            featured: 1,
+            training_pack_author: "Poquito",
+            training_pack_name: "this is a name",
+            training_pack_id: 1,
+          },
+          {
+            difficulty: "Hard",
+            featured: 1,
+            training_pack_author: "Poquito",
+            training_pack_name: "this is a name",
+            training_pack_id: 1,
+          },
         ]}
       />
 
       <SidebarItem
         text="Training packs"
-        options={[
-          { urlPrefix: "/training_packs/", name: "Hard Redirects" },
-          { urlPrefix: "/training_packs/", name: "GoalKeeper" },
-          { urlPrefix: "/training_packs/", name: "Passing" },
-        ]}
+        urlPrefix="/training_packs/"
+        subItems={trainingPacks}
       />
       <SidebarItem
         text="Mechanics"
-        options={[
-          { urlPrefix: "/learn_mechanics/", name: "Kickoffs" },
-          { urlPrefix: "/learn_mechanics/", name: "Fast Aerials" },
-          { urlPrefix: "/learn_mechanics/", name: "Flip Resets" },
-          { urlPrefix: "/learn_mechanics/", name: "Ceilling Shots" },
+        urlPrefix="/learn_mechanics/"
+        subItems={[
+          {
+            difficulty: "Hard",
+            featured: 1,
+            training_pack_author: "Poquito",
+            training_pack_name: "this is a name",
+            training_pack_id: 1,
+          },
+          {
+            difficulty: "Hard",
+            featured: 1,
+            training_pack_author: "Poquito",
+            training_pack_name: "this is a name",
+            training_pack_id: 1,
+          },
+          {
+            difficulty: "Hard",
+            featured: 1,
+            training_pack_author: "Poquito",
+            training_pack_name: "this is a name",
+            training_pack_id: 1,
+          },
+          {
+            difficulty: "Hard",
+            featured: 1,
+            training_pack_author: "Poquito",
+            training_pack_name: "this is a name",
+            training_pack_id: 1,
+          },
         ]}
       />
 
       <SidebarItem
         text="Training packs"
-        options={[
-          { urlPrefix: "/training_packs/", name: "Hard Redirects" },
-          { urlPrefix: "/training_packs/", name: "GoalKeeper" },
-          { urlPrefix: "/training_packs/", name: "Passing" },
-          { urlPrefix: "/training_packs/", name: "Air Dribble" },
-        ]}
+        urlPrefix="/training_packs/"
+        subItems={trainingPacks}
       />
     </SidebarContainer>
   );

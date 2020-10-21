@@ -7,16 +7,15 @@ import {
 } from "./sidebarStyles";
 import { useMeasure } from "react-use";
 import Link from "next/link";
+import { TrainingPack, Mechanic } from "../../store";
 
 interface Props {
   text: string;
-  options: {
-    urlPrefix: string;
-    name: string;
-  }[];
+  urlPrefix: string;
+  subItems: TrainingPack[] | Mechanic[];
 }
 
-const SidebarItem = ({ text, options }: Props) => {
+const SidebarItem = ({ text, urlPrefix, subItems }: Props) => {
   const closedHeight = "0px";
   const [ref, { height }] = useMeasure();
   const [active, setActive] = useState<boolean>(false);
@@ -67,12 +66,14 @@ const SidebarItem = ({ text, options }: Props) => {
       <animated.div style={expand}>
         <div ref={ref}>
           {active
-            ? options.map((item, index) => {
-                const { urlPrefix, name } = item;
+            ? (subItems as any).map((item: Mechanic | TrainingPack, index) => {
                 return (
-                  <Link href={`${urlPrefix + name}`} key={index}>
+                  <Link
+                    href={`${urlPrefix + item.training_pack_name}`}
+                    key={index}
+                  >
                     <SidebarOptionContainer>
-                      <a>{item.name}</a>
+                      <a>{item.training_pack_name}</a>
                     </SidebarOptionContainer>
                   </Link>
                 );
