@@ -1,17 +1,34 @@
 import Head from "next/head";
-import { useState } from "react";
-import { useMeasure } from "react-use";
-import { useSpring, animated } from "react-spring";
-import Navbar from "../components/navbar/navbar";
-import Sidebar from "../components/sidebar/sidebar";
+import { GetStaticProps } from "next";
+import { getFeaturedTrainingPacks } from "../lib/trainingPacks";
+import { useContext, useEffect } from "react";
+import { store } from "../store";
 
-export default function Home() {
+export default function Home({ trainingPacks }: { trainingPacks: any }) {
+  const { dispatch } = useContext(store);
+
+  useEffect(() => {
+    dispatch({
+      type: "POPULATE_SIDEBAR",
+      payload: { trainingPacks: JSON.parse(trainingPacks) },
+    });
+  }, []);
+
   return (
     <>
       <Head>
         <title>How to improve at Rocket League</title>
       </Head>
-      <Navbar />
     </>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  const trainingPacks = await getFeaturedTrainingPacks();
+
+  return {
+    props: {
+      trainingPacks,
+    },
+  };
+};

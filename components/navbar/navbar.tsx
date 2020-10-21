@@ -72,8 +72,6 @@ const Navbar = () => {
     signIn("google");
   };
 
-  console.log(session);
-
   return (
     <div>
       <NavbarContainer>
