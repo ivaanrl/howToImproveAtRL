@@ -7,9 +7,6 @@ import {
   MenuOpenIcon,
   MenuButtonContainer,
   SignInWithGoogleButton,
-  SignedInButton,
-  ProfilePictureContainer,
-  ChevronDownIcon,
 } from "./navbarStyles";
 import useWindowDimensions from "../../shared/customHooks/useWindowsDimensions";
 import { signIn, useSession } from "next-auth/client";
