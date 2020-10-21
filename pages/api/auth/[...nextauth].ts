@@ -4,7 +4,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 const options = {
   providers: [
-    {
+    /*{ NEED TO FIGURE OUT HOW TO HANDLE STEAM LOGIN
       id: "steam",
       name: "Steam",
       type: "oauth",
@@ -13,12 +13,15 @@ const options = {
       authorizationUrl: `https://steamcommunity.com/oauth/login?response_type=token&client_id=${process.env.steam_secret}`,
       accessTokenUrl: `http://redirect/uri/here#access_token=token_here&token_type=steam`,
       clientId: process.env.steam_secret,
-    },
+    },*/
+    Providers.Google({
+      clientId: process.env.google_client_id,
+      clientSecret: process.env.google_secret,
+    }),
   ],
   database: process.env.mysql_host,
 };
 
 export default (req: NextApiRequest, res: NextApiResponse) => {
-  console.log(process.env.steam_secret);
   return NextAuth(req, res, options);
 };

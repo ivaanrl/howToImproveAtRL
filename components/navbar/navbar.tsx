@@ -5,7 +5,10 @@ import {
   NavbarContainer,
   MenuOpenIcon,
   MenuButtonContainer,
-  SteamLoginButtonContainer,
+  SignInWithGoogleButton,
+  SignedInButton,
+  ProfilePictureContainer,
+  ChevronDownIcon,
 } from "./navbarStyles";
 import useWindowDimensions from "../../shared/customHooks/useWindowsDimensions";
 import { signIn, signOut, useSession } from "next-auth/client";
@@ -44,7 +47,6 @@ const Navbar = () => {
   }));
 
   useEffect(() => {
-    console.log(getSidebarWidth());
     setNavbarSpringProps({ width: `${getSidebarWidth()}px` });
   }, [width]);
 
@@ -69,8 +71,10 @@ const Navbar = () => {
   };
 
   const handleSteamAuth = () => {
-    signIn();
+    signIn("google");
   };
+
+  console.log(session);
 
   return (
     <div>
@@ -81,10 +85,17 @@ const Navbar = () => {
           </animated.div>
         </MenuButtonContainer>
 
-        {session && <div style={{ color: "red" }}>Signed in!</div>}
-        <SteamLoginButtonContainer onClick={handleSteamAuth}>
-          <img src="/images/loginButtons/steam.png" />
-        </SteamLoginButtonContainer>
+        {session ? (
+          <SignedInButton>
+            <ProfilePictureContainer image={session.user.image} />
+            {session.user.name.split(" ")[0]} <ChevronDownIcon />
+          </SignedInButton>
+        ) : (
+          <SignInWithGoogleButton onClick={handleSteamAuth}>
+            {" "}
+            Sign in with Google
+          </SignInWithGoogleButton>
+        )}
       </NavbarContainer>
 
       <animated.div style={navbarSpringProps}>
