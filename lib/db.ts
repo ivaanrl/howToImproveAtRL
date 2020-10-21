@@ -9,9 +9,15 @@ const db = mysql({
   },
 });
 
-export const query = async (query: any) => {
+export const executeQuery = async ({
+  query,
+  values,
+}: {
+  query: string;
+  values: any;
+}) => {
   try {
-    const results = await db.query(query);
+    const results = await db.query(query, values);
     await db.end();
     return results;
   } catch (error) {

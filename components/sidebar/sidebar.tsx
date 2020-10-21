@@ -17,19 +17,19 @@ const Sidebar = ({ closeSidebar }: Props) => {
       <SidebarItem
         text="Mechanics"
         options={[
-          { urlPrefix: "/learn_mechanics/", name: "Kickoffs" },
-          { urlPrefix: "/learn_mechanics/", name: "Fast Aerials" },
-          { urlPrefix: "/learn_mechanics/", name: "Flip Resets" },
-          { urlPrefix: "/learn_mechanics/", name: "Ceilling Shots" },
+          { urlPrefix: "/api/learn_mechanics/", name: "Kickoffs" },
+          { urlPrefix: "/api/learn_mechanics/", name: "Fast Aerials" },
+          { urlPrefix: "/api/learn_mechanics/", name: "Flip Resets" },
+          { urlPrefix: "/api/learn_mechanics/", name: "Ceilling Shots" },
         ]}
       />
 
       <SidebarItem
         text="Training packs"
         options={[
-          { urlPrefix: "/training_packs/", name: "Hard Redirects" },
-          { urlPrefix: "/training_packs/", name: "GoalKeeper" },
-          { urlPrefix: "/training_packs/", name: "Passing" },
+          { urlPrefix: "/api/training_packs/", name: "Hard Redirects" },
+          { urlPrefix: "/api/training_packs/", name: "GoalKeeper" },
+          { urlPrefix: "/api/training_packs/", name: "Passing" },
         ]}
       />
       <SidebarItem
