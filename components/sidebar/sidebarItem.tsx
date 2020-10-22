@@ -12,7 +12,7 @@ import { TrainingPack, Mechanic } from "../../store";
 interface Props {
   text: string;
   urlPrefix: string;
-  subItems: TrainingPack[] | Mechanic[];
+  subItems: { [creator: string]: TrainingPack[] | Mechanic[] };
 }
 
 const SidebarItem = ({ text, urlPrefix, subItems }: Props) => {
@@ -66,14 +66,11 @@ const SidebarItem = ({ text, urlPrefix, subItems }: Props) => {
       <animated.div style={expand}>
         <div ref={ref}>
           {active
-            ? (subItems as any).map((item: Mechanic | TrainingPack, index) => {
+            ? Object.keys(subItems).map((creator: string, index: number) => {
                 return (
-                  <Link
-                    href={`${urlPrefix + item.training_pack_name}`}
-                    key={index}
-                  >
+                  <Link href={`${urlPrefix + creator}`} key={index}>
                     <SidebarOptionContainer>
-                      <a>{item.training_pack_name}</a>
+                      <a>{creator}</a>
                     </SidebarOptionContainer>
                   </Link>
                 );

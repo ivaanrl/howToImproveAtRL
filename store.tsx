@@ -3,7 +3,18 @@ import { createContext, useReducer, Dispatch } from "react";
 export interface TrainingPack {
   difficulty: string;
   featured: number;
-  field_image: string;
+  field_image:
+    | "Mannfield"
+    | "DFH"
+    | "Urban"
+    | "Utopia"
+    | "Wasteland"
+    | "Aquadome"
+    | "Neo"
+    | "Champions"
+    | "Farmstead"
+    | "Salty"
+    | "Forbidden";
   training_pack_code: string;
   training_pack_name: string;
   traning_style: {};
@@ -20,11 +31,11 @@ export interface Mechanic {
   training_pack_id: number;
 }
 interface State {
-  trainingPacks: TrainingPack[];
+  featuredTrainingPackCreators: { [creator: string]: TrainingPack[] };
   mechanics: Mechanic[];
 }
 
-const initialState: State = { trainingPacks: [], mechanics: [] };
+const initialState: State = { featuredTrainingPackCreators: {}, mechanics: [] };
 const store = createContext<{ state: State; dispatch: Dispatch<any> }>({
   state: initialState,
   dispatch: () => null,

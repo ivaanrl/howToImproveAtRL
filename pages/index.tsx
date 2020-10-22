@@ -2,15 +2,19 @@ import Head from "next/head";
 import { GetStaticProps } from "next";
 import { getFeaturedTrainingPacks } from "../lib/trainingPacks";
 import { useContext, useEffect } from "react";
-import { store } from "../store";
+import { store, TrainingPack } from "../store";
 
-export default function Home({ trainingPacks }: { trainingPacks: any }) {
+export default function Home({
+  featuredTrainingPackCreators,
+}: {
+  featuredTrainingPackCreators: { [creator: string]: TrainingPack };
+}) {
   const { dispatch } = useContext(store);
 
   useEffect(() => {
     dispatch({
       type: "POPULATE_SIDEBAR",
-      payload: { trainingPacks: JSON.parse(trainingPacks) },
+      payload: { featuredTrainingPackCreators },
     });
   }, []);
 
@@ -24,11 +28,11 @@ export default function Home({ trainingPacks }: { trainingPacks: any }) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const trainingPacks = await getFeaturedTrainingPacks();
+  const featuredTrainingPackCreators = await getFeaturedTrainingPacks();
 
   return {
     props: {
-      trainingPacks,
+      featuredTrainingPackCreators,
     },
   };
 };
