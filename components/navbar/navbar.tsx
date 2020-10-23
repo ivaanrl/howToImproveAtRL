@@ -39,6 +39,7 @@ const Navbar = () => {
       position: "absolute" as any,
       top: 0,
       bottom: 0,
+      zIndex: 200,
     },
     transform: "translateX(-200px)",
     width: `${getSidebarWidth()}px`,

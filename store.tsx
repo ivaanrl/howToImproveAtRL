@@ -1,8 +1,22 @@
 import { createContext, useReducer, Dispatch } from "react";
 
+export interface ContentCreator {
+  content_creator_id: string;
+  tiktok: string;
+  youtube: string;
+  twitter: string;
+  steam: string;
+  instagram: string;
+  personal_website: string;
+  facebook: string;
+  discord: string;
+  twitch: string;
+  featured: 1 | 0;
+  name: string;
+}
+
 export interface TrainingPack {
-  difficulty: string;
-  featured: number;
+  training_pack_id: number;
   field_image:
     | "Mannfield"
     | "DFH"
@@ -15,11 +29,11 @@ export interface TrainingPack {
     | "Farmstead"
     | "Salty"
     | "Forbidden";
+  difficulty: string;
   training_pack_code: string;
-  training_pack_name: string;
   traning_style: {};
-  training_pack_author: string | null;
-  training_pack_id: number;
+  training_pack_name: string;
+  name: string;
 }
 
 export interface Mechanic {
@@ -31,7 +45,12 @@ export interface Mechanic {
   training_pack_id: number;
 }
 interface State {
-  featuredTrainingPackCreators: { [creator: string]: TrainingPack[] };
+  featuredTrainingPackCreators: {
+    [creator: string]: {
+      contentCreatorInfo: ContentCreator;
+      trainingPacks: TrainingPack[];
+    };
+  };
   mechanics: Mechanic[];
 }
 

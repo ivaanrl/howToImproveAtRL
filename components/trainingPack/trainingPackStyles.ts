@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 import { ThemeInterface } from "../../styles/theme";
+import { ClipboardCopy } from "@styled-icons/heroicons-solid/ClipboardCopy";
 
 export const TrainingPackContainer = styled.div`
   display: flex;
@@ -8,12 +9,12 @@ export const TrainingPackContainer = styled.div`
   width: 80%;
   margin: auto;
   margin-top: 30px;
-
   padding-bottom: 0px;
   background-color: ${(props) => (props.theme as ThemeInterface).bgColor};
   border-radius: 10px;
   height: 30vh;
   max-width: 460px;
+  overflow: hidden;
 
   @media (min-width: 800px) {
     width: 35%;
@@ -33,6 +34,75 @@ export const TrainingPackImageContainer = styled.div<{
   background-position: center top;
   width: 100%;
   height: 100%;
+  filter: blur(1px);
+  position: relative;
+  display: flex;
 `;
 
-export const TraningPackNameContaier = styled.div``;
+export const TraningPackNameContaier = styled.div`
+  color: ${(props) => (props.theme as ThemeInterface).mainTextColor};
+  font-weight: bold;
+  font-size: 20px;
+  position: absolute;
+  background-color: rgba(55, 55, 55, 0.6);
+  margin-top: 10px;
+  border-radius: 4px;
+  padding-right: 5px;
+  padding-left: 5px;
+`;
+
+export const TrainingPackCodeContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: ${(props) => (props.theme as ThemeInterface).bgColorDark};
+  border-radius: 10px;
+  margin-top: 10px;
+  padding: 4px;
+  padding-right: 0px;
+  height: 30px;
+`;
+
+export const TrainingPackCodeTextContainer = styled.textarea`
+  color: ${(props) => (props.theme as ThemeInterface).mainTextColor};
+  margin-right: 10px;
+  background-color: ${(props) => (props.theme as ThemeInterface).bgColorDark};
+  border: none;
+  height: 20px;
+  resize: none;
+  user-select: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:focus {
+    outline: none;
+  }
+`;
+
+export const TrainingPackCodeIconContainer = styled.button`
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border: none;
+  background-color: ${(props) =>
+    (props.theme as ThemeInterface).bgColorDarkHighlight};
+  height: 30px;
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:active {
+    background-color: ${(props) => (props.theme as ThemeInterface).bgColorDark};
+  }
+`;
+
+export const ClipboardCopyIcon = styled(ClipboardCopy)`
+  height: 20px;
+  width: 20px;
+  color: ${(props) => (props.theme as ThemeInterface).mainTextColor};
+`;

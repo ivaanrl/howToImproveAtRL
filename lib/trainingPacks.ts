@@ -1,31 +1,76 @@
-import { TrainingPack } from "../store";
+import { TrainingPack, ContentCreator } from "../store";
 import { executeQuery } from "./db";
 
 export const getFeaturedTrainingPacks = async () => {
   const result = await executeQuery({
-    query: "SELECT * FROM training_packs WHERE featured = ?",
+    query: `
+      SELECT training_pack_id,field_image,difficulty,training_pack_code,training_style, training_pack_name, content_creators.name FROM training_packs 
+      INNER JOIN(
+        SELECT name, content_creator_id, featured FROM content_creators
+      ) AS content_creators ON training_packs.training_pack_author = content_creators.content_creator_id
+      WHERE content_creators.featured = ?
+    `,
     values: ["1"],
   });
 
   const featuredCreatorsQueryResult = await executeQuery({
-    query: "Select training_pack_author FROM training_packs WHERE featured = ?",
+    query: "Select * FROM content_creators WHERE featured = ?",
     values: ["1"],
   });
 
-  const featuredCreatorsJSON: { training_pack_author: string }[] = JSON.parse(
+  const featuredCreatorsJSON: ContentCreator[] = JSON.parse(
     JSON.stringify(featuredCreatorsQueryResult)
   );
 
-  const featuredCreatorsPacks = {};
+  const featuredCreatorsPacks: {
+    [contenCreatorName: string]: {
+      contentCreatorInfo: ContentCreator;
+      trainingPacks: TrainingPack[];
+    };
+  } = {};
   featuredCreatorsJSON.forEach((featuredCreator) => {
-    if (featuredCreator.training_pack_author in featuredCreatorsPacks) return;
-    featuredCreatorsPacks[featuredCreator.training_pack_author] = [];
+    if (featuredCreator.name in featuredCreatorsPacks) return;
+    const {
+      content_creator_id,
+      tiktok,
+      youtube,
+      twitter,
+      steam,
+      instagram,
+      personal_website,
+      facebook,
+      discord,
+      twitch,
+      featured,
+      name,
+    } = featuredCreator;
+    featuredCreatorsPacks[featuredCreator.name] = {
+      contentCreatorInfo: {
+        content_creator_id,
+        tiktok,
+        youtube,
+        twitter,
+        steam,
+        instagram,
+        personal_website,
+        facebook,
+        discord,
+        twitch,
+        featured,
+        name,
+      },
+      trainingPacks: [],
+    };
   });
+
+  console.log("featuredCreatorsJSON: ", featuredCreatorsPacks);
 
   const resultsInJSON = JSON.parse(JSON.stringify(result));
   resultsInJSON.map((trainingPack: TrainingPack) => {
-    featuredCreatorsPacks[trainingPack.training_pack_author].push(trainingPack);
+    featuredCreatorsPacks[trainingPack.name].trainingPacks.push(trainingPack);
   });
+
+  console.log(featuredCreatorsPacks);
 
   return featuredCreatorsPacks;
 };

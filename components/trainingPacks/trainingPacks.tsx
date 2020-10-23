@@ -9,7 +9,10 @@ const TrainingPacks = ({ trainingPacksInfo }: Props) => {
   return (
     <TrainingPacksContainer>
       {trainingPacksInfo?.map((trainingPack) => (
-        <FeaturedTrainingPack trainingPackInfo={trainingPack} />
+        <FeaturedTrainingPack
+          trainingPackInfo={trainingPack}
+          key={trainingPack.training_pack_code}
+        />
       ))}
     </TrainingPacksContainer>
   );
