@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   SocialNetworkContainer,
   SocialNetworkIconContainer,
@@ -23,27 +23,50 @@ interface Props {
 }
 
 const SocialNetwork = ({ socialNetwork, showHandle, handle, size }: Props) => {
+  const [icon, setIcon] = useState<string>();
   const [link, setLink] = useState<string>();
-  const getIcon = () => {
+
+  const setIconAndLink = () => {
     switch (socialNetwork) {
       case "tiktok":
-        return "/images/socialIcons/tiktok_icon.png";
+        setLink("https://tiktok.com/@" + handle);
+        setIcon("/images/socialIcons/tiktok_icon.png");
+        break;
       case "youtube":
-        return "/images/socialIcons/yt_icon.png";
+        setLink("https://youtube.com/c/" + handle);
+        setIcon("/images/socialIcons/yt_icon.png");
+        break;
       case "twitter":
-        return "/images/socialIcons/twitter_icon.png";
+        setLink("https://twitter.com/" + handle);
+        setIcon("/images/socialIcons/twitter_icon.png");
+        break;
       case "steam":
-        return "/images/socialIcons/steam_icon.png";
+        setLink("https://steamcommunity.com/id/" + handle);
+        setIcon("/images/socialIcons/steam_icon.png");
+        break;
       case "instagram":
-        return "/images/socialIcons/ig_icon.png";
+        setLink("https://instagram.com/" + handle);
+        setIcon("/images/socialIcons/ig_icon.png");
+        break;
       case "facebook":
-        return "/images/socialIcons/fb_icon.png";
+        setIcon("/images/socialIcons/fb_icon.png");
+        break;
       case "discord":
-        return "/images/socialIcons/discord_icon.png";
+        setLink("https://discord.gg/" + handle);
+        setIcon("/images/socialIcons/discord_icon.png");
+        break;
       case "twitch":
-        return "/images/socialIcons/twitch_icon.png";
+        setLink("https://twitch.tv/" + handle);
+        setIcon("/images/socialIcons/twitch_icon.png");
+        break;
+      case "personal website":
+        setLink(handle);
     }
   };
+
+  useEffect(() => {
+    setIconAndLink();
+  }, [icon, link]);
 
   return (
     <a href={link} target="blank_">
@@ -51,7 +74,7 @@ const SocialNetwork = ({ socialNetwork, showHandle, handle, size }: Props) => {
         {socialNetwork === "personal website" ? (
           <PersonalWebsiteContainer>Personal Website</PersonalWebsiteContainer>
         ) : (
-          <SocialNetworkIconContainer icon={getIcon()} />
+          <SocialNetworkIconContainer icon={icon} />
         )}
       </SocialNetworkContainer>
     </a>
