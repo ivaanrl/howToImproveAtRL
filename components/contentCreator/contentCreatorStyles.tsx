@@ -7,8 +7,12 @@ export const ContentCreatorContainer = styled.div`
   height: calc(100vh - 190px);
 `;
 
-export const ProfileBigButton = styled.button<{ backgroundImage: string }>`
+export const ProfileBigButton = styled.button<{
+  backgroundImage: string;
+  isNavbar: boolean;
+}>`
   flex: 1;
+  //height: calc((100vh - 190px) / 3);
   background-image: url(${(props) => props.backgroundImage});
   background-size: cover;
   border: 10px solid ${(props) => (props.theme as ThemeInterface).bgColorDark};
@@ -41,9 +45,24 @@ export const ProfileBigButton = styled.button<{ backgroundImage: string }>`
   &:focus {
     outline: none;
   }
+
+  ${(props) =>
+    props.isNavbar &&
+    css`
+      border: none;
+      background-image: none;
+      background-color: ${(props) =>
+        (props.theme as ThemeInterface).bgColorDark};
+
+      &:hover {
+        background-image: none;
+        background-color: ${(props) =>
+          (props.theme as ThemeInterface).bgColorDarkHighlight};
+      }
+    `}
 `;
 
-export const ProfileBigButtonText = styled.p`
+export const ProfileBigButtonText = styled.p<{ isNavbar: boolean }>`
   font-size: 30px;
   font-weight: bold;
   color: ${(props) => (props.theme as ThemeInterface).mainTextColor};
@@ -53,6 +72,15 @@ export const ProfileBigButtonText = styled.p`
   padding-top: 10px;
   padding-bottom: 10px;
   border-radius: 10px;
+
+  ${(props) =>
+    props.isNavbar &&
+    css`
+      background-color: transparent;
+      font-size: 14px;
+      padding-top: 0px;
+      padding-bottom: 0px;
+    `}
 `;
 
 export const ContentCreatorHeader = styled.div<{ backgroundImage: string }>`
@@ -98,16 +126,13 @@ export const ProfilePictureContainer = styled.div<{ profilePicture: string }>`
   border-radius: 100%;
   border: 5px solid
     ${(props) => (props.theme as ThemeInterface).profilePictureBorderColor};
-  height: 150px;
-  width: 150px;
-  position: absolute;
-  margin-top: 40px;
+  height: 100%;
+  width: 100%;
 `;
 
 export const ContentCreatorNameContainer = styled.div`
   margin-bottom: 100px;
   font-weight: bold;
-  font-size: 25px;
   color: ${(props) => (props.theme as ThemeInterface).mainTextColor};
 `;
 

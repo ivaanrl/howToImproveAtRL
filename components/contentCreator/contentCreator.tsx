@@ -12,6 +12,8 @@ import {
   PictureAndNameContainer,
   ProfileBigButtonText,
 } from "./contentCreatorStyles";
+import { useMeasure } from "react-use";
+import { useSpring, animated } from "react-spring";
 
 const NUMBER_OF_IMAGES = 5;
 
@@ -46,7 +48,44 @@ const ContentCreator = () => {
     }
   }, [router.query.creatorName, state.featuredTrainingPackCreators]);
 
+  const [isNavbar, setIsNavbar] = useState<boolean>(false);
+  const [ref, { height }] = useMeasure();
+
+  const [buttonsSpringProps, setButtonsSpringProps] = useSpring(() => ({
+    from: {
+      display: "flex",
+    },
+    flexDirection: "column" as "column", //don't even ask, idk why ts does this
+    height: "100%",
+  }));
+
+  const [profilePictureSpringProps, setProfilePictureSpringProps] = useSpring(
+    () => ({
+      from: {
+        position: "absolute" as "absolute",
+      },
+      marginTop: "40px",
+      height: "150px",
+      width: "150px",
+    })
+  );
+
+  const [profileNameSpringProps, setProfileNameSpringProps] = useSpring(() => ({
+    fontSize: "25px",
+  }));
+
   if (!currentContentCreator) return <div></div>;
+
+  const handleBigButtonClick = (category: string) => {
+    if (!isNavbar) setIsNavbar(true);
+    setButtonsSpringProps({ height: "5%", flexDirection: "row" });
+    setProfilePictureSpringProps({
+      height: "80px",
+      width: "80px",
+      marginTop: "30px",
+    });
+    setProfileNameSpringProps({ fontSize: "18px" });
+  };
 
   const {
     name,
@@ -66,8 +105,12 @@ const ContentCreator = () => {
     <>
       <ContentCreatorHeader backgroundImage={headerImage}>
         <PictureAndNameContainer>
-          <ContentCreatorNameContainer> {name} </ContentCreatorNameContainer>
-          <ProfilePictureContainer profilePicture={picture} />
+          <animated.div style={profileNameSpringProps}>
+            <ContentCreatorNameContainer> {name} </ContentCreatorNameContainer>
+          </animated.div>
+          <animated.div style={profilePictureSpringProps}>
+            <ProfilePictureContainer profilePicture={picture} />
+          </animated.div>
         </PictureAndNameContainer>
         <SocialNetworksContainer>
           {tiktok ? (
@@ -145,17 +188,35 @@ const ContentCreator = () => {
           ) : null}
         </SocialNetworksContainer>
       </ContentCreatorHeader>
-      <ContentCreatorContainer>
-        <ProfileBigButton backgroundImage="/images/profileButtons/training.jpg">
-          <ProfileBigButtonText>Training Packs</ProfileBigButtonText>
+      <animated.div style={buttonsSpringProps} ref={ref}>
+        <ProfileBigButton
+          backgroundImage="/images/profileButtons/training.jpg"
+          onClick={() => handleBigButtonClick("training")}
+          isNavbar={isNavbar}
+        >
+          <ProfileBigButtonText isNavbar={isNavbar}>
+            Training Packs
+          </ProfileBigButtonText>
         </ProfileBigButton>
-        <ProfileBigButton backgroundImage="/images/profileButtons/tutorials.jpg">
-          <ProfileBigButtonText>Tutorials</ProfileBigButtonText>
+        <ProfileBigButton
+          backgroundImage="/images/profileButtons/tutorials.jpg"
+          onClick={() => handleBigButtonClick("tutorials")}
+          isNavbar={isNavbar}
+        >
+          <ProfileBigButtonText isNavbar={isNavbar}>
+            Tutorials
+          </ProfileBigButtonText>
         </ProfileBigButton>
-        <ProfileBigButton backgroundImage="/images/profileButtons/mechanics.jpg">
-          <ProfileBigButtonText>Mechanics</ProfileBigButtonText>
+        <ProfileBigButton
+          backgroundImage="/images/profileButtons/mechanics.jpg"
+          onClick={() => handleBigButtonClick("mechanics")}
+          isNavbar={isNavbar}
+        >
+          <ProfileBigButtonText isNavbar={isNavbar}>
+            Mechanics
+          </ProfileBigButtonText>
         </ProfileBigButton>
-      </ContentCreatorContainer>
+      </animated.div>
     </>
   );
 };
