@@ -5,6 +5,7 @@ import TrainingPacks from "../../components/trainingPacks/trainingPacks";
 import { store, TrainingPack as TraningPackInterface } from "../../store";
 import { GetStaticProps, GetStaticPaths } from "next";
 import { getFeaturedTrainingPacks } from "../../lib/trainingPacks";
+import ContentCreator from "../../components/contentCreator/contentCreator";
 
 export default function TrainingPack({
   featuredTrainingPackCreators,
@@ -14,6 +15,7 @@ export default function TrainingPack({
   const { state, dispatch } = useContext(store);
   const router = useRouter();
   const [trainingPacks, setTrainingPacks] = useState<TraningPackInterface[]>();
+  const [page, setPage] = useState<0 | 1 | 2 | 3>(0);
 
   useEffect(() => {
     dispatch({
@@ -23,18 +25,36 @@ export default function TrainingPack({
   }, []);
 
   useEffect(() => {
-    setTrainingPacks(
+    if (
       state.featuredTrainingPackCreators[router.query.creatorName as string]
-        .trainingPacks
-    );
+    ) {
+      setTrainingPacks(
+        state.featuredTrainingPackCreators[router.query.creatorName as string]
+          .trainingPacks
+      );
+    }
   }, [trainingPacks, router, state.featuredTrainingPackCreators]);
+
+  const renderPage = () => {
+    switch (page) {
+      case 0:
+        break;
+      case 1:
+        return <TrainingPacks trainingPacksInfo={trainingPacks} />;
+      case 2:
+        break;
+      case 3:
+        break;
+    }
+  };
 
   return (
     <>
       <Head>
         <title>How to improve at Rocket League - Training Packs</title>
       </Head>
-      <TrainingPacks trainingPacksInfo={trainingPacks} />
+      <ContentCreator />
+      {renderPage()}
     </>
   );
 }

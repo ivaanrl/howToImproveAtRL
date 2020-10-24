@@ -7,15 +7,21 @@ import {
 } from "./sidebarStyles";
 import { useMeasure } from "react-use";
 import Link from "next/link";
-import { TrainingPack, Mechanic } from "../../store";
+import { TrainingPack, Mechanic, ContentCreator, Tutorial } from "../../store";
 
 interface Props {
   text: string;
-  urlPrefix: string;
-  subItems: { [creator: string]: TrainingPack[] | Mechanic[] };
+  subItems: {
+    [creator: string]: {
+      contentCreatorInfo: ContentCreator;
+      trainingPacks: TrainingPack[];
+      mechanics: Mechanic[];
+      tutorials: Tutorial[];
+    };
+  };
 }
 
-const SidebarItem = ({ text, urlPrefix, subItems }: Props) => {
+const SidebarItem = ({ text, subItems }: Props) => {
   const closedHeight = "0px";
   const [ref, { height }] = useMeasure();
   const [active, setActive] = useState<boolean>(false);
@@ -68,7 +74,7 @@ const SidebarItem = ({ text, urlPrefix, subItems }: Props) => {
           {active
             ? Object.keys(subItems).map((creator: string, index: number) => {
                 return (
-                  <Link href={`${urlPrefix + creator}`} key={index}>
+                  <Link href={`${creator}`} key={index}>
                     <SidebarOptionContainer>
                       <a>{creator}</a>
                     </SidebarOptionContainer>

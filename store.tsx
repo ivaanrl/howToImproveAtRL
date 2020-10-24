@@ -13,6 +13,7 @@ export interface ContentCreator {
   twitch: string;
   featured: 1 | 0;
   name: string;
+  picture: string;
 }
 
 export interface TrainingPack {
@@ -34,27 +35,31 @@ export interface TrainingPack {
   traning_style: {};
   training_pack_name: string;
   name: string;
+  youtube_explanation: string | null;
 }
 
 export interface Mechanic {
   difficulty: string;
   featured: number;
-  training_pack_code?: string;
-  training_pack_name?: string;
-  training_pack_author: string | null;
-  training_pack_id: number;
 }
+
+export interface Tutorial {
+  difficulty: string;
+  featured: number;
+}
+
 interface State {
   featuredTrainingPackCreators: {
     [creator: string]: {
       contentCreatorInfo: ContentCreator;
       trainingPacks: TrainingPack[];
+      mechanics: Mechanic[];
+      tutorials: Tutorial[];
     };
   };
-  mechanics: Mechanic[];
 }
 
-const initialState: State = { featuredTrainingPackCreators: {}, mechanics: [] };
+const initialState: State = { featuredTrainingPackCreators: {} };
 const store = createContext<{ state: State; dispatch: Dispatch<any> }>({
   state: initialState,
   dispatch: () => null,

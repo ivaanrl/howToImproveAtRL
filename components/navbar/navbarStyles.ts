@@ -10,6 +10,11 @@ export const NavbarContainer = styled.div`
   justify-content: space-between;
   background: ${(props) => (props.theme as ThemeInterface).bgColor};
   height: 50px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1800;
 `;
 
 export const MenuButtonContainer = styled.button`

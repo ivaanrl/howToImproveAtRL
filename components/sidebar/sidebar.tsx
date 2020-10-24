@@ -18,92 +18,14 @@ const Sidebar = ({ closeSidebar }: Props) => {
           <MenuOpenIcon />
         </MenuButtonContainer>
       </SidebarButtonContainer>
-      <SidebarItem
-        text="Mechanics"
-        urlPrefix="/learn_mechanics/"
-        subItems={{
-          Musty: [
-            {
-              difficulty: "Hard",
-              featured: 1,
-              training_pack_author: "Poquito",
-              training_pack_name: "this is a name",
-              training_pack_id: 1,
-            },
-            {
-              difficulty: "Hard",
-              featured: 1,
-              training_pack_author: "Poquito",
-              training_pack_name: "this is a name",
-              training_pack_id: 1,
-            },
-          ],
-          Leth: [
-            {
-              difficulty: "Hard",
-              featured: 1,
-              training_pack_author: "Poquito",
-              training_pack_name: "this is a name",
-              training_pack_id: 1,
-            },
-            {
-              difficulty: "Hard",
-              featured: 1,
-              training_pack_author: "Poquito",
-              training_pack_name: "this is a name",
-              training_pack_id: 1,
-            },
-          ],
-        }}
-      />
 
       <SidebarItem
         text="Training packs"
-        urlPrefix="/training_packs/"
         subItems={featuredTrainingPackCreators}
       />
-      <SidebarItem
-        text="Mechanics"
-        urlPrefix="/learn_mechanics/"
-        subItems={{
-          Musty: [
-            {
-              difficulty: "Hard",
-              featured: 1,
-              training_pack_author: "Poquito",
-              training_pack_name: "this is a name",
-              training_pack_id: 1,
-            },
-            {
-              difficulty: "Hard",
-              featured: 1,
-              training_pack_author: "Poquito",
-              training_pack_name: "this is a name",
-              training_pack_id: 1,
-            },
-          ],
-          Leth: [
-            {
-              difficulty: "Hard",
-              featured: 1,
-              training_pack_author: "Poquito",
-              training_pack_name: "this is a name",
-              training_pack_id: 1,
-            },
-            {
-              difficulty: "Hard",
-              featured: 1,
-              training_pack_author: "Poquito",
-              training_pack_name: "this is a name",
-              training_pack_id: 1,
-            },
-          ],
-        }}
-      />
 
       <SidebarItem
         text="Training packs"
-        urlPrefix="/training_packs/"
         subItems={featuredTrainingPackCreators}
       />
     </SidebarContainer>

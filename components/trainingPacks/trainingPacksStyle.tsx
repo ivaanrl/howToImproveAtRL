@@ -3,7 +3,7 @@ import { ThemeInterface } from "../../styles/theme";
 
 export const TrainingPacksContainer = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: space-around;
 
