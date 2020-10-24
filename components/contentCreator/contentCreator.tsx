@@ -5,13 +5,12 @@ import SocialNetwork from "../socialNetwork/socialNetwork";
 import {
   ContentCreatorContainer,
   ContentCreatorHeader,
-  TrainingPacksButton,
-  MechanicsButton,
-  TutorialsButton,
+  ProfileBigButton,
   ContentCreatorNameContainer,
   SocialNetworksContainer,
   ProfilePictureContainer,
   PictureAndNameContainer,
+  ProfileBigButtonText,
 } from "./contentCreatorStyles";
 
 const NUMBER_OF_IMAGES = 5;
@@ -146,7 +145,17 @@ const ContentCreator = () => {
           ) : null}
         </SocialNetworksContainer>
       </ContentCreatorHeader>
-      <ContentCreatorContainer></ContentCreatorContainer>
+      <ContentCreatorContainer>
+        <ProfileBigButton backgroundImage="/images/profileButtons/training.jpg">
+          <ProfileBigButtonText>Training Packs</ProfileBigButtonText>
+        </ProfileBigButton>
+        <ProfileBigButton backgroundImage="/images/profileButtons/tutorials.jpg">
+          <ProfileBigButtonText>Tutorials</ProfileBigButtonText>
+        </ProfileBigButton>
+        <ProfileBigButton backgroundImage="/images/profileButtons/mechanics.jpg">
+          <ProfileBigButtonText>Mechanics</ProfileBigButtonText>
+        </ProfileBigButton>
+      </ContentCreatorContainer>
     </>
   );
 };

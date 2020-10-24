@@ -1,14 +1,59 @@
 import styled, { css } from "styled-components";
 import { ThemeInterface } from "../../styles/theme";
-import { SocialNetworkContainer } from "../socialNetwork/socialNetworkStyles";
 
-export const ContentCreatorContainer = styled.div``;
+export const ContentCreatorContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 190px);
+`;
 
-export const TrainingPacksButton = styled.div``;
+export const ProfileBigButton = styled.button<{ backgroundImage: string }>`
+  flex: 1;
+  background-image: url(${(props) => props.backgroundImage});
+  background-size: cover;
+  border: 10px solid ${(props) => (props.theme as ThemeInterface).bgColorDark};
+  border-right: 10px solid
+    ${(props) => (props.theme as ThemeInterface).bgColorDark};
+  border-left: 10px solid
+    ${(props) => (props.theme as ThemeInterface).bgColorDark};
 
-export const MechanicsButton = styled.div``;
+  &:hover {
+    cursor: pointer;
+    background-image: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.1) 10%,
+        rgba(255, 255, 255, 0.3) 70%
+      ),
+      url(${(props) => props.backgroundImage});
+  }
 
-export const TutorialsButton = styled.div``;
+  &:active {
+    background-image: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0.2) 10%,
+        rgba(255, 255, 255, 0.5) 70%
+      ),
+      url(${(props) => props.backgroundImage});
+  }
+
+  &:focus {
+    outline: none;
+  }
+`;
+
+export const ProfileBigButtonText = styled.p`
+  font-size: 30px;
+  font-weight: bold;
+  color: ${(props) => (props.theme as ThemeInterface).mainTextColor};
+  background-color: rgba(55, 55, 55, 0.6);
+  width: 40%;
+  margin: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 10px;
+`;
 
 export const ContentCreatorHeader = styled.div<{ backgroundImage: string }>`
   display: flex;
