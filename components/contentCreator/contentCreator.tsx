@@ -14,6 +14,8 @@ import {
   PictureAndNameContainer,
 } from "./contentCreatorStyles";
 
+const NUMBER_OF_IMAGES = 5;
+
 const ContentCreator = () => {
   const { state } = useContext(store);
   const router = useRouter();
@@ -21,17 +23,29 @@ const ContentCreator = () => {
     currentContentCreator,
     setCurrentContentCreator,
   ] = useState<ContentCreatorInterface | null>(null);
+  const [headerImage, setHeaderImage] = useState<string>("");
+
+  const getRandomHeaderImage = () => {
+    const rndNmbr = Math.floor(Math.random() * NUMBER_OF_IMAGES + 1);
+
+    if (rndNmbr === 1) {
+      return "/images/profileHeader/rl.jpeg";
+    } else {
+      return `/images/profileHeader/rl${rndNmbr}.jpg`;
+    }
+  };
 
   useEffect(() => {
     if (
       state.featuredTrainingPackCreators[router.query.creatorName as string]
     ) {
+      setHeaderImage(getRandomHeaderImage());
       setCurrentContentCreator(
         state.featuredTrainingPackCreators[router.query.creatorName as string]
           .contentCreatorInfo
       );
     }
-  }, [router, state.featuredTrainingPackCreators]);
+  }, [router.query.creatorName, state.featuredTrainingPackCreators]);
 
   if (!currentContentCreator) return <div></div>;
 
@@ -51,7 +65,7 @@ const ContentCreator = () => {
 
   return (
     <>
-      <ContentCreatorHeader>
+      <ContentCreatorHeader backgroundImage={headerImage}>
         <PictureAndNameContainer>
           <ContentCreatorNameContainer> {name} </ContentCreatorNameContainer>
           <ProfilePictureContainer profilePicture={picture} />
@@ -97,14 +111,7 @@ const ContentCreator = () => {
               handle={instagram}
             />
           ) : null}
-          {personal_website ? (
-            <SocialNetwork
-              socialNetwork="personal website"
-              showHandle={true}
-              size="big"
-              handle={personal_website}
-            />
-          ) : null}
+
           {facebook ? (
             <SocialNetwork
               socialNetwork="facebook"
@@ -127,6 +134,14 @@ const ContentCreator = () => {
               showHandle={true}
               size="big"
               handle={twitch}
+            />
+          ) : null}
+          {personal_website ? (
+            <SocialNetwork
+              socialNetwork="personal website"
+              showHandle={true}
+              size="big"
+              handle={personal_website}
             />
           ) : null}
         </SocialNetworksContainer>

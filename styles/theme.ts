@@ -5,6 +5,9 @@ export interface ThemeInterface {
   mainTextColor: string;
   mutedTextColor: string;
   highlightTextColor: string;
+  profileHeaderColorOP1: string;
+  profileHeaderColorOP0: string;
+  profilePictureBorderColor: string;
 }
 
 export const theme: ThemeInterface = {
@@ -14,4 +17,7 @@ export const theme: ThemeInterface = {
   mainTextColor: "#FFFFFF",
   mutedTextColor: "#ababab",
   highlightTextColor: "#FAA41A",
+  profileHeaderColorOP1: "rgba(38, 64, 92, 1)",
+  profileHeaderColorOP0: "rgba(38, 64, 92, 0.6)",
+  profilePictureBorderColor: "#0b3042",
 };

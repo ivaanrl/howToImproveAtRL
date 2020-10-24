@@ -3,6 +3,7 @@ import {
   SocialNetworkContainer,
   SocialNetworkIconContainer,
   HandleContainer,
+  PersonalWebsiteContainer,
 } from "./socialNetworkStyles";
 
 interface Props {
@@ -47,8 +48,11 @@ const SocialNetwork = ({ socialNetwork, showHandle, handle, size }: Props) => {
   return (
     <a href={link} target="blank_">
       <SocialNetworkContainer>
-        <SocialNetworkIconContainer icon={getIcon()} />
-        {showHandle ? <HandleContainer> {handle} </HandleContainer> : null}
+        {socialNetwork === "personal website" ? (
+          <PersonalWebsiteContainer>Personal Website</PersonalWebsiteContainer>
+        ) : (
+          <SocialNetworkIconContainer icon={getIcon()} />
+        )}
       </SocialNetworkContainer>
     </a>
   );
