@@ -65,14 +65,9 @@ export const getFeaturedTrainingPacks = async () => {
     };
   });
 
-  console.log("featuredCreatorsJSON: ", featuredCreatorsPacks);
-
   const resultsInJSON = JSON.parse(JSON.stringify(result));
   resultsInJSON.map((trainingPack: TrainingPack) => {
     featuredCreatorsPacks[trainingPack.name].trainingPacks.push(trainingPack);
   });
-
-  console.log(featuredCreatorsPacks);
-
   return featuredCreatorsPacks;
 };
