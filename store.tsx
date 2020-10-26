@@ -1,52 +1,10 @@
 import { createContext, useReducer, Dispatch } from "react";
-
-export interface ContentCreator {
-  content_creator_id: string;
-  tiktok: string;
-  youtube: string;
-  twitter: string;
-  steam: string;
-  instagram: string;
-  personal_website: string;
-  facebook: string;
-  discord: string;
-  twitch: string;
-  featured: 1 | 0;
-  name: string;
-  picture: string;
-}
-
-export interface TrainingPack {
-  training_pack_id: number;
-  field_image:
-    | "Mannfield"
-    | "DFH"
-    | "Urban"
-    | "Utopia"
-    | "Wasteland"
-    | "Aquadome"
-    | "Neo"
-    | "Champions"
-    | "Farmstead"
-    | "Salty"
-    | "Forbidden";
-  difficulty: string;
-  training_pack_code: string;
-  training_style: {};
-  training_pack_name: string;
-  name: string;
-  youtube_explanation: string | null;
-}
-
-export interface Mechanic {
-  difficulty: string;
-  featured: number;
-}
-
-export interface Tutorial {
-  difficulty: string;
-  featured: number;
-}
+import {
+  ContentCreator,
+  TrainingPack,
+  Mechanic,
+  Tutorial,
+} from "./shared/interfaces";
 
 interface State {
   featuredTrainingPackCreators: {

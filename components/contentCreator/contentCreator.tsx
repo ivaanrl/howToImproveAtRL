@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
+import { store } from "../../store";
 import {
-  store,
   ContentCreator as ContentCreatorInterface,
   TrainingPack,
-} from "../../store";
+} from "../../shared/interfaces";
 import { useRouter } from "next/router";
 import SocialNetwork from "../socialNetwork/socialNetwork";
 import {

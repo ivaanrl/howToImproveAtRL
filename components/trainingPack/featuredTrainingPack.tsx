@@ -1,4 +1,4 @@
-import { TrainingPack } from "../../store";
+import { TrainingPack } from "../../shared/interfaces";
 import {
   TrainingPackImageContainer,
   TrainingPackContainer,
