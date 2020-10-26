@@ -57,7 +57,7 @@ export const TrainingPackCodeContainer = styled.div`
   align-items: center;
   background-color: ${(props) => (props.theme as ThemeInterface).bgColorDark};
   border-radius: 10px;
-  margin-top: 10px;
+  margin-top: 15px;
   padding: 4px;
   padding-right: 0px;
   height: 30px;
@@ -105,4 +105,59 @@ export const ClipboardCopyIcon = styled(ClipboardCopy)`
   height: 20px;
   width: 20px;
   color: ${(props) => (props.theme as ThemeInterface).mainTextColor};
+`;
+
+export const TrainingPackCategoriesContainer = styled.div`
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+`;
+
+export const TrainingPackCategoryContainer = styled.button<{
+  defensive: boolean;
+  offensive: boolean;
+  support: boolean;
+}>`
+  border: none;
+  padding: 5px;
+  margin-right: 5px;
+  border-radius: 10px;
+  color: ${(props) => (props.theme as ThemeInterface).mainTextColor};
+
+  &:hover {
+    cursor: pointer;
+  }
+  ${(props) =>
+    props.defensive &&
+    css`
+      background-color: ${(props) =>
+        (props.theme as ThemeInterface).defensiveColor};
+
+      &:hover {
+        background-color: ${(props) =>
+          (props.theme as ThemeInterface).defensiveHoverColor};
+      }
+    `}
+  ${(props) =>
+    props.offensive &&
+    css`
+      background-color: ${(props) =>
+        (props.theme as ThemeInterface).offensiveColor};
+      &:hover {
+        background-color: ${(props) =>
+          (props.theme as ThemeInterface).offensiveHoverColor};
+      }
+    `}
+    ${(props) =>
+    props.support &&
+    css`
+      background-color: ${(props) =>
+        (props.theme as ThemeInterface).supportColor};
+      &:hover {
+        background-color: ${(props) =>
+          (props.theme as ThemeInterface).supportHoverColor};
+      }
+    `};
 `;

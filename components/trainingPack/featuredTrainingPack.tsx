@@ -9,6 +9,7 @@ import {
   ClipboardCopyIcon,
 } from "./trainingPackStyles";
 import { MouseEvent, useRef, useState } from "react";
+import TrainingPackCategories from "./trainingPackCategories";
 
 interface Props {
   trainingPackInfo: TrainingPack;
@@ -32,8 +33,6 @@ const FeaturedTrainingPack = ({ trainingPackInfo }: Props) => {
     setShowCopiedMessage(true);
   };
 
-  console.log(training_style);
-
   return (
     <TrainingPackContainer>
       <img
@@ -51,6 +50,9 @@ const FeaturedTrainingPack = ({ trainingPackInfo }: Props) => {
           <ClipboardCopyIcon />
         </TrainingPackCodeIconContainer>
       </TrainingPackCodeContainer>
+      <TrainingPackCategories
+        categories={JSON.parse(training_style as string)}
+      />
     </TrainingPackContainer>
   );
 };
