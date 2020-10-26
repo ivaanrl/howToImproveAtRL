@@ -32,7 +32,7 @@ export interface TrainingPack {
     | "Forbidden";
   difficulty: string;
   training_pack_code: string;
-  traning_style: {};
+  training_style: {};
   training_pack_name: string;
   name: string;
   youtube_explanation: string | null;

@@ -13,12 +13,12 @@ export const TrainingPackContainer = styled.div`
   background-color: ${(props) => (props.theme as ThemeInterface).bgColor};
   border-radius: 10px;
   height: 30vh;
-  max-width: 460px;
+  max-width: 337px;
   overflow: hidden;
 
   @media (min-width: 800px) {
     width: 35%;
-    max-width: 442px;
+    //max-width: 442px;
   }
 `;
 

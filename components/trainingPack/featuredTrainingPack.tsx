@@ -19,6 +19,7 @@ const FeaturedTrainingPack = ({ trainingPackInfo }: Props) => {
     field_image,
     training_pack_name,
     training_pack_code,
+    training_style,
   } = trainingPackInfo;
   const ref = useRef<HTMLTextAreaElement>(null);
   const [showCopiedMessage, setShowCopiedMessage] = useState<boolean>(false);
@@ -31,11 +32,13 @@ const FeaturedTrainingPack = ({ trainingPackInfo }: Props) => {
     setShowCopiedMessage(true);
   };
 
+  console.log(training_style);
+
   return (
     <TrainingPackContainer>
       <img
         src={`/images/maps/${field_image}.jpg`}
-        style={{ filter: "blur(1px)", maxHeight: "230px" }}
+        style={{ filter: "blur(1px)", maxHeight: "170px" }}
       />
       <TraningPackNameContaier>{training_pack_name} </TraningPackNameContaier>
       <TrainingPackCodeContainer>
