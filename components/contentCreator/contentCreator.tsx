@@ -1,5 +1,9 @@
 import { useContext, useEffect, useState } from "react";
-import { store, ContentCreator as ContentCreatorInterface } from "../../store";
+import {
+  store,
+  ContentCreator as ContentCreatorInterface,
+  TrainingPack,
+} from "../../store";
 import { useRouter } from "next/router";
 import SocialNetwork from "../socialNetwork/socialNetwork";
 import {
@@ -12,10 +16,40 @@ import {
   PictureAndNameContainer,
   ProfileBigButtonText,
 } from "./contentCreatorStyles";
-import { useMeasure } from "react-use";
-import { useSpring, animated } from "react-spring";
+import { useSpring, animated, useTransition } from "react-spring";
+import useWindowDimensions from "../../shared/customHooks/useWindowsDimensions";
+import TrainingPacks from "../trainingPacks/trainingPacks";
 
 const NUMBER_OF_IMAGES = 5;
+
+const pages = [
+  ({
+    style,
+    trainingPacksInfo,
+  }: {
+    trainingPacksInfo: TrainingPack[];
+    style: any;
+  }) => <animated.div style={{ ...style }}> </animated.div>,
+  ({
+    style,
+    trainingPacksInfo,
+  }: {
+    trainingPacksInfo: TrainingPack[];
+    style: any;
+  }) => (
+    <animated.div style={{ ...style }}>
+      <TrainingPacks trainingPacksInfo={trainingPacksInfo} />
+    </animated.div>
+  ),
+  ({ style }) => (
+    <animated.div style={{ ...style, background: "lightblue" }}>B</animated.div>
+  ),
+  ({ style }) => (
+    <animated.div style={{ ...style, background: "lightgreen" }}>
+      C
+    </animated.div>
+  ),
+];
 
 const ContentCreator = () => {
   const { state } = useContext(store);
@@ -49,14 +83,15 @@ const ContentCreator = () => {
   }, [router.query.creatorName, state.featuredTrainingPackCreators]);
 
   const [isNavbar, setIsNavbar] = useState<boolean>(false);
-  const [ref, { height }] = useMeasure();
+  const { width } = useWindowDimensions();
 
   const [buttonsSpringProps, setButtonsSpringProps] = useSpring(() => ({
     from: {
       display: "flex",
     },
-    flexDirection: "column" as "column", //don't even ask, idk why ts does this
+    flexDirection: width < 1300 ? ("column" as "column") : ("row" as "row"), //don't even ask, idk why ts does this
     height: "100%",
+    minHeight: "0px",
   }));
 
   const [profilePictureSpringProps, setProfilePictureSpringProps] = useSpring(
@@ -74,11 +109,24 @@ const ContentCreator = () => {
     fontSize: "25px",
   }));
 
+  const [page, setPage] = useState<0 | 1 | 2 | 3>(0);
+
+  const transitions = useTransition(page, (p) => p, {
+    from: { opacity: 0, transform: "translate3d(100%,0,0)" },
+    enter: { opacity: 1, transform: "translate3d(0%,0,0)" },
+    leave: { opacity: 0, transform: "translate3d(-50%,0,0)" },
+  });
+
   if (!currentContentCreator) return <div></div>;
 
-  const handleBigButtonClick = (category: string) => {
+  const handleBigButtonClick = (categorySelected: 1 | 2 | 3) => {
     if (!isNavbar) setIsNavbar(true);
-    setButtonsSpringProps({ height: "5%", flexDirection: "row" });
+    setPage(categorySelected);
+    setButtonsSpringProps({
+      height: "5%",
+      minHeight: "40px",
+      flexDirection: "row",
+    });
     setProfilePictureSpringProps({
       height: "80px",
       width: "80px",
@@ -188,35 +236,51 @@ const ContentCreator = () => {
           ) : null}
         </SocialNetworksContainer>
       </ContentCreatorHeader>
-      <animated.div style={buttonsSpringProps} ref={ref}>
-        <ProfileBigButton
-          backgroundImage="/images/profileButtons/training.jpg"
-          onClick={() => handleBigButtonClick("training")}
-          isNavbar={isNavbar}
-        >
-          <ProfileBigButtonText isNavbar={isNavbar}>
-            Training Packs
-          </ProfileBigButtonText>
-        </ProfileBigButton>
-        <ProfileBigButton
-          backgroundImage="/images/profileButtons/tutorials.jpg"
-          onClick={() => handleBigButtonClick("tutorials")}
-          isNavbar={isNavbar}
-        >
-          <ProfileBigButtonText isNavbar={isNavbar}>
-            Tutorials
-          </ProfileBigButtonText>
-        </ProfileBigButton>
-        <ProfileBigButton
-          backgroundImage="/images/profileButtons/mechanics.jpg"
-          onClick={() => handleBigButtonClick("mechanics")}
-          isNavbar={isNavbar}
-        >
-          <ProfileBigButtonText isNavbar={isNavbar}>
-            Mechanics
-          </ProfileBigButtonText>
-        </ProfileBigButton>
-      </animated.div>
+      <div style={{ height: "100%" }}>
+        <animated.div style={buttonsSpringProps}>
+          <ProfileBigButton
+            backgroundImage="/images/profileButtons/training.jpg"
+            onClick={() => handleBigButtonClick(1)}
+            isNavbar={isNavbar}
+          >
+            <ProfileBigButtonText isNavbar={isNavbar}>
+              Training Packs
+            </ProfileBigButtonText>
+          </ProfileBigButton>
+          <ProfileBigButton
+            backgroundImage="/images/profileButtons/tutorials.jpg"
+            onClick={() => handleBigButtonClick(2)}
+            isNavbar={isNavbar}
+          >
+            <ProfileBigButtonText isNavbar={isNavbar}>
+              Tutorials
+            </ProfileBigButtonText>
+          </ProfileBigButton>
+          <ProfileBigButton
+            backgroundImage="/images/profileButtons/mechanics.jpg"
+            onClick={() => handleBigButtonClick(3)}
+            isNavbar={isNavbar}
+          >
+            <ProfileBigButtonText isNavbar={isNavbar}>
+              Mechanics
+            </ProfileBigButtonText>
+          </ProfileBigButton>
+        </animated.div>
+        {transitions.map(({ item, props, key }) => {
+          const Page = pages[item];
+          return (
+            <Page
+              key={key}
+              style={props}
+              trainingPacksInfo={
+                state.featuredTrainingPackCreators[
+                  router.query.creatorName as string
+                ].trainingPacks
+              }
+            />
+          );
+        })}
+      </div>
     </>
   );
 };
