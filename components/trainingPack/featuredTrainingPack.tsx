@@ -1,4 +1,4 @@
-import { TrainingPack } from "../../shared/interfaces";
+import { TrainingPack } from '../../shared/interfaces';
 import {
   TrainingPackImageContainer,
   TrainingPackContainer,
@@ -7,15 +7,15 @@ import {
   TrainingPackCodeTextContainer,
   TrainingPackCodeIconContainer,
   ClipboardCopyIcon,
-} from "./trainingPackStyles";
-import { MouseEvent, useRef, useState, useEffect } from "react";
-import TrainingPackCategories from "./trainingPackCategories";
+} from './trainingPackStyles';
+import { MouseEvent, useRef, useState, useEffect } from 'react';
+import TrainingPackCategories from './trainingPackCategories';
 
 interface Props {
   trainingPackInfo: TrainingPack;
 }
 
-const FeaturedTrainingPack = ({ trainingPackInfo }: Props) => {
+export const FeaturedTrainingPack = ({ trainingPackInfo }: Props) => {
   const {
     field_image,
     training_pack_name,
@@ -25,12 +25,10 @@ const FeaturedTrainingPack = ({ trainingPackInfo }: Props) => {
   const ref = useRef<HTMLTextAreaElement>(null);
   const [showCopiedMessage, setShowCopiedMessage] = useState<boolean>(false);
 
-  const copyCodeToClipboard = (
-    e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-  ) => {
+  const copyCodeToClipboard = () => {
     if (showCopiedMessage) return;
     ref.current.select();
-    document.execCommand("copy");
+    document.execCommand('copy');
     setShowCopiedMessage(true);
   };
 
@@ -41,19 +39,22 @@ const FeaturedTrainingPack = ({ trainingPackInfo }: Props) => {
   }, [showCopiedMessage]);
 
   return (
-    <TrainingPackContainer>
+    <TrainingPackContainer role="container">
       <img
         src={`/images/maps/${field_image}.jpg`}
-        style={{ maxHeight: "170px" }}
+        style={{ maxHeight: '170px' }}
       />
       <TraningPackNameContaier>{training_pack_name} </TraningPackNameContaier>
       <TrainingPackCodeContainer>
         <TrainingPackCodeTextContainer
           ref={ref}
-          value={showCopiedMessage ? "Copied!" : training_pack_code}
+          value={showCopiedMessage ? 'Copied!' : training_pack_code}
           readOnly={true}
         />
-        <TrainingPackCodeIconContainer onClick={(e) => copyCodeToClipboard(e)}>
+        <TrainingPackCodeIconContainer
+          data-testid="clipboard button"
+          onClick={copyCodeToClipboard}
+        >
           <ClipboardCopyIcon />
         </TrainingPackCodeIconContainer>
       </TrainingPackCodeContainer>
