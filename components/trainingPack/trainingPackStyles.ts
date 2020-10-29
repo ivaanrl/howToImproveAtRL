@@ -122,7 +122,7 @@ export const TrainingPackCategoryContainer = styled.button<{
 }>`
   border: none;
   padding: 5px;
-  margin-right: 5px;
+  margin-right: 10px;
   border-radius: 10px;
   color: ${(props) => (props.theme as ThemeInterface).mainTextColor};
 

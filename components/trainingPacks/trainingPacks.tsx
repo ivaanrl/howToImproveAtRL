@@ -1,5 +1,5 @@
 import FeaturedTrainingPack from "../trainingPack/featuredTrainingPack";
-import { TrainingPack as TrainingPackInterface } from "../../store";
+import { TrainingPack as TrainingPackInterface } from "../../shared/interfaces";
 import { TrainingPacksContainer } from "./trainingPacksStyle";
 interface Props {
   trainingPacksInfo: TrainingPackInterface[];

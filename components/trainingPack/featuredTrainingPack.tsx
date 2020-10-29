@@ -8,7 +8,7 @@ import {
   TrainingPackCodeIconContainer,
   ClipboardCopyIcon,
 } from "./trainingPackStyles";
-import { MouseEvent, useRef, useState } from "react";
+import { MouseEvent, useRef, useState, useEffect } from "react";
 import TrainingPackCategories from "./trainingPackCategories";
 
 interface Props {
@@ -28,16 +28,23 @@ const FeaturedTrainingPack = ({ trainingPackInfo }: Props) => {
   const copyCodeToClipboard = (
     e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
   ) => {
+    if (showCopiedMessage) return;
     ref.current.select();
     document.execCommand("copy");
     setShowCopiedMessage(true);
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      setShowCopiedMessage(false);
+    }, 2000);
+  }, [showCopiedMessage]);
+
   return (
     <TrainingPackContainer>
       <img
         src={`/images/maps/${field_image}.jpg`}
-        style={{ filter: "blur(1px)", maxHeight: "170px" }}
+        style={{ maxHeight: "170px" }}
       />
       <TraningPackNameContaier>{training_pack_name} </TraningPackNameContaier>
       <TrainingPackCodeContainer>

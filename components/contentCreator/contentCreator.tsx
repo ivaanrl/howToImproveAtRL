@@ -242,6 +242,7 @@ const ContentCreator = () => {
             backgroundImage="/images/profileButtons/training.jpg"
             onClick={() => handleBigButtonClick(1)}
             isNavbar={isNavbar}
+            active={page === 1}
           >
             <ProfileBigButtonText isNavbar={isNavbar}>
               Training Packs
@@ -251,6 +252,7 @@ const ContentCreator = () => {
             backgroundImage="/images/profileButtons/tutorials.jpg"
             onClick={() => handleBigButtonClick(2)}
             isNavbar={isNavbar}
+            active={page === 2}
           >
             <ProfileBigButtonText isNavbar={isNavbar}>
               Tutorials
@@ -260,6 +262,7 @@ const ContentCreator = () => {
             backgroundImage="/images/profileButtons/mechanics.jpg"
             onClick={() => handleBigButtonClick(3)}
             isNavbar={isNavbar}
+            active={page === 3}
           >
             <ProfileBigButtonText isNavbar={isNavbar}>
               Mechanics

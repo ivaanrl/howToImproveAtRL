@@ -3,7 +3,7 @@ import { ThemeInterface } from "../../styles/theme";
 import { ChevronDown } from "@styled-icons/boxicons-regular/ChevronDown";
 
 export const SidebarContainer = styled.div`
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   background: ${(props) => (props.theme as ThemeInterface).bgColor};
