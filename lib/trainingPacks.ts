@@ -1,4 +1,4 @@
-import { TrainingPack, ContentCreator } from "../store";
+import { TrainingPack, ContentCreator } from "../shared/interfaces";
 import { executeQuery } from "./db";
 
 export const getFeaturedTrainingPacks = async () => {
