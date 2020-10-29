@@ -1,6 +1,5 @@
 import { TrainingPack } from '../../shared/interfaces';
 import {
-  TrainingPackImageContainer,
   TrainingPackContainer,
   TraningPackNameContaier,
   TrainingPackCodeContainer,
@@ -8,7 +7,7 @@ import {
   TrainingPackCodeIconContainer,
   ClipboardCopyIcon,
 } from './trainingPackStyles';
-import { MouseEvent, useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import TrainingPackCategories from './trainingPackCategories';
 
 interface Props {

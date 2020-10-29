@@ -20,6 +20,7 @@ global.document.execCommand = mockExcecCommand;
 
 afterEach(() => {
   jest.useRealTimers();
+  jest.resetAllMocks();
 });
 
 test('renders properly', () => {
@@ -41,6 +42,23 @@ test('Copies training pack code to clipboard', async () => {
   const clipboardButton = getByTestId('clipboard button');
   user.click(clipboardButton);
   await waitFor(() => getByText(/Copied*/i));
+  expect(mockExcecCommand).toHaveBeenCalledTimes(1);
+  await waitFor(() =>
+    expect(getByText(trainingPackInfo.training_pack_code)).toBeInTheDocument(),
+  );
+});
+
+test('Multiple clicks to copy only copy training code', async () => {
+  jest.useFakeTimers();
+  const { getByTestId, getByText } = render(
+    <FeaturedTrainingPack trainingPackInfo={trainingPackInfo} />,
+  );
+
+  const clipboardButton = getByTestId('clipboard button');
+  user.click(clipboardButton);
+  await waitFor(() => getByText(/Copied*/i));
+  user.click(clipboardButton);
+  user.click(clipboardButton);
   expect(mockExcecCommand).toHaveBeenCalledTimes(1);
   await waitFor(() =>
     expect(getByText(trainingPackInfo.training_pack_code)).toBeInTheDocument(),
