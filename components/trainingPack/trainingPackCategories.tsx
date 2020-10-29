@@ -1,6 +1,6 @@
-import { TrainingPackCategories as TrainingPackCategoriesInterface } from "../../shared/interfaces";
-import TrainingPackCategory from "./trainingPackCategory";
-import { TrainingPackCategoriesContainer } from "./trainingPackStyles";
+import { TrainingPackCategories as TrainingPackCategoriesInterface } from '../../shared/interfaces';
+import TrainingPackCategory from './trainingPackCategory';
+import { TrainingPackCategoriesContainer } from './trainingPackStyles';
 
 interface Props {
   categories: TrainingPackCategoriesInterface;
@@ -8,7 +8,7 @@ interface Props {
 
 const TrainingPackCategories = ({ categories }: Props) => {
   return (
-    <TrainingPackCategoriesContainer>
+    <TrainingPackCategoriesContainer role="categories-container">
       {Object.keys(categories).map((category, index) => {
         return <TrainingPackCategory label={category} key={index} />;
       })}
