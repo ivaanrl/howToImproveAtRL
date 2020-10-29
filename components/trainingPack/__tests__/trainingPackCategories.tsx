@@ -1,7 +1,4 @@
-import { render, waitFor } from '@testing-library/react';
-import user from '@testing-library/user-event';
-import { TrainingPack } from '../../../shared/interfaces';
-import faker from 'faker';
+import { render } from '../../../test/testsUtils';
 import TrainingPackCategories from '../trainingPackCategories';
 
 const trainingPackCategories = {

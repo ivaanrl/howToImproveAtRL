@@ -3,10 +3,6 @@ import TrainingPackCategory from '../trainingPackCategory';
 import { theme } from '../../../styles/theme';
 import { ThemeProvider } from 'styled-components';
 
-function Wrapper({ children }) {
-  return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
-}
-
 test('renders with correct color', () => {
   let label = 'Striker';
   const { getByRole, rerender } = render(

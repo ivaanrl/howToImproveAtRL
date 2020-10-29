@@ -1,4 +1,4 @@
-import { render, waitFor } from '@testing-library/react';
+import { render, waitFor } from '../../../test/testsUtils';
 import user from '@testing-library/user-event';
 import { TrainingPack } from '../../../shared/interfaces';
 import faker from 'faker';
