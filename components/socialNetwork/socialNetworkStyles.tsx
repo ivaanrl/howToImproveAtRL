@@ -1,5 +1,5 @@
-import styled, { css } from "styled-components";
-import { ThemeInterface } from "../../styles/theme";
+import styled, { css } from 'styled-components';
+import { ThemeInterface } from '../../styles/theme';
 
 export const SocialNetworkContainer = styled.div`
   display: flex;
@@ -13,10 +13,7 @@ export const SocialNetworkContainer = styled.div`
   }
 `;
 
-export const SocialNetworkIconContainer = styled.div<{ icon: string }>`
-  background-image: url(${(props) => props.icon});
-  background-size: cover;
-  background-reapeat: no-repeat;
+export const SocialNetworkIconContainer = styled.div`
   height: 20px;
   width: 20px;
   margin-left: 10px;
