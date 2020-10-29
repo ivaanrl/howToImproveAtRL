@@ -36,7 +36,7 @@ const Navbar = () => {
   }));
   const [navbarSpringProps, setNavbarSpringProps] = useSpring(() => ({
     from: {
-      position: "absolute" as any,
+      position: "fixed" as "fixed",
       top: 0,
       bottom: 0,
       zIndex: 2000,

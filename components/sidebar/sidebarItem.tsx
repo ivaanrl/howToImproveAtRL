@@ -7,7 +7,12 @@ import {
 } from "./sidebarStyles";
 import { useMeasure } from "react-use";
 import Link from "next/link";
-import { TrainingPack, Mechanic, ContentCreator, Tutorial } from "../../store";
+import {
+  TrainingPack,
+  Mechanic,
+  ContentCreator,
+  Tutorial,
+} from "../../shared/interfaces";
 
 interface Props {
   text: string;

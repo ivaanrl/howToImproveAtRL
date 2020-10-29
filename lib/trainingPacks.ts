@@ -69,5 +69,6 @@ export const getFeaturedTrainingPacks = async () => {
   resultsInJSON.map((trainingPack: TrainingPack) => {
     featuredCreatorsPacks[trainingPack.name].trainingPacks.push(trainingPack);
   });
+
   return featuredCreatorsPacks;
 };

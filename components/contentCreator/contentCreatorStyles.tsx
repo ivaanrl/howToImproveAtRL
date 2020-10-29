@@ -10,6 +10,7 @@ export const ContentCreatorContainer = styled.div`
 export const ProfileBigButton = styled.button<{
   backgroundImage: string;
   isNavbar: boolean;
+  active: boolean;
 }>`
   flex: 1;
   //height: calc((100vh - 190px) / 3);
@@ -50,15 +51,28 @@ export const ProfileBigButton = styled.button<{
     props.isNavbar &&
     css`
       border: none;
+      border-bottom: 2px solid transparent;
       background-image: none;
       background-color: ${(props) =>
         (props.theme as ThemeInterface).bgColorDark};
 
       &:hover {
         background-image: none;
+        border-bottom: 2px solid white;
         background-color: ${(props) =>
           (props.theme as ThemeInterface).bgColorDarkHighlight};
       }
+    `}
+
+  ${(props) =>
+    props.isNavbar &&
+    props.active &&
+    css`
+      border: none;
+      background-image: none;
+      border-bottom: 2px solid white;
+      background-color: ${(props) =>
+        (props.theme as ThemeInterface).bgColorDarkHighlight};
     `}
 `;
 
