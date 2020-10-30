@@ -2,10 +2,7 @@ import React from 'react';
 import { render } from '../../test/testsUtils';
 import Home from '../../pages/index';
 import faker from 'faker';
-import { useContext } from 'react';
-
 import { ContentCreator, TrainingPack } from '../../shared/interfaces';
-import { store } from '../../store';
 
 const featuredTrainingPackCreators: {
   [contenCreatorName: string]: {

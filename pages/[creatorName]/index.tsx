@@ -1,27 +1,44 @@
-import Head from "next/head";
-import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
-import TrainingPacks from "../../components/trainingPacks/trainingPacks";
-import { store, TrainingPack as TraningPackInterface } from "../../store";
-import { GetStaticProps, GetStaticPaths } from "next";
-import { getFeaturedTrainingPacks } from "../../lib/trainingPacks";
-import ContentCreator from "../../components/contentCreator/contentCreator";
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import TrainingPacks from '../../components/trainingPacks/trainingPacks';
+import {
+  TrainingPack as TrainingPackInterface,
+  ContentCreator as ContentCreatorInterface,
+  Mechanic,
+  Tutorial,
+} from '../../shared/interfaces';
+import { GetStaticProps, GetStaticPaths } from 'next';
+import { getFeaturedTrainingPacks } from '../../lib/trainingPacks';
+import ContentCreator from '../../components/contentCreator/contentCreator';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../redux/store';
+import { actions as contentCreatorsActions } from '../../redux/reducers/contentCreators';
 
 export default function TrainingPack({
   featuredTrainingPackCreators,
 }: {
-  featuredTrainingPackCreators: { [creator: string]: TraningPackInterface };
+  featuredTrainingPackCreators: {
+    [contenCreatorName: string]: {
+      contentCreatorInfo: ContentCreatorInterface;
+      trainingPacks: TrainingPackInterface[];
+      mechanics: Mechanic[];
+      tutorials: Tutorial[];
+    };
+  };
 }) {
-  const { state, dispatch } = useContext(store);
+  const state = useSelector((state: RootState) => state.contentCreators);
+  const dispatch = useDispatch();
   const router = useRouter();
-  const [trainingPacks, setTrainingPacks] = useState<TraningPackInterface[]>();
-  const [page, setPage] = useState<0 | 1 | 2 | 3>(0);
+  const [trainingPacks, setTrainingPacks] = useState<TrainingPackInterface[]>();
+  const [page] = useState<0 | 1 | 2 | 3>(0);
 
   useEffect(() => {
-    dispatch({
-      type: "POPULATE_SIDEBAR",
-      payload: { featuredTrainingPackCreators },
-    });
+    dispatch(
+      contentCreatorsActions.populate_content_creators(
+        featuredTrainingPackCreators,
+      ),
+    );
   }, []);
 
   useEffect(() => {
@@ -30,7 +47,7 @@ export default function TrainingPack({
     ) {
       setTrainingPacks(
         state.featuredTrainingPackCreators[router.query.creatorName as string]
-          .trainingPacks
+          .trainingPacks,
       );
     }
   }, [trainingPacks, router, state.featuredTrainingPackCreators]);
@@ -71,7 +88,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: [{ params: { creatorName: "Poquito" } }],
+    paths: [{ params: { creatorName: 'Poquito' } }],
     fallback: true,
   };
 };

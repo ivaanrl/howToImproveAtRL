@@ -1,5 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
-import { store } from '../../store';
+import { useEffect, useState } from 'react';
 import {
   ContentCreator as ContentCreatorInterface,
   TrainingPack,
@@ -18,17 +17,15 @@ import {
 import { useSpring, animated, useTransition } from 'react-spring';
 import useWindowDimensions from '../../shared/customHooks/useWindowsDimensions';
 import TrainingPacks from '../trainingPacks/trainingPacks';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
 
 const NUMBER_OF_IMAGES = 5;
 
 const pages = [
-  ({
-    style,
-    trainingPacksInfo,
-  }: {
-    trainingPacksInfo: TrainingPack[];
-    style: any;
-  }) => <animated.div style={{ ...style }}> </animated.div>,
+  ({ style }: { trainingPacksInfo: TrainingPack[]; style: any }) => (
+    <animated.div style={{ ...style }}> </animated.div>
+  ),
   ({
     style,
     trainingPacksInfo,
@@ -51,7 +48,7 @@ const pages = [
 ];
 
 const ContentCreator = () => {
-  const { state } = useContext(store);
+  const state = useSelector((state: RootState) => state.contentCreators);
   const router = useRouter();
   const [
     currentContentCreator,

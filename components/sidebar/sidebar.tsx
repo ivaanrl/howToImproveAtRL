@@ -1,15 +1,16 @@
 import SidebarItem from './sidebarItem';
 import { SidebarContainer, SidebarButtonContainer } from './sidebarStyles';
 import { MenuOpenIcon, MenuButtonContainer } from '../navbar/navbarStyles';
-import { useContext } from 'react';
-import { store } from '../../store';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
 interface Props {
   closeSidebar: () => void;
 }
 
 const Sidebar = ({ closeSidebar }: Props) => {
-  const { state } = useContext(store);
-  const { featuredTrainingPackCreators } = state;
+  const { featuredTrainingPackCreators } = useSelector(
+    (state: RootState) => state.contentCreators,
+  );
   return (
     <SidebarContainer aria-label="sidebar container">
       <SidebarButtonContainer>
