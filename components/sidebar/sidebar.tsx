@@ -14,7 +14,7 @@ const Sidebar = ({ closeSidebar }: Props) => {
     <SidebarContainer aria-label="sidebar container">
       <SidebarButtonContainer>
         <MenuButtonContainer onClick={closeSidebar}>
-          <MenuOpenIcon aria-label="open sidebar menu" />
+          <MenuOpenIcon aria-label="close sidebar menu" />
         </MenuButtonContainer>
       </SidebarButtonContainer>
 

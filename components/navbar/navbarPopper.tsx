@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { usePopper } from "react-popper";
+import { useState } from 'react';
+import { usePopper } from 'react-popper';
 import {
   SignedInButton,
   ProfilePictureContainer,
@@ -7,19 +7,18 @@ import {
   NavbarSignedInButtonContainer,
   NavbarPopperContainer,
   NavbarPopperItem,
-} from "./navbarStyles";
-import OutsideAlerter from "../../shared/modules/OutsideAlerter";
-import { signOut, useSession } from "next-auth/client";
+} from './navbarStyles';
+import OutsideAlerter from '../../shared/modules/OutsideAlerter';
+import { signOut, useSession } from 'next-auth/client';
 
 const NavbarPopper = () => {
-  const [session, loading] = useSession();
+  const [session] = useSession();
   const [referenceElement, setReferenceElement] = useState(null);
   const [popperElement, setPopperElement] = useState(null);
-  const [arrowElement, setArrowElement] = useState(null);
   const [popoverOpen, setPopOverOpen] = useState<boolean>(false);
 
   const { styles, attributes } = usePopper(referenceElement, popperElement, {
-    modifiers: [{ name: "arrow", options: { element: arrowElement } }],
+    modifiers: [{ name: 'arrow' }],
   });
 
   const togglePopover = () => {
@@ -37,7 +36,7 @@ const NavbarPopper = () => {
           image={session.user.image}
           className="prevent-reopen-user-navbar"
         />
-        {session.user.name.split(" ")[0]}{" "}
+        {session.user.name.split(' ')[0]}{' '}
         <ChevronDownIcon className="prevent-reopen-user-navbar" />
       </SignedInButton>
       {popoverOpen ? (
@@ -53,8 +52,7 @@ const NavbarPopper = () => {
           >
             <NavbarPopperContainer>
               <NavbarPopperItem>My Favorites</NavbarPopperItem>
-              <NavbarPopperItem>My uploads</NavbarPopperItem>
-              <NavbarPopperItem>My Favorites</NavbarPopperItem>
+              <NavbarPopperItem>My Uploads</NavbarPopperItem>
               <NavbarPopperItem onClick={() => signOut()}>
                 Sign Out
               </NavbarPopperItem>

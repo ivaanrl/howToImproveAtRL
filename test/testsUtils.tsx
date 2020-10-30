@@ -2,6 +2,7 @@ import { theme } from '../styles/theme';
 import { ThemeProvider } from 'styled-components';
 import { render, RenderOptions } from '@testing-library/react';
 import { StateProvider, State } from '../store';
+import { Provider as NextAuthProvider } from 'next-auth/client';
 import faker from 'faker';
 
 const initialState: State = {
@@ -71,9 +72,9 @@ const initialState: State = {
 
 const EveryProvider = ({ children }) => {
   return (
-    <StateProvider initialState={initialState}>
-      <ThemeProvider theme={theme}> {children} </ThemeProvider>;
-    </StateProvider>
+    <ThemeProvider theme={theme}>
+      <StateProvider initialState={initialState}>{children}</StateProvider>
+    </ThemeProvider>
   );
 };
 

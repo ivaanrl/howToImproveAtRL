@@ -1,18 +1,18 @@
-import { useState, useEffect } from "react";
-import { useSpring, animated } from "react-spring";
-import Sidebar from "../sidebar/sidebar";
-import NavbarPopper from "./navbarPopper";
+import { useState, useEffect } from 'react';
+import { useSpring, animated } from 'react-spring';
+import Sidebar from '../sidebar/sidebar';
+import NavbarPopper from './navbarPopper';
 import {
   NavbarContainer,
   MenuOpenIcon,
   MenuButtonContainer,
   SignInWithGoogleButton,
-} from "./navbarStyles";
-import useWindowDimensions from "../../shared/customHooks/useWindowsDimensions";
-import { signIn, useSession } from "next-auth/client";
+} from './navbarStyles';
+import useWindowDimensions from '../../shared/customHooks/useWindowsDimensions';
+import { signIn, useSession } from 'next-auth/client';
 
 const Navbar = () => {
-  const [session, loading] = useSession();
+  const [session] = useSession();
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const { width } = useWindowDimensions();
 
@@ -30,18 +30,18 @@ const Navbar = () => {
 
   const [menuButtonSpringProps, setMenuButtonSpringProps] = useSpring(() => ({
     from: {
-      transform: "rotate(180deg)",
+      transform: 'rotate(180deg)',
     },
     opacity: 1,
   }));
   const [navbarSpringProps, setNavbarSpringProps] = useSpring(() => ({
     from: {
-      position: "fixed" as "fixed",
+      position: 'fixed' as 'fixed',
       top: 0,
       bottom: 0,
       zIndex: 2000,
     },
-    transform: "translateX(-200px)",
+    transform: 'translateX(-200px)',
     width: `${getSidebarWidth()}px`,
   }));
 
@@ -64,19 +64,22 @@ const Navbar = () => {
     } else {
       setMenuButtonSpringProps({ opacity: 0 });
 
-      setNavbarSpringProps({ transform: "translateX(0px)" });
+      setNavbarSpringProps({ transform: 'translateX(0px)' });
     }
     setSidebarOpen(!sidebarOpen);
   };
 
   const handleSteamAuth = () => {
-    signIn("google");
+    signIn('google');
   };
 
   return (
     <div>
-      <NavbarContainer>
-        <MenuButtonContainer onClick={handleMenuClick}>
+      <NavbarContainer data-testid="navbar container">
+        <MenuButtonContainer
+          aria-label="open sidebar button"
+          onClick={handleMenuClick}
+        >
           <animated.div style={menuButtonSpringProps}>
             <MenuOpenIcon />
           </animated.div>
@@ -85,8 +88,11 @@ const Navbar = () => {
         {session ? (
           <NavbarPopper />
         ) : (
-          <SignInWithGoogleButton onClick={handleSteamAuth}>
-            {" "}
+          <SignInWithGoogleButton
+            onClick={handleSteamAuth}
+            data-testid="sign in with google"
+          >
+            {' '}
             Sign in with Google
           </SignInWithGoogleButton>
         )}
