@@ -7,6 +7,7 @@ export default {
     '!**/@types/**',
     '!**/coverage/**',
     '!**/redux/store.tsx',
+    '!**/pages/_document.tsx',
   ],
   setupFilesAfterEnv: ['<rootDir>/setupTests.ts'],
   testPathIgnorePatterns: ['/node_modules/', '/.next/'],
