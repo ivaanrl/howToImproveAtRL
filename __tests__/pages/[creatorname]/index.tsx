@@ -1,14 +1,28 @@
 import React from 'react';
-import { render } from '../../test/testsUtils';
-import Home from '../../pages/index';
+import { render } from '../../../test/testsUtils';
+import ContentCreatorPage from '../../../pages/[creatorName]/index';
 import faker from 'faker';
-import { actions as contentCreatorsActions } from '../../redux/reducers/contentCreators';
+import { actions as contentCreatorsActions } from '../../../redux/reducers/contentCreators';
 import {
   ContentCreator,
   TrainingPack,
   Mechanic,
   Tutorial,
-} from '../../shared/interfaces';
+} from '../../../shared/interfaces';
+
+jest.mock('next/router', () => ({
+  useRouter: jest.fn(() => ({
+    query: {
+      creatorName: 'ivanrl',
+    },
+  })),
+}));
+
+const mockDispatch = jest.fn();
+jest.mock('react-redux', () => ({
+  ...jest.requireActual('react-redux'),
+  useDispatch: () => mockDispatch,
+}));
 
 const featuredTrainingPackCreators: {
   [contenCreatorName: string]: {
@@ -18,7 +32,7 @@ const featuredTrainingPackCreators: {
     tutorials: Tutorial[];
   };
 } = {
-  [faker.internet.userName()]: {
+  ['ivanrl']: {
     contentCreatorInfo: {
       content_creator_id: faker.random.alphaNumeric(),
       tiktok: faker.internet.userName(),
@@ -80,18 +94,15 @@ const featuredTrainingPackCreators: {
   },
 };
 
-const mockDispatch = jest.fn();
-jest.mock('react-redux', () => ({
-  ...jest.requireActual('react-redux'),
-  useDispatch: () => mockDispatch,
-}));
-
 test('renders properly', () => {
-  const {} = render(
-    <Home featuredTrainingPackCreators={featuredTrainingPackCreators} />,
+  const { getByTestId } = render(
+    <ContentCreatorPage
+      featuredTrainingPackCreators={featuredTrainingPackCreators}
+    />,
   );
 
-  expect(mockDispatch).toHaveBeenCalledTimes(1);
+  expect(getByTestId('content creator name')).toBeInTheDocument();
+
   expect(mockDispatch).toHaveBeenCalledWith({
     type: contentCreatorsActions.populate_content_creators.toString(),
     payload: featuredTrainingPackCreators,

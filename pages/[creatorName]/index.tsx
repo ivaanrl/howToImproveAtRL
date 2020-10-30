@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import TrainingPacks from '../../components/trainingPacks/trainingPacks';
 import {
   TrainingPack as TrainingPackInterface,
   ContentCreator as ContentCreatorInterface,
@@ -15,7 +14,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { actions as contentCreatorsActions } from '../../redux/reducers/contentCreators';
 
-export default function TrainingPack({
+export default function ContentCreatorPage({
   featuredTrainingPackCreators,
 }: {
   featuredTrainingPackCreators: {
@@ -31,7 +30,6 @@ export default function TrainingPack({
   const dispatch = useDispatch();
   const router = useRouter();
   const [trainingPacks, setTrainingPacks] = useState<TrainingPackInterface[]>();
-  const [page] = useState<0 | 1 | 2 | 3>(0);
 
   useEffect(() => {
     dispatch(
@@ -52,26 +50,12 @@ export default function TrainingPack({
     }
   }, [trainingPacks, router, state.featuredTrainingPackCreators]);
 
-  const renderPage = () => {
-    switch (page) {
-      case 0:
-        break;
-      case 1:
-        return <TrainingPacks trainingPacksInfo={trainingPacks} />;
-      case 2:
-        break;
-      case 3:
-        break;
-    }
-  };
-
   return (
     <>
       <Head>
         <title>How to improve at Rocket League - Training Packs</title>
       </Head>
       <ContentCreator />
-      {renderPage()}
     </>
   );
 }
