@@ -1,20 +1,23 @@
 export default {
   collectCoverageFrom: [
-    "**/*.{js,jsx,ts,tsx}",
-    "!**/*.d.ts",
-    "!**/node_modules/**",
+    '**/*.{js,jsx,ts,tsx}',
+    '!**/*.d.ts',
+    '!**/node_modules/**',
+    '!**/.next/**',
+    '!**/@types/**',
+    '!**/coverage/**',
   ],
-  setupFilesAfterEnv: ["<rootDir>/setupTests.ts"],
-  testPathIgnorePatterns: ["/node_modules/", "/.next/"],
+  setupFilesAfterEnv: ['<rootDir>/setupTests.ts'],
+  testPathIgnorePatterns: ['/node_modules/', '/.next/'],
   transform: {
-    "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
+    '^.+\\.(js|jsx|ts|tsx)$': '<rootDir>/node_modules/babel-jest',
     //"^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
   },
   transformIgnorePatterns: [
-    "/node_modules/",
-    "^.+\\.module\\.(css|sass|scss)$",
+    '/node_modules/',
+    '^.+\\.module\\.(css|sass|scss)$',
   ],
   moduleNameMapper: {
-    "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy",
+    '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
   },
 };

@@ -1,8 +1,8 @@
-import SidebarItem from "./sidebarItem";
-import { SidebarContainer, SidebarButtonContainer } from "./sidebarStyles";
-import { MenuOpenIcon, MenuButtonContainer } from "../navbar/navbarStyles";
-import { useContext } from "react";
-import { store } from "../../store";
+import SidebarItem from './sidebarItem';
+import { SidebarContainer, SidebarButtonContainer } from './sidebarStyles';
+import { MenuOpenIcon, MenuButtonContainer } from '../navbar/navbarStyles';
+import { useContext } from 'react';
+import { store } from '../../store';
 interface Props {
   closeSidebar: () => void;
 }
@@ -10,19 +10,13 @@ interface Props {
 const Sidebar = ({ closeSidebar }: Props) => {
   const { state } = useContext(store);
   const { featuredTrainingPackCreators } = state;
-
   return (
-    <SidebarContainer>
+    <SidebarContainer aria-label="sidebar container">
       <SidebarButtonContainer>
         <MenuButtonContainer onClick={closeSidebar}>
-          <MenuOpenIcon />
+          <MenuOpenIcon aria-label="open sidebar menu" />
         </MenuButtonContainer>
       </SidebarButtonContainer>
-
-      <SidebarItem
-        text="Training packs"
-        subItems={featuredTrainingPackCreators}
-      />
 
       <SidebarItem
         text="Training packs"

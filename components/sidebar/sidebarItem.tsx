@@ -1,20 +1,20 @@
-import { useEffect, useState } from "react";
-import { useSpring, animated } from "react-spring";
+import { useEffect, useState } from 'react';
+import { useSpring, animated } from 'react-spring';
 import {
   SidebarItemContainer,
   ChevronDownIcon,
   SidebarOptionContainer,
-} from "./sidebarStyles";
-import { useMeasure } from "react-use";
-import Link from "next/link";
+} from './sidebarStyles';
+import { useMeasure } from 'react-use';
+import Link from 'next/link';
 import {
   TrainingPack,
   Mechanic,
   ContentCreator,
   Tutorial,
-} from "../../shared/interfaces";
+} from '../../shared/interfaces';
 
-interface Props {
+export interface Props {
   text: string;
   subItems: {
     [creator: string]: {
@@ -27,25 +27,25 @@ interface Props {
 }
 
 const SidebarItem = ({ text, subItems }: Props) => {
-  const closedHeight = "0px";
+  const closedHeight = '0px';
   const [ref, { height }] = useMeasure();
   const [active, setActive] = useState<boolean>(false);
   const [contentHeight, setContentHeight] = useState<string | number>(
-    closedHeight
+    closedHeight,
   );
 
   const handleClick = () => {
     if (active) {
-      setSpringProps({ transform: "rotateX(180deg)", marginBottom: "10px" });
+      setSpringProps({ transform: 'rotateX(180deg)', marginBottom: '10px' });
     } else {
-      setSpringProps({ transform: "rotateX(0deg)", marginBottom: "0px" });
+      setSpringProps({ transform: 'rotateX(0deg)', marginBottom: '0px' });
     }
     setActive(!active);
   };
 
   const [springProps, setSpringProps] = useSpring(() => ({
-    transform: "rotateX(180deg)",
-    marginBottom: "10px",
+    transform: 'rotateX(180deg)',
+    marginBottom: '10px',
   }));
 
   const expand = useSpring({
@@ -56,12 +56,6 @@ const SidebarItem = ({ text, subItems }: Props) => {
   useEffect(() => {
     //Sets initial height
     setContentHeight(height);
-
-    //Adds resize event listener
-    window.addEventListener("resize", () => setContentHeight(height));
-
-    // Clean-up
-    return window.removeEventListener("resize", () => setContentHeight(height));
   }, [height]);
 
   return (
@@ -69,8 +63,8 @@ const SidebarItem = ({ text, subItems }: Props) => {
       <SidebarItemContainer active={active} onClick={handleClick}>
         <p>{text}</p>
         <animated.div style={springProps}>
-          {" "}
-          <ChevronDownIcon active={active} />{" "}
+          {' '}
+          <ChevronDownIcon active={active} />{' '}
         </animated.div>
       </SidebarItemContainer>
 

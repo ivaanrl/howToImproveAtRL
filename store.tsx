@@ -1,12 +1,12 @@
-import { createContext, useReducer, Dispatch } from "react";
+import { createContext, useReducer, Dispatch } from 'react';
 import {
   ContentCreator,
   TrainingPack,
   Mechanic,
   Tutorial,
-} from "./shared/interfaces";
+} from './shared/interfaces';
 
-interface State {
+export interface State {
   featuredTrainingPackCreators: {
     [creator: string]: {
       contentCreatorInfo: ContentCreator;
@@ -17,23 +17,23 @@ interface State {
   };
 }
 
-const initialState: State = { featuredTrainingPackCreators: {} };
+const initialStoreState: State = { featuredTrainingPackCreators: {} };
 const store = createContext<{ state: State; dispatch: Dispatch<any> }>({
-  state: initialState,
+  state: initialStoreState,
   dispatch: () => null,
 });
 const { Provider } = store;
-const StateProvider = ({ children }) => {
+const StateProvider = ({ children, initialState = initialStoreState }) => {
   const [state, dispatch] = useReducer(
     (state: State, action: { payload: any; type: string }) => {
       switch (action.type) {
-        case "POPULATE_SIDEBAR":
+        case 'POPULATE_SIDEBAR':
           return { ...state, ...action.payload };
         default:
           return state;
       }
     },
-    initialState
+    initialState,
   );
 
   return <Provider value={{ state, dispatch }}>{children}</Provider>;
