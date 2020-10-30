@@ -1,19 +1,25 @@
-import Head from "next/head";
-import { GetStaticProps } from "next";
-import { getFeaturedTrainingPacks } from "../lib/trainingPacks";
-import { useContext, useEffect } from "react";
-import { store, TrainingPack } from "../store";
+import Head from 'next/head';
+import { GetStaticProps } from 'next';
+import { getFeaturedTrainingPacks } from '../lib/trainingPacks';
+import { useContext, useEffect } from 'react';
+import { store } from '../store';
+import { ContentCreator, TrainingPack } from '../shared/interfaces';
 
 export default function Home({
   featuredTrainingPackCreators,
 }: {
-  featuredTrainingPackCreators: { [creator: string]: TrainingPack };
+  featuredTrainingPackCreators: {
+    [contenCreatorName: string]: {
+      contentCreatorInfo: ContentCreator;
+      trainingPacks: TrainingPack[];
+    };
+  };
 }) {
   const { dispatch } = useContext(store);
 
   useEffect(() => {
     dispatch({
-      type: "POPULATE_SIDEBAR",
+      type: 'POPULATE_SIDEBAR',
       payload: { featuredTrainingPackCreators },
     });
   }, []);

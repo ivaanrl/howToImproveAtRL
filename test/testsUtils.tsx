@@ -2,12 +2,11 @@ import { theme } from '../styles/theme';
 import { ThemeProvider } from 'styled-components';
 import { render, RenderOptions } from '@testing-library/react';
 import { StateProvider, State } from '../store';
-import { Provider as NextAuthProvider } from 'next-auth/client';
 import faker from 'faker';
 
 const initialState: State = {
   featuredTrainingPackCreators: {
-    [faker.internet.userName()]: {
+    ['ivanrl']: {
       contentCreatorInfo: {
         content_creator_id: faker.random.alphaNumeric(),
         tiktok: faker.internet.userName(),
@@ -20,7 +19,7 @@ const initialState: State = {
         discord: faker.internet.userName(),
         twitch: faker.internet.userName(),
         featured: 1,
-        name: faker.internet.userName(),
+        name: 'ivanrl', //just for making some tests easier
         picture: faker.internet.url(),
       },
       trainingPacks: [],

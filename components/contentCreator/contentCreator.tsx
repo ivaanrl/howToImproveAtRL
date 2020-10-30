@@ -7,7 +7,6 @@ import {
 import { useRouter } from 'next/router';
 import SocialNetwork from '../socialNetwork/socialNetwork';
 import {
-  ContentCreatorContainer,
   ContentCreatorHeader,
   ProfileBigButton,
   ContentCreatorNameContainer,
@@ -151,16 +150,22 @@ const ContentCreator = () => {
 
   return (
     <>
-      <ContentCreatorHeader backgroundImage={headerImage}>
+      <ContentCreatorHeader
+        backgroundImage={headerImage}
+        data-testid="content creator header"
+      >
         <PictureAndNameContainer>
           <animated.div style={profileNameSpringProps}>
-            <ContentCreatorNameContainer> {name} </ContentCreatorNameContainer>
+            <ContentCreatorNameContainer data-testid="content creator name">
+              {' '}
+              {name}{' '}
+            </ContentCreatorNameContainer>
           </animated.div>
           <animated.div style={profilePictureSpringProps}>
             <ProfilePictureContainer profilePicture={picture} />
           </animated.div>
         </PictureAndNameContainer>
-        <SocialNetworksContainer>
+        <SocialNetworksContainer data-testid="social networks container">
           {tiktok ? (
             <SocialNetwork socialNetwork="tiktok" handle={tiktok} />
           ) : null}
@@ -195,7 +200,10 @@ const ContentCreator = () => {
         </SocialNetworksContainer>
       </ContentCreatorHeader>
       <div style={{ height: '100%' }}>
-        <animated.div style={buttonsSpringProps}>
+        <animated.div
+          style={buttonsSpringProps}
+          data-testid="big buttons container"
+        >
           <ProfileBigButton
             backgroundImage="/images/profileButtons/training.jpg"
             onClick={() => handleBigButtonClick(1)}
