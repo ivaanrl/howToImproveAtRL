@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { ThemeInterface } from '../../styles/theme';
 
 export const SocialNetworkContainer = styled.div`

@@ -1,6 +1,6 @@
-import styled, { css } from "styled-components";
-import { ThemeInterface } from "../../styles/theme";
-import { ChevronDown } from "@styled-icons/boxicons-regular/ChevronDown";
+import styled, { css } from 'styled-components';
+import { ThemeInterface } from '../../styles/theme';
+import { ChevronDown } from '@styled-icons/boxicons-regular/ChevronDown';
 
 export const SidebarContainer = styled.div`
   position: fixed;

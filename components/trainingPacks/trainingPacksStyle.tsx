@@ -1,5 +1,5 @@
-import styled, { css } from "styled-components";
-import { ThemeInterface } from "../../styles/theme";
+import styled from 'styled-components';
+import { ThemeInterface } from '../../styles/theme';
 
 export const TrainingPacksContainer = styled.div`
   display: flex;
