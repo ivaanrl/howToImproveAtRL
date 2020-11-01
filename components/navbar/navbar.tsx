@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ChangeEvent, KeyboardEvent } from 'react';
+import { useRouter } from 'next/router';
 import { useSpring, animated } from 'react-spring';
 import Sidebar from '../sidebar/sidebar';
 import NavbarPopper from './navbarPopper';
@@ -15,10 +16,25 @@ import useWindowDimensions from '../../shared/customHooks/useWindowsDimensions';
 import { signIn, useSession } from 'next-auth/client';
 
 const Navbar = () => {
+  const router = useRouter();
   const [session] = useSession();
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const { width } = useWindowDimensions();
-  const [search, setSearch] = useState<string>();
+  const [search, setSearch] = useState<string>('');
+
+  const handleSearch = () => {
+    router.push({ pathname: '/search', query: { name: search } });
+  };
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearch(event.target.value);
+  };
+
+  const handleSearchKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
 
   const getSidebarWidth = () => {
     if (width < 600) {
@@ -90,8 +106,13 @@ const Navbar = () => {
         </MenuButtonContainer>
 
         <NavbarSearchBarContainer>
-          <NavbarSearchBarInput placeholder="Search" value={search} />
-          <SearchIcon />
+          <NavbarSearchBarInput
+            placeholder="Search"
+            value={search}
+            onChange={handleInputChange}
+            onKeyPress={handleSearchKeyPress}
+          />
+          <SearchIcon aria-label="search button" onClick={handleSearch} />
         </NavbarSearchBarContainer>
 
         {session ? (

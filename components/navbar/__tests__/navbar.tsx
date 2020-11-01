@@ -1,6 +1,7 @@
-import { queryByPlaceholderText, render } from '../../../test/testsUtils';
+import { render } from '../../../test/testsUtils';
 import user from '@testing-library/user-event';
 import Navbar from '../navbar';
+import faker from 'faker';
 
 jest.mock('next-auth/client', () => ({
   useSession: jest.fn(() => {
@@ -16,6 +17,14 @@ jest.mock('next-auth/client', () => ({
       },
       true,
     ];
+  }),
+}));
+
+const mockPushRouter = jest.fn();
+
+jest.mock('next/router', () => ({
+  useRouter: () => ({
+    push: mockPushRouter,
   }),
 }));
 
@@ -54,4 +63,19 @@ test('can close sidebar', async () => {
   const closeSidebarButton = getByLabelText('close sidebar menu');
   user.click(closeSidebarButton);
   expect(queryByLabelText('sidebar container')).toBeInTheDocument();
+});
+
+test('search redirects to correct path', () => {
+  const searchQuery = faker.lorem.words(3);
+  const { getByPlaceholderText, getByLabelText } = render(<Navbar />);
+  const searchBar = getByPlaceholderText(/search/i);
+  user.type(searchBar, searchQuery);
+  const searchButton = getByLabelText('search button');
+  user.click(searchButton);
+  expect(mockPushRouter).toHaveBeenCalled();
+  expect(mockPushRouter).toHaveBeenCalledTimes(1);
+  expect(mockPushRouter).toHaveBeenCalledWith({
+    pathname: '/search',
+    query: { name: searchQuery },
+  });
 });
