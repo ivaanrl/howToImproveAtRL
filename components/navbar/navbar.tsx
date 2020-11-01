@@ -7,6 +7,9 @@ import {
   MenuOpenIcon,
   MenuButtonContainer,
   SignInWithGoogleButton,
+  NavbarSearchBarContainer,
+  NavbarSearchBarInput,
+  SearchIcon,
 } from './navbarStyles';
 import useWindowDimensions from '../../shared/customHooks/useWindowsDimensions';
 import { signIn, useSession } from 'next-auth/client';
@@ -15,6 +18,7 @@ const Navbar = () => {
   const [session] = useSession();
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const { width } = useWindowDimensions();
+  const [search, setSearch] = useState<string>();
 
   const getSidebarWidth = () => {
     if (width < 600) {
@@ -84,6 +88,11 @@ const Navbar = () => {
             <MenuOpenIcon />
           </animated.div>
         </MenuButtonContainer>
+
+        <NavbarSearchBarContainer>
+          <NavbarSearchBarInput placeholder="Search" value={search} />
+          <SearchIcon />
+        </NavbarSearchBarContainer>
 
         {session ? (
           <NavbarPopper />

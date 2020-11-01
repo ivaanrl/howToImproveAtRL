@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { ThemeInterface } from '../../styles/theme';
 import { MenuOpen } from '@styled-icons/material/MenuOpen';
 import { ChevronDown } from '@styled-icons/boxicons-regular/ChevronDown';
+import { Search } from '@styled-icons/evil/Search';
 
 export const NavbarContainer = styled.div`
   display: flex;
@@ -159,5 +160,40 @@ export const NavbarPopperItem = styled.button`
 
   &:focus {
     outline: none;
+  }
+`;
+
+export const NavbarSearchBarContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 40%;
+  max-width: 550px;
+  justify-content: center;
+`;
+
+export const NavbarSearchBarInput = styled.input`
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
+  border: none;
+  padding-left: 10px;
+  width: 100%;
+
+  &:focus {
+    outline: none;
+  }
+`;
+
+export const SearchIcon = styled(Search)`
+  height: 30px;
+  width: 30px;
+  color: ${(props) => (props.theme as ThemeInterface).mainTextColor};
+  background-color: ${(props) => (props.theme as ThemeInterface).bgColorDark};
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: ${(props) =>
+      (props.theme as ThemeInterface).bgColorDarkHighlight};
   }
 `;

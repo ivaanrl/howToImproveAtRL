@@ -1,4 +1,4 @@
-import { render } from '../../../test/testsUtils';
+import { queryByPlaceholderText, render } from '../../../test/testsUtils';
 import user from '@testing-library/user-event';
 import Navbar from '../navbar';
 
@@ -21,11 +21,17 @@ jest.mock('next-auth/client', () => ({
 
 describe('renders properly', () => {
   test('with user signed in', () => {
-    const { getByTestId, getByRole, queryByTestId } = render(<Navbar />);
+    const {
+      getByTestId,
+      getByRole,
+      queryByTestId,
+      getByPlaceholderText,
+    } = render(<Navbar />);
 
     expect(getByTestId('navbar container')).toBeInTheDocument();
     expect(getByRole('button', { name: 'ivanrl' })).toBeInTheDocument();
     expect(queryByTestId('sign in with google')).toBeNull();
+    expect(getByPlaceholderText(/search/i)).toBeInTheDocument();
   });
 });
 
