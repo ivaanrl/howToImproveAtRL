@@ -1,6 +1,5 @@
 import { render } from '../../../test/testsUtils';
 import user from '@testing-library/user-event';
-import faker from 'faker';
 import SearchBar from '../searchbar';
 
 const mockSetSearchValue = jest.fn();
