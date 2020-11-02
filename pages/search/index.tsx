@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import { useDispatch } from 'react-redux';
 import { getSearchResults } from '../../lib/search';
@@ -12,6 +12,8 @@ import {
   searchTrainingPack,
 } from '../../shared/interfaces';
 import { actions as searchResultsActions } from '../../redux/reducers/searchResults';
+import SearchBar from '../../components/searchbar/searchbar';
+import { BackgroundDefault } from '../../shared/ui/backgroundStyles';
 
 export default function SearchPage({
   searchResults,
@@ -25,12 +27,21 @@ export default function SearchPage({
     dispatch(searchResultsActions.populate_search_results(searchResults));
   }, [router.query]);
 
+  const [searchValue, setSearchValue] = useState<string>();
+
+  const search = () => {};
+
   return (
-    <>
+    <BackgroundDefault>
       <Head>
         <title>The Best Rocket League Trainings</title>
       </Head>
-    </>
+      <SearchBar
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+        search={search}
+      />
+    </BackgroundDefault>
   );
 }
 
@@ -39,6 +50,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const searchResults = await getSearchResults(
     (context.query as unknown) as searchAny | searchTrainingPack,
   );
+
   return {
     props: { searchResults },
   };
