@@ -18,7 +18,6 @@ import TrainingPackSelector from '../../shared/modules/react-select/TrainingPack
 import ContentCreatorSelector from '../../shared/modules/react-select/ContentCreatorSelector';
 import DifficultySelector from '../../shared/modules/react-select/difficultySelector';
 import CategorySelector from '../../shared/modules/react-select/CategorySelector';
-import { stringify } from 'querystring';
 
 export default function SearchPage({
   searchResults,
@@ -53,13 +52,13 @@ export default function SearchPage({
         searchType: category.value,
         name: searchValue,
         training_styles: trainingPackValue.map((selectedOption) => {
-          return selectedOption.value;
+          return selectedOption?.value;
         }),
         contentCreators: contentCreatorValue.map((selectedOption) => {
-          return selectedOption.value;
+          return selectedOption?.value;
         }),
         difficulties: difficultyValue.map((selectedOption) => {
-          return selectedOption.value;
+          return selectedOption?.value;
         }),
       },
     });
