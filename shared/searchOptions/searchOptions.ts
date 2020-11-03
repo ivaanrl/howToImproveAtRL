@@ -1,3 +1,6 @@
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
+
 export const TrainingStyleOptions = [
   {
     value: 'Striker',
@@ -83,4 +86,37 @@ export const TrainingStyleOptions = [
     value: 'Backboard',
     label: 'Backboard',
   },
+];
+
+export const ContentCreatorOptions = () => {
+  const contentCreators = useSelector(
+    (state: RootState) => state.contentCreators,
+  );
+
+  const contentCreatorOptionsArray = contentCreators.map((contentCreator) => {
+    return { value: contentCreator.name, label: contentCreator.name };
+  });
+
+  return contentCreatorOptionsArray;
+};
+
+export const DifficultyOptions = [
+  {
+    value: 'Easy',
+    label: 'Easy',
+  },
+  {
+    value: 'Medium',
+    label: 'Medium',
+  },
+  {
+    value: 'Hard',
+    label: 'Hard',
+  },
+];
+
+export const CategoriesOptions = [
+  { value: 'training pack', label: 'Training Packs' },
+  { value: 'Mechanics', label: 'Mechanics' },
+  { value: 'Tutorials', label: 'Tutorials' },
 ];

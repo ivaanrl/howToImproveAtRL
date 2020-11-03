@@ -21,8 +21,14 @@ export interface ThemeInterface {
   supportSelectBackgroundColor: string;
   supportSelectHoverColor: string;
   easy: string;
+  easySelectBackgroundColor: string;
+  easySelectHoverColor: string;
   medium: string;
+  mediumSelectHoverColor: string;
+  mediumSelectBackgroundColor: string;
   hard: string;
+  hardSelectHoverColor: string;
+  hardSelectBackgroundColor: string;
 }
 
 export const theme: ThemeInterface = {
@@ -47,7 +53,13 @@ export const theme: ThemeInterface = {
   defensiveSelectHoverColor: 'rgba(206,238,252,1)',
   supportSelectBackgroundColor: 'rgba(43,149,69,0.1)',
   supportSelectHoverColor: 'rgba(43,149,69,0.3)',
-  easy: '',
-  medium: '',
-  hard: '',
+  easy: '#A18910',
+  easySelectBackgroundColor: 'rgba(225, 190, 14, 0.2)',
+  easySelectHoverColor: 'rgba(225, 190, 14, 0.4)',
+  medium: '#0C93B5',
+  mediumSelectBackgroundColor: 'rgba(151, 227, 246, 0.3)',
+  mediumSelectHoverColor: 'rgba(151, 227, 246, 0.7)',
+  hard: '#af5bf0',
+  hardSelectBackgroundColor: 'rgba(175,91,240,0.2)',
+  hardSelectHoverColor: 'rgba(175,91,240,0.4)',
 };

@@ -1,7 +1,7 @@
-import { theme } from '../../../styles/theme';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
-import { TrainingStyleOptions } from '../../searchOptions/searchOptions';
+import { theme } from '../../../styles/theme';
+import { DifficultyOptions } from '../../searchOptions/searchOptions';
 
 interface Props {
   value: { value: string; label: string }[];
@@ -10,53 +10,28 @@ interface Props {
 
 const animatedComponents = makeAnimated();
 
-const TrainingPackSelector = ({ value, setValue }: Props) => {
+const DifficultySelector = ({ value, setValue }: Props) => {
   const getOptionsColor = (
     label: string,
   ): { color: string; backgroundColor: string; hoverColor: string } => {
     switch (label) {
-      case 'Bounces':
-      case 'Shots':
-      case 'Redirects':
-      case 'Freestlyes':
-      case 'Air_dribbles':
-      case 'Dribbles':
-      case 'Long_shots':
-      case 'Close_shots':
-      case 'Angle_shots':
-      case 'Backwards_shots':
-      case 'Pinch_shots':
-      case 'Striker':
-      case 'Offense':
+      case 'Easy':
         return {
-          color: theme.offensiveColor,
-          backgroundColor: theme.offensiveSelectBackgroundColor,
-          hoverColor: theme.offensiveSelectHoverColor,
+          color: theme.easy,
+          backgroundColor: theme.easySelectBackgroundColor,
+          hoverColor: theme.easySelectHoverColor,
         };
-      case 'Saves':
-      case 'Clears':
-      case 'Defense':
+      case 'Medium':
         return {
-          color: theme.defensiveColor,
-          backgroundColor: theme.defensiveSelectBackgroundColor,
-          hoverColor: theme.defensiveSelectHoverColor,
+          color: theme.medium,
+          backgroundColor: theme.mediumSelectBackgroundColor,
+          hoverColor: theme.mediumSelectHoverColor,
         };
-      case 'Rebounds':
-      case 'Kickoffs':
-      case 'Wall_shots':
-      case 'Passing':
-      case 'Aerial':
-      case 'Backboard':
+      case 'Hard':
         return {
-          color: theme.supportColor,
-          backgroundColor: theme.supportSelectBackgroundColor,
-          hoverColor: theme.supportSelectHoverColor,
-        };
-      default:
-        return {
-          color: theme.offensiveColor,
-          backgroundColor: theme.offensiveSelectBackgroundColor,
-          hoverColor: theme.offensiveSelectHoverColor,
+          color: theme.hard,
+          backgroundColor: theme.hardSelectBackgroundColor,
+          hoverColor: theme.hardSelectHoverColor,
         };
     }
   };
@@ -100,13 +75,13 @@ const TrainingPackSelector = ({ value, setValue }: Props) => {
       closeMenuOnSelect={false}
       components={animatedComponents}
       isMulti
-      options={TrainingStyleOptions}
+      options={DifficultyOptions}
       styles={colourStyles}
       onChange={setValue}
       value={value}
-      placeholder="Select Training Packs..."
+      placeholder="Select Difficulty..."
     />
   );
 };
 
-export default TrainingPackSelector;
+export default DifficultySelector;

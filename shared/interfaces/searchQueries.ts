@@ -6,7 +6,7 @@ export interface searchAny {
 export interface searchTrainingPack {
   searchType: 'training pack';
   name: string | undefined;
-  training_styles: string | undefined;
-  contentCreators: string | undefined;
-  difficulties: string | undefined;
+  training_styles: string[] | undefined;
+  contentCreators: string[] | undefined;
+  difficulties: string[] | undefined;
 }

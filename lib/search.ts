@@ -21,7 +21,11 @@ export const getSearchResults = async (
 };
 
 const getTrainingPackSearch = async (query: searchTrainingPack) => {
-  const difficulties = query.difficulties.replace(/[\[\]]/g, '').split(',');
+  const difficulties = query.difficulties
+    ? Array.isArray(query.difficulties)
+      ? query.difficulties
+      : [query.difficulties]
+    : [];
   let difficultyQuery: string;
   if (difficulties.length > 0) {
     difficultyQuery = '(';
@@ -37,12 +41,13 @@ const getTrainingPackSearch = async (query: searchTrainingPack) => {
   }
 
   const training_styles = query.training_styles
-    ? query.training_styles.replace(/[\[\]]/g, '').split(',')
+    ? Array.isArray(query.training_styles)
+      ? query.training_styles
+      : [query.training_styles]
     : [];
   let training_style_query: string = training_styles.length > 0 ? 'AND ' : '';
   training_styles.forEach((training_style, index: number) => {
     if (index < training_styles.length - 1) {
-      console.log(index);
       training_style_query += `training_style REGEXP '"${training_style}":([^"])true([^"])' AND `;
     } else {
       training_style_query += `training_style REGEXP '"${training_style}":([^"])true([^"])'`;
@@ -50,8 +55,12 @@ const getTrainingPackSearch = async (query: searchTrainingPack) => {
   });
 
   const whereQuery = `
-  training_pack_name LIKE '%${query.name}%' AND difficulty IN ${difficultyQuery} ${training_style_query}
+  training_pack_name LIKE '%${
+    query.name ? query.name : ''
+  }%' AND difficulty IN ${difficultyQuery} ${training_style_query}
   `;
+
+  console.log('where query:', whereQuery);
 
   const queryResult: (TrainingPack | Mechanic | Tutorial)[] = JSON.parse(
     JSON.stringify(
