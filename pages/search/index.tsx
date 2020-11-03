@@ -14,6 +14,7 @@ import {
 import { actions as searchResultsActions } from '../../redux/reducers/searchResults';
 import SearchBar from '../../components/searchbar/searchbar';
 import { BackgroundDefault } from '../../shared/ui/backgroundStyles';
+import TrainingPackSelector from '../../shared/modules/react-select/TrainingPackSelector';
 
 export default function SearchPage({
   searchResults,
@@ -28,6 +29,9 @@ export default function SearchPage({
   }, [router.query]);
 
   const [searchValue, setSearchValue] = useState<string>();
+  const [trainingPackValue, setTrainingPackValue] = useState<
+    { value: string; label: string }[]
+  >([]);
 
   const search = () => {};
 
@@ -40,6 +44,10 @@ export default function SearchPage({
         searchValue={searchValue}
         setSearchValue={setSearchValue}
         search={search}
+      />
+      <TrainingPackSelector
+        value={trainingPackValue}
+        setValue={setTrainingPackValue}
       />
     </BackgroundDefault>
   );
