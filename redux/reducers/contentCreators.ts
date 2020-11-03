@@ -1,34 +1,31 @@
 import { ContentCreatorsReducerState } from '../../shared/interfaces/reducers/contentCreatorsReducer';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import {
-  ContentCreator,
-  Mechanic,
-  TrainingPack,
-  Tutorial,
-} from '../../shared/interfaces';
 
-const initialState: ContentCreatorsReducerState = {
-  featuredTrainingPackCreators: {},
-};
+const initialState: ContentCreatorsReducerState = [];
 
 const { actions, reducer, name } = createSlice({
   name: 'contentCreators',
   initialState,
   reducers: {
     populate_content_creators(
-      state,
-      action: PayloadAction<{
-        [contenCreatorName: string]: {
-          contentCreatorInfo: ContentCreator;
-          trainingPacks: TrainingPack[];
-          mechanics: Mechanic[];
-          tutorials: Tutorial[];
-        };
-      }>,
+      _state,
+      action: PayloadAction<
+        {
+          name: string;
+        }[]
+      >,
     ) {
-      state.featuredTrainingPackCreators = action.payload;
+      console.log(action.payload);
+      return action.payload;
     },
   },
 });
+
+export const fetchContenCreators = () => async (dispatch) => {
+  const response = await (
+    await fetch('/api/contentCreators/getContentCreators')
+  ).json();
+  dispatch(actions.populate_content_creators(response as any));
+};
 
 export { actions, reducer, name };

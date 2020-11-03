@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import {
   ContentCreator as ContentCreatorInterface,
+  Mechanic,
   TrainingPack,
+  Tutorial,
 } from '../../shared/interfaces';
 import { useRouter } from 'next/router';
 import SocialNetwork from '../socialNetwork/socialNetwork';
@@ -17,8 +19,6 @@ import {
 import { useSpring, animated, useTransition } from 'react-spring';
 import useWindowDimensions from '../../shared/customHooks/useWindowsDimensions';
 import TrainingPacks from '../trainingPacks/trainingPacks';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
 
 const NUMBER_OF_IMAGES = 5;
 
@@ -47,13 +47,17 @@ const pages = [
   ),
 ];
 
-const ContentCreator = () => {
-  const state = useSelector((state: RootState) => state.contentCreators);
+interface Props {
+  currentContentCreator: {
+    contentCreatorInfo: ContentCreatorInterface;
+    trainingPacks: TrainingPack[];
+    mechanics: Mechanic[];
+    tutorials: Tutorial[];
+  };
+}
+
+const ContentCreator = ({ currentContentCreator }: Props) => {
   const router = useRouter();
-  const [
-    currentContentCreator,
-    setCurrentContentCreator,
-  ] = useState<ContentCreatorInterface | null>(null);
   const [headerImage, setHeaderImage] = useState<string>('');
 
   const getRandomHeaderImage = () => {
@@ -67,16 +71,8 @@ const ContentCreator = () => {
   };
 
   useEffect(() => {
-    if (
-      state.featuredTrainingPackCreators[router.query.creatorName as string]
-    ) {
-      setHeaderImage(getRandomHeaderImage());
-      setCurrentContentCreator(
-        state.featuredTrainingPackCreators[router.query.creatorName as string]
-          .contentCreatorInfo,
-      );
-    }
-  }, [router.query.creatorName, state.featuredTrainingPackCreators]);
+    setHeaderImage(getRandomHeaderImage());
+  }, [router.query.creatorName]);
 
   const [isNavbar, setIsNavbar] = useState<boolean>(false);
   const { width } = useWindowDimensions();
@@ -143,7 +139,7 @@ const ContentCreator = () => {
     facebook,
     discord,
     twitch,
-  } = currentContentCreator;
+  } = currentContentCreator.contentCreatorInfo;
 
   return (
     <>
@@ -238,11 +234,7 @@ const ContentCreator = () => {
             <Page
               key={key}
               style={props}
-              trainingPacksInfo={
-                state.featuredTrainingPackCreators[
-                  router.query.creatorName as string
-                ].trainingPacks
-              }
+              trainingPacksInfo={currentContentCreator.trainingPacks}
             />
           );
         })}

@@ -54,7 +54,6 @@ export default function SearchPage({
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  console.log(context.query);
   const searchResults = await getSearchResults(
     (context.query as unknown) as searchAny | searchTrainingPack,
   );

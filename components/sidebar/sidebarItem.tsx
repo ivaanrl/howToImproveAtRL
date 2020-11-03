@@ -7,23 +7,12 @@ import {
 } from './sidebarStyles';
 import { useMeasure } from 'react-use';
 import Link from 'next/link';
-import {
-  TrainingPack,
-  Mechanic,
-  ContentCreator,
-  Tutorial,
-} from '../../shared/interfaces';
 
 export interface Props {
   text: string;
   subItems: {
-    [creator: string]: {
-      contentCreatorInfo: ContentCreator;
-      trainingPacks: TrainingPack[];
-      mechanics: Mechanic[];
-      tutorials: Tutorial[];
-    };
-  };
+    name: string;
+  }[];
 }
 
 const SidebarItem = ({ text, subItems }: Props) => {
@@ -71,11 +60,11 @@ const SidebarItem = ({ text, subItems }: Props) => {
       <animated.div style={expand}>
         <div ref={ref}>
           {active
-            ? Object.keys(subItems).map((creator: string, index: number) => {
+            ? subItems.map((subItem, index: number) => {
                 return (
-                  <Link href={`${creator}`} key={index}>
+                  <Link href={`${subItem.name}`} key={index}>
                     <SidebarOptionContainer>
-                      <a>{creator}</a>
+                      <a>{subItem.name}</a>
                     </SidebarOptionContainer>
                   </Link>
                 );

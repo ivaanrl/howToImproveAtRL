@@ -1,16 +1,24 @@
+import { useEffect } from 'react';
 import SidebarItem from './sidebarItem';
 import { SidebarContainer, SidebarButtonContainer } from './sidebarStyles';
 import { MenuOpenIcon, MenuButtonContainer } from '../navbar/navbarStyles';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
+import { fetchContenCreators } from '../../redux/reducers/contentCreators';
 interface Props {
   closeSidebar: () => void;
 }
 
 const Sidebar = ({ closeSidebar }: Props) => {
-  const { featuredTrainingPackCreators } = useSelector(
+  const dispatch = useDispatch();
+  const contentCreators = useSelector(
     (state: RootState) => state.contentCreators,
   );
+
+  useEffect(() => {
+    dispatch(fetchContenCreators());
+  }, []);
+
   return (
     <SidebarContainer aria-label="sidebar container">
       <SidebarButtonContainer>
@@ -19,10 +27,7 @@ const Sidebar = ({ closeSidebar }: Props) => {
         </MenuButtonContainer>
       </SidebarButtonContainer>
 
-      <SidebarItem
-        text="Training packs"
-        subItems={featuredTrainingPackCreators}
-      />
+      <SidebarItem text="Training packs" subItems={contentCreators} />
     </SidebarContainer>
   );
 };

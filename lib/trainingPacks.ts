@@ -1,5 +1,5 @@
-import { TrainingPack, ContentCreator } from "../shared/interfaces";
-import { executeQuery } from "./db";
+import { TrainingPack, ContentCreator } from '../shared/interfaces';
+import { executeQuery } from './db';
 
 export const getFeaturedTrainingPacks = async () => {
   const result = await executeQuery({
@@ -10,16 +10,16 @@ export const getFeaturedTrainingPacks = async () => {
       ) AS content_creators ON training_packs.training_pack_author = content_creators.content_creator_id
       WHERE content_creators.featured = ?
     `,
-    values: ["1"],
+    values: ['1'],
   });
 
   const featuredCreatorsQueryResult = await executeQuery({
-    query: "Select * FROM content_creators WHERE featured = ?",
-    values: ["1"],
+    query: 'Select * FROM content_creators WHERE featured = ?',
+    values: ['1'],
   });
 
   const featuredCreatorsJSON: ContentCreator[] = JSON.parse(
-    JSON.stringify(featuredCreatorsQueryResult)
+    JSON.stringify(featuredCreatorsQueryResult),
   );
 
   const featuredCreatorsPacks: {

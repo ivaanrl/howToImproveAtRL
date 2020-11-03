@@ -13,6 +13,7 @@ import ContentCreator from '../../components/contentCreator/contentCreator';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { actions as contentCreatorsActions } from '../../redux/reducers/contentCreators';
+import { getFeaturedContentCreatorsName } from '../../lib/getFeaturedContentCreators';
 
 export default function ContentCreatorPage({
   featuredTrainingPackCreators,
@@ -31,31 +32,19 @@ export default function ContentCreatorPage({
   const router = useRouter();
   const [trainingPacks, setTrainingPacks] = useState<TrainingPackInterface[]>();
 
-  useEffect(() => {
-    dispatch(
-      contentCreatorsActions.populate_content_creators(
-        featuredTrainingPackCreators,
-      ),
-    );
-  }, []);
-
-  useEffect(() => {
-    if (
-      state.featuredTrainingPackCreators[router.query.creatorName as string]
-    ) {
-      setTrainingPacks(
-        state.featuredTrainingPackCreators[router.query.creatorName as string]
-          .trainingPacks,
-      );
-    }
-  }, [trainingPacks, router, state.featuredTrainingPackCreators]);
+  console.log(featuredTrainingPackCreators[router.query.creatorName as string]);
 
   return (
     <>
       <Head>
         <title>How to improve at Rocket League - Training Packs</title>
       </Head>
-      <ContentCreator />
+
+      <ContentCreator
+        currentContentCreator={
+          featuredTrainingPackCreators[router.query.creatorName as string]
+        }
+      />
     </>
   );
 }
@@ -71,8 +60,11 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const featuredCreators = await getFeaturedContentCreatorsName();
   return {
-    paths: [{ params: { creatorName: 'Poquito' } }],
+    paths: featuredCreators.map((featuredCreator: { name: string }) => {
+      return { params: { creatorName: featuredCreator.name } };
+    }),
     fallback: true,
   };
 };
