@@ -81,14 +81,17 @@ export default function SearchPage({
           <TrainingPackSelector
             value={trainingPackValue}
             setValue={setTrainingPackValue}
+            initialValue={router.query.training_styles}
           />
           <ContentCreatorSelector
             value={contentCreatorValue}
             setValue={setContentCreatorValue}
+            initialValue={router.query.contentCreators}
           />
           <DifficultySelector
             value={difficultyValue}
             setValue={setDifficultyValue}
+            initialValue={router.query.difficulties}
           />
         </>
       ) : null}

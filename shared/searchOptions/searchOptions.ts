@@ -120,3 +120,18 @@ export const CategoriesOptions = [
   { value: 'Mechanics', label: 'Mechanics' },
   { value: 'Tutorials', label: 'Tutorials' },
 ];
+
+export const getDefaultValues = (
+  initialValue: string | string[] | undefined,
+  optionsArray: { value: string; label: string }[],
+) => {
+  const defaultValue = Array.isArray(initialValue)
+    ? initialValue
+    : [initialValue];
+  const defaultValues = defaultValue.map((selectedOption) => {
+    return optionsArray.find(
+      (trainingStyleOption) => trainingStyleOption.value === selectedOption,
+    );
+  });
+  return defaultValues;
+};

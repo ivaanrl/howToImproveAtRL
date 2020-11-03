@@ -12,7 +12,7 @@ const animatedComponents = makeAnimated();
 const CategorySelector = ({ value, setValue }: Props) => {
   return (
     <Select
-      closeMenuOnSelect={false}
+      closeMenuOnSelect={true}
       components={animatedComponents}
       options={CategoriesOptions}
       onChange={setValue}

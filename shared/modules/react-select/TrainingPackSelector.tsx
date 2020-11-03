@@ -1,16 +1,21 @@
 import { theme } from '../../../styles/theme';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
-import { TrainingStyleOptions } from '../../searchOptions/searchOptions';
+import {
+  getDefaultValues,
+  TrainingStyleOptions,
+} from '../../searchOptions/searchOptions';
+import { useEffect } from 'react';
 
 interface Props {
   value: { value: string; label: string }[];
   setValue: (value: { value: string; label: string }[]) => void;
+  initialValue: string | string[] | undefined;
 }
 
 const animatedComponents = makeAnimated();
 
-const TrainingPackSelector = ({ value, setValue }: Props) => {
+const TrainingPackSelector = ({ value, setValue, initialValue }: Props) => {
   const getOptionsColor = (
     label: string,
   ): { color: string; backgroundColor: string; hoverColor: string } => {
@@ -94,6 +99,10 @@ const TrainingPackSelector = ({ value, setValue }: Props) => {
       };
     },
   };
+
+  useEffect(() => {
+    setValue(getDefaultValues(initialValue, TrainingStyleOptions));
+  }, [initialValue]);
 
   return (
     <Select

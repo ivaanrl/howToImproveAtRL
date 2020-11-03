@@ -1,16 +1,21 @@
+import { useEffect } from 'react';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { theme } from '../../../styles/theme';
-import { DifficultyOptions } from '../../searchOptions/searchOptions';
+import {
+  DifficultyOptions,
+  getDefaultValues,
+} from '../../searchOptions/searchOptions';
 
 interface Props {
   value: { value: string; label: string }[];
   setValue: (value: { value: string; label: string }[]) => void;
+  initialValue: string | string[] | undefined;
 }
 
 const animatedComponents = makeAnimated();
 
-const DifficultySelector = ({ value, setValue }: Props) => {
+const DifficultySelector = ({ value, setValue, initialValue }: Props) => {
   const getOptionsColor = (
     label: string,
   ): { color: string; backgroundColor: string; hoverColor: string } => {
@@ -69,6 +74,10 @@ const DifficultySelector = ({ value, setValue }: Props) => {
       };
     },
   };
+
+  useEffect(() => {
+    setValue(getDefaultValues(initialValue, DifficultyOptions));
+  }, [initialValue]);
 
   return (
     <Select
