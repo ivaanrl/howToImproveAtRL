@@ -7,6 +7,7 @@ interface Props {
 }
 
 const TrainingPackCategories = ({ categories }: Props) => {
+  console.log('catttts:', categories);
   return (
     <TrainingPackCategoriesContainer role="categories-container">
       {Object.keys(categories).map((category, index) => {

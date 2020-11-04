@@ -18,6 +18,7 @@ import TrainingPackSelector from '../../shared/modules/react-select/TrainingPack
 import ContentCreatorSelector from '../../shared/modules/react-select/ContentCreatorSelector';
 import DifficultySelector from '../../shared/modules/react-select/difficultySelector';
 import CategorySelector from '../../shared/modules/react-select/CategorySelector';
+import SearchResults from '../../components/searchResults/searchResults';
 
 export default function SearchPage({
   searchResults,
@@ -94,6 +95,7 @@ export default function SearchPage({
           />
         </>
       ) : null}
+      <SearchResults />
     </BackgroundDefault>
   );
 }

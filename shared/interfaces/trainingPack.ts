@@ -21,4 +21,4 @@ export interface TrainingPack {
 }
 
 export const isTrainingPack = (arg: any): arg is TrainingPack =>
-  arg && arg.prop && typeof arg.training_pack_id == 'number';
+  arg && arg.training_pack_id && typeof arg.training_pack_id == 'number';

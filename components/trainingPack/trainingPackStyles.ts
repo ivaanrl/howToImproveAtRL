@@ -1,6 +1,6 @@
-import styled, { css } from "styled-components";
-import { ThemeInterface } from "../../styles/theme";
-import { ClipboardCopy } from "@styled-icons/heroicons-solid/ClipboardCopy";
+import styled, { css } from 'styled-components';
+import { ThemeInterface } from '../../styles/theme';
+import { ClipboardCopy } from '@styled-icons/heroicons-solid/ClipboardCopy';
 
 export const TrainingPackContainer = styled.div`
   display: flex;
@@ -129,6 +129,11 @@ export const TrainingPackCategoryContainer = styled.button<{
   &:hover {
     cursor: pointer;
   }
+
+  &:focus {
+    outline: none;
+  }
+
   ${(props) =>
     props.defensive &&
     css`
