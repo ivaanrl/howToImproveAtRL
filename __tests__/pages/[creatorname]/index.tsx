@@ -2,7 +2,6 @@ import React from 'react';
 import { render } from '../../../test/testsUtils';
 import ContentCreatorPage from '../../../pages/[creatorName]/index';
 import faker from 'faker';
-import { actions as contentCreatorsActions } from '../../../redux/reducers/contentCreators';
 import {
   ContentCreator,
   TrainingPack,
@@ -16,12 +15,6 @@ jest.mock('next/router', () => ({
       creatorName: 'ivanrl',
     },
   })),
-}));
-
-const mockDispatch = jest.fn();
-jest.mock('react-redux', () => ({
-  ...jest.requireActual('react-redux'),
-  useDispatch: () => mockDispatch,
 }));
 
 const featuredTrainingPackCreators: {
@@ -102,9 +95,4 @@ test('renders properly', () => {
   );
 
   expect(getByTestId('content creator name')).toBeInTheDocument();
-
-  expect(mockDispatch).toHaveBeenCalledWith({
-    type: contentCreatorsActions.populate_content_creators.toString(),
-    payload: featuredTrainingPackCreators,
-  });
 });

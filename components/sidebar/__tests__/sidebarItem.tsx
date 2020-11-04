@@ -7,68 +7,14 @@ import SidebarItem, {
 
 const { text, subItems }: sidebarItemPropsInterface = {
   text: 'Category name',
-  subItems: {
-    [faker.internet.userName()]: {
-      contentCreatorInfo: {
-        content_creator_id: faker.random.alphaNumeric(),
-        tiktok: faker.internet.userName(),
-        youtube: faker.internet.userName(),
-        twitter: faker.internet.userName(),
-        steam: faker.internet.userName(),
-        instagram: faker.internet.userName(),
-        personal_website: faker.internet.url(),
-        facebook: faker.internet.userName(),
-        discord: faker.internet.userName(),
-        twitch: faker.internet.userName(),
-        featured: 1,
-        name: faker.internet.userName(),
-        picture: faker.internet.url(),
-      },
-      trainingPacks: [],
-      mechanics: [],
-      tutorials: [],
-    },
-    [faker.internet.userName()]: {
-      contentCreatorInfo: {
-        content_creator_id: faker.random.alphaNumeric(),
-        tiktok: faker.internet.userName(),
-        youtube: faker.internet.userName(),
-        twitter: faker.internet.userName(),
-        steam: faker.internet.userName(),
-        instagram: faker.internet.userName(),
-        personal_website: faker.internet.url(),
-        facebook: faker.internet.userName(),
-        discord: faker.internet.userName(),
-        twitch: faker.internet.userName(),
-        featured: 1,
-        name: faker.internet.userName(),
-        picture: faker.internet.url(),
-      },
-      trainingPacks: [],
-      mechanics: [],
-      tutorials: [],
-    },
-    [faker.internet.userName()]: {
-      contentCreatorInfo: {
-        content_creator_id: faker.random.alphaNumeric(),
-        tiktok: faker.internet.userName(),
-        youtube: faker.internet.userName(),
-        twitter: faker.internet.userName(),
-        steam: faker.internet.userName(),
-        instagram: faker.internet.userName(),
-        personal_website: faker.internet.url(),
-        facebook: faker.internet.userName(),
-        discord: faker.internet.userName(),
-        twitch: faker.internet.userName(),
-        featured: 1,
-        name: faker.internet.userName(),
-        picture: faker.internet.url(),
-      },
-      trainingPacks: [],
-      mechanics: [],
-      tutorials: [],
-    },
-  },
+  subItems: [
+    { name: faker.name.firstName() },
+    { name: faker.name.firstName() },
+    { name: faker.name.firstName() },
+    { name: faker.name.firstName() },
+    { name: faker.name.firstName() },
+    { name: faker.name.firstName() },
+  ],
 };
 
 jest.mock('next/link', () => {
@@ -84,8 +30,8 @@ test('renders properly', () => {
 
   const category = getByRole('button', { name: text });
   expect(category).not.toBeNull();
-  Object.keys(subItems).forEach((item) => {
-    expect(queryByText(item)).toBeNull();
+  subItems.forEach((item) => {
+    expect(queryByText(item.name)).toBeNull();
   });
 });
 
@@ -96,14 +42,14 @@ describe('clicking category hide and show items', () => {
     );
 
     const category = getByRole('button', { name: text });
-    Object.keys(subItems).forEach((item) => {
-      expect(queryByText(item)).toBeNull();
+    subItems.forEach((item) => {
+      expect(queryByText(item.name)).toBeNull();
     });
 
     user.click(category);
 
     for (let key in subItems) {
-      await findByText(key);
+      await findByText(subItems[key].name);
     }
   });
 
@@ -115,8 +61,9 @@ describe('clicking category hide and show items', () => {
     const category = getByRole('button', { name: text });
     user.click(category);
     user.click(category);
-    Object.keys(subItems).forEach((item) => {
-      expect(queryByText(item)).toBeNull();
+
+    subItems.forEach((item) => {
+      expect(queryByText(item.name)).toBeNull();
     });
   });
 });
@@ -128,6 +75,6 @@ test('anchor tag with subItem name is rendered', async () => {
 
   const category = getByRole('button', { name: text });
   user.click(category);
-  const subItem = await findByText(Object.keys(subItems)[0]);
+  const subItem = await findByText(subItems[0].name);
   expect(subItem).toBeInTheDocument();
 });

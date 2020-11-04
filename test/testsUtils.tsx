@@ -7,70 +7,14 @@ import { Provider } from 'react-redux';
 import faker from 'faker';
 
 const initialState: RootState = {
-  contentCreators: {
-    featuredTrainingPackCreators: {
-      ['ivanrl']: {
-        contentCreatorInfo: {
-          content_creator_id: faker.random.alphaNumeric(),
-          tiktok: faker.internet.userName(),
-          youtube: faker.internet.userName(),
-          twitter: faker.internet.userName(),
-          steam: faker.internet.userName(),
-          instagram: faker.internet.userName(),
-          personal_website: faker.internet.url(),
-          facebook: faker.internet.userName(),
-          discord: faker.internet.userName(),
-          twitch: faker.internet.userName(),
-          featured: 1,
-          name: 'ivanrl', //just for making some tests easier
-          picture: faker.internet.url(),
-        },
-        trainingPacks: [],
-        mechanics: [],
-        tutorials: [],
-      },
-      [faker.internet.userName()]: {
-        contentCreatorInfo: {
-          content_creator_id: faker.random.alphaNumeric(),
-          tiktok: faker.internet.userName(),
-          youtube: faker.internet.userName(),
-          twitter: faker.internet.userName(),
-          steam: faker.internet.userName(),
-          instagram: faker.internet.userName(),
-          personal_website: faker.internet.url(),
-          facebook: faker.internet.userName(),
-          discord: faker.internet.userName(),
-          twitch: faker.internet.userName(),
-          featured: 1,
-          name: faker.internet.userName(),
-          picture: faker.internet.url(),
-        },
-        trainingPacks: [],
-        mechanics: [],
-        tutorials: [],
-      },
-      [faker.internet.userName()]: {
-        contentCreatorInfo: {
-          content_creator_id: faker.random.alphaNumeric(),
-          tiktok: faker.internet.userName(),
-          youtube: faker.internet.userName(),
-          twitter: faker.internet.userName(),
-          steam: faker.internet.userName(),
-          instagram: faker.internet.userName(),
-          personal_website: faker.internet.url(),
-          facebook: faker.internet.userName(),
-          discord: faker.internet.userName(),
-          twitch: faker.internet.userName(),
-          featured: 1,
-          name: faker.internet.userName(),
-          picture: faker.internet.url(),
-        },
-        trainingPacks: [],
-        mechanics: [],
-        tutorials: [],
-      },
-    },
-  },
+  contentCreators: [
+    { name: 'ivanrl' },
+    { name: `${faker.internet.userName}` },
+    { name: `${faker.internet.userName}` },
+    { name: `${faker.internet.userName}` },
+    { name: `${faker.internet.userName}` },
+  ],
+  searchResults: { searchResults: [] },
 };
 
 const configureMockStore = configureStore();

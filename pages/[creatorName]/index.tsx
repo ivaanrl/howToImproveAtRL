@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 import {
   TrainingPack as TrainingPackInterface,
   ContentCreator as ContentCreatorInterface,
@@ -10,9 +9,6 @@ import {
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { getFeaturedTrainingPacks } from '../../lib/trainingPacks';
 import ContentCreator from '../../components/contentCreator/contentCreator';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../redux/store';
-import { actions as contentCreatorsActions } from '../../redux/reducers/contentCreators';
 import { getFeaturedContentCreatorsName } from '../../lib/getFeaturedContentCreators';
 
 export default function ContentCreatorPage({
@@ -27,12 +23,7 @@ export default function ContentCreatorPage({
     };
   };
 }) {
-  const state = useSelector((state: RootState) => state.contentCreators);
-  const dispatch = useDispatch();
   const router = useRouter();
-  const [trainingPacks, setTrainingPacks] = useState<TrainingPackInterface[]>();
-
-  console.log(featuredTrainingPackCreators[router.query.creatorName as string]);
 
   return (
     <>
