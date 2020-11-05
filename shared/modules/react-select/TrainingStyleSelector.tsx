@@ -15,7 +15,7 @@ interface Props {
 
 const animatedComponents = makeAnimated();
 
-const TrainingPackSelector = ({ value, setValue, initialValue }: Props) => {
+const TrainingStyleSelector = ({ value, setValue, initialValue }: Props) => {
   const getOptionsColor = (
     label: string,
   ): { color: string; backgroundColor: string; hoverColor: string } => {
@@ -118,4 +118,4 @@ const TrainingPackSelector = ({ value, setValue, initialValue }: Props) => {
   );
 };
 
-export default TrainingPackSelector;
+export default TrainingStyleSelector;

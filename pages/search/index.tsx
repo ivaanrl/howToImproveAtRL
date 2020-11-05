@@ -12,13 +12,19 @@ import {
   searchTrainingPack,
 } from '../../shared/interfaces';
 import { actions as searchResultsActions } from '../../redux/reducers/searchResults';
-import SearchBar from '../../components/searchbar/searchbar';
+import SearchBar from '../../containers/searchbar/searchbar';
 import { BackgroundDefault } from '../../shared/ui/backgroundStyles';
-import TrainingPackSelector from '../../shared/modules/react-select/TrainingPackSelector';
+import TrainingStyleSelector from '../../shared/modules/react-select/TrainingStyleSelector';
 import ContentCreatorSelector from '../../shared/modules/react-select/ContentCreatorSelector';
 import DifficultySelector from '../../shared/modules/react-select/difficultySelector';
 import CategorySelector from '../../shared/modules/react-select/CategorySelector';
-import SearchResults from '../../components/searchResults/searchResults';
+import SearchResults from '../../containers/searchResults/searchResults';
+import {
+  FilterContainer,
+  SelectContainer,
+  SelectLabel,
+} from '../../shared/ui/select-styles/selectStyles';
+import { FilterSearchButton } from '../../shared/ui/buttonStyles';
 
 export default function SearchPage({
   searchResults,
@@ -70,31 +76,54 @@ export default function SearchPage({
       <Head>
         <title>The Best Rocket League Trainings</title>
       </Head>
-      <SearchBar
-        searchValue={searchValue}
-        setSearchValue={setSearchValue}
-        search={search}
-      />
-      <CategorySelector value={category} setValue={setCategory} />
-      {category.label === 'Training Packs' ? (
-        <>
-          <TrainingPackSelector
-            value={trainingPackValue}
-            setValue={setTrainingPackValue}
-            initialValue={router.query.training_styles}
+      <FilterContainer>
+        <SelectContainer>
+          <SelectLabel htmlFor="category-selector">Category</SelectLabel>
+          <CategorySelector
+            id="category-selector"
+            value={category}
+            setValue={setCategory}
           />
-          <ContentCreatorSelector
-            value={contentCreatorValue}
-            setValue={setContentCreatorValue}
-            initialValue={router.query.contentCreators}
+        </SelectContainer>
+        <FilterSearchButton>Search</FilterSearchButton>
+        <SelectContainer>
+          <SelectLabel htmlFor="filter-searchbar">Name</SelectLabel>
+          <SearchBar
+            id="filter-searchbar"
+            searchValue={searchValue}
+            setSearchValue={setSearchValue}
+            search={search}
           />
-          <DifficultySelector
-            value={difficultyValue}
-            setValue={setDifficultyValue}
-            initialValue={router.query.difficulties}
-          />
-        </>
-      ) : null}
+        </SelectContainer>
+        {category.label === 'Training Packs' ? (
+          <>
+            <SelectContainer>
+              <SelectLabel>Training Style</SelectLabel>
+              <TrainingStyleSelector
+                value={trainingPackValue}
+                setValue={setTrainingPackValue}
+                initialValue={router.query.training_styles}
+              />
+            </SelectContainer>
+            <SelectContainer>
+              <SelectLabel>Creator</SelectLabel>
+              <ContentCreatorSelector
+                value={contentCreatorValue}
+                setValue={setContentCreatorValue}
+                initialValue={router.query.contentCreators}
+              />
+            </SelectContainer>
+            <SelectContainer>
+              <SelectLabel>Difficulty</SelectLabel>
+              <DifficultySelector
+                value={difficultyValue}
+                setValue={setDifficultyValue}
+                initialValue={router.query.difficulties}
+              />
+            </SelectContainer>
+          </>
+        ) : null}
+      </FilterContainer>
       <SearchResults />
     </BackgroundDefault>
   );

@@ -38,11 +38,13 @@ const TrainingPackSearchResults = () => {
 
   return (
     <DataTable
-      title="Training Packs"
+      noHeader
       columns={columns}
       data={searchResults as TrainingPack[]}
-      pagination={true}
-      paginationPerPage={10}
+      pagination
+      responsive
+      paginationPerPage={8}
+      paginationRowsPerPageOptions={[8]}
     ></DataTable>
   );
 };

@@ -2,7 +2,7 @@ import '../styles/globals.css';
 import { ThemeProvider } from 'styled-components';
 import { theme } from '../styles/theme';
 import { Provider as NextAuthProvider } from 'next-auth/client';
-import Navbar from '../components/navbar/navbar';
+import Navbar from '../containers/navbar/navbar';
 import { Provider } from 'react-redux';
 import { store } from '../redux/store';
 

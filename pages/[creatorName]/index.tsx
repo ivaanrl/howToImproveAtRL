@@ -8,7 +8,7 @@ import {
 } from '../../shared/interfaces';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { getFeaturedTrainingPacks } from '../../lib/trainingPacks';
-import ContentCreator from '../../components/contentCreator/contentCreator';
+import ContentCreator from '../../containers/contentCreator/contentCreator';
 import { getFeaturedContentCreatorsName } from '../../lib/getFeaturedContentCreators';
 
 export default function ContentCreatorPage({

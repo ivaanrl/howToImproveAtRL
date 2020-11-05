@@ -3,17 +3,9 @@ import { ThemeInterface } from '../../styles/theme';
 import { Search } from '@styled-icons/evil/Search';
 
 export const SearchBarContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   background-color: ${(props) => (props.theme as ThemeInterface).mainTextColor};
-  border: 5px solid ${(props) => (props.theme as ThemeInterface).bgColor};
-  margin: auto;
-  min-width: 50%;
-  max-width: 50%;
-  border-radius: 10px;
+  border-radius: 5px;
   cursor: pointer;
-  margin-top: 10px;
 `;
 
 export const SearchBarInput = styled.input`
