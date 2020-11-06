@@ -19,7 +19,8 @@ export const SelectContainer = styled.div`
   flex-direction: column;
   flex-basis: 50%;
   padding: 20px;
-  padding-top: 10px;
+  padding-top: 5px;
+  padding-bottom: 10px;
 `;
 
 export const SelectLabel = styled.label`

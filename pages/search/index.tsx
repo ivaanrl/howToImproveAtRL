@@ -28,14 +28,17 @@ import { FilterSearchButton } from '../../shared/ui/buttonStyles';
 
 export default function SearchPage({
   searchResults,
+  total_count,
 }: {
   searchResults: (TrainingPack | Mechanic | Tutorial)[];
+  total_count: number;
 }) {
   const router = useRouter();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(searchResultsActions.populate_search_results(searchResults));
+    dispatch(searchResultsActions.update_total_count(total_count));
   }, [router.query]);
 
   const [searchValue, setSearchValue] = useState<string>();
@@ -130,11 +133,11 @@ export default function SearchPage({
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const searchResults = await getSearchResults(
+  const { queryResult, total_count } = await getSearchResults(
     (context.query as unknown) as searchAny | searchTrainingPack,
   );
 
   return {
-    props: { searchResults },
+    props: { searchResults: queryResult, total_count },
   };
 };

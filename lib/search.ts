@@ -7,12 +7,14 @@ import {
 } from '../shared/interfaces';
 import { executeQuery } from './db';
 
+export const PAGE_LIMIT = 6;
+
 export const getSearchResults = async (
   query: searchAny | searchTrainingPack,
 ) => {
   switch (query.searchType) {
-    case 'any':
-      return await getAnySearch(query);
+    /*case 'any':
+      return await getAnySearch(query);*/
     case 'training pack':
       return await getTrainingPackSearch(query);
     default:
@@ -21,6 +23,8 @@ export const getSearchResults = async (
 };
 
 const getTrainingPackSearch = async (query: searchTrainingPack) => {
+  const page = parseInt(query.page, 10) || 0;
+
   const difficulties = query.difficulties
     ? Array.isArray(query.difficulties)
       ? query.difficulties
@@ -60,8 +64,6 @@ const getTrainingPackSearch = async (query: searchTrainingPack) => {
   }%' AND difficulty IN ${difficultyQuery} ${training_style_query}
   `;
 
-  console.log('where query:', whereQuery);
-
   const queryResult: (TrainingPack | Mechanic | Tutorial)[] = JSON.parse(
     JSON.stringify(
       await executeQuery({
@@ -72,13 +74,30 @@ const getTrainingPackSearch = async (query: searchTrainingPack) => {
         INNER JOIN(
                 SELECT name, content_creator_id, featured,picture FROM content_creators
         ) AS content_creators ON training_packs.training_pack_author = content_creators.content_creator_id 
-        WHERE ${whereQuery}`,
+        WHERE ${whereQuery}
+        LIMIT ${PAGE_LIMIT} OFFSET ${page * PAGE_LIMIT}
+        `,
         values: [],
       }),
     ),
   );
 
-  return queryResult;
+  const numberOfResults: { total_count: number }[] = JSON.parse(
+    JSON.stringify(
+      await executeQuery({
+        query: `
+      SELECT COUNT(training_pack_id) as total_count 
+      FROM training_packs
+      INNER JOIN(
+              SELECT name, content_creator_id, featured,picture FROM content_creators
+      ) AS content_creators ON training_packs.training_pack_author = content_creators.content_creator_id 
+      WHERE ${whereQuery}`,
+        values: [],
+      }),
+    ),
+  );
+
+  return { queryResult, total_count: numberOfResults[0].total_count };
 };
 
-const getAnySearch = async (_query: searchAny) => {};
+//const getAnySearch = async (_query: searchAny) => {};

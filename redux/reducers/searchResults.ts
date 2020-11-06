@@ -4,6 +4,7 @@ import { SearchResultReducerState } from '../../shared/interfaces/reducers/searc
 
 const initialState: SearchResultReducerState = {
   searchResults: [],
+  total_count: 0,
 };
 
 const { actions, reducer, name } = createSlice({
@@ -15,6 +16,9 @@ const { actions, reducer, name } = createSlice({
       action: PayloadAction<(TrainingPack | Mechanic | Tutorial)[]>,
     ) {
       state.searchResults = action.payload;
+    },
+    update_total_count(state, action: PayloadAction<number>) {
+      state.total_count = action.payload;
     },
   },
 });

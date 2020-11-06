@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { ThemeInterface } from '../../styles/theme';
 
 export const SearchResultsContainer = styled.div`
-  max-height: 500px;
+  max-height: 550px;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
 

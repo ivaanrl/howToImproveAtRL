@@ -28,3 +28,56 @@ a {
 * {
   box-sizing: border-box;
 }
+
+/*BELOW THIS ARE CSS STYLES FOR REACT PAGINATION
+/ THERE IS NO EASY WAY TO MAKE IT 
+/ WORK WITH STYLED-COMPONENTS
+*/
+/*
+CHECK COLORS FROM styles/theme.ts TO APPLY STYLINGS.
+*/
+.react-pagination-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  list-style-type: none;
+  width: 80%;
+  margin: auto;
+  background-color: #002233; /*bgColorDark*/
+  border-radius: 7px;
+}
+
+.react-pagination-break-me {
+  list-style-type: none;
+  cursor: pointer;
+  color: #faa41a; /*highlightTextColor*/
+}
+.react-pagination-page {
+  list-style-type: none;
+  cursor: pointer;
+  color: #ffffff; /*mainTextColor*/
+}
+.react-pagination-active {
+  list-style-type: none;
+  cursor: pointer;
+  color: #faa41a; /*highlightTextColor*/
+}
+.react-pagination-active:focus {
+  color: black;
+  outline: none;
+}
+.react-pagination-page:focus {
+  outline: none;
+}
+
+.react-pagination-previous,
+.react-pagination-next {
+  list-style-type: none;
+  cursor: pointer;
+  color: #faa41a; /*highlightTextColor*/
+  font-weight: bold;
+  font-size: 20px;
+}
