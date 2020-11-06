@@ -1,10 +1,14 @@
 export interface ThemeInterface {
   bgColor: string;
+  bgColorLighter: string;
   bgColorDark: string;
   bgColorDarkHighlight: string;
   mainTextColor: string;
   mutedTextColor: string;
+  darkTextColor: string;
   highlightTextColor: string;
+  hoverHighlightTextColor: string;
+  highlightTextColorDisabled: string;
   profileHeaderColorOP1: string;
   profileHeaderColorOP0: string;
   profilePictureBorderColor: string;
@@ -35,9 +39,13 @@ export const theme: ThemeInterface = {
   bgColorDark: '#002233',
   bgColorDarkHighlight: '#0b3042',
   bgColor: '#010c2e',
+  bgColorLighter: '#011247',
   mainTextColor: '#FFFFFF',
   mutedTextColor: '#ababab',
+  darkTextColor: 'black',
   highlightTextColor: '#FAA41A',
+  hoverHighlightTextColor: '#fab648',
+  highlightTextColorDisabled: '#c2a372',
   profileHeaderColorOP1: 'rgba(38, 64, 92, 1)',
   profileHeaderColorOP0: 'rgba(38, 64, 92, 0.6)',
   profilePictureBorderColor: '#0b3042',

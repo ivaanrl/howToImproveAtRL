@@ -2,13 +2,10 @@ import { TrainingPack } from '../../shared/interfaces';
 import {
   TrainingPackContainer,
   TraningPackNameContaier,
-  TrainingPackCodeContainer,
-  TrainingPackCodeTextContainer,
-  TrainingPackCodeIconContainer,
-  ClipboardCopyIcon,
+  ImageCodeSpacer,
 } from './trainingPackStyles';
-import { useRef, useState, useEffect } from 'react';
 import TrainingPackCategories from './trainingPackCategories';
+import TrainingPackCode from './TrainingPackCode';
 
 interface Props {
   trainingPackInfo: TrainingPack;
@@ -21,21 +18,6 @@ export const FeaturedTrainingPack = ({ trainingPackInfo }: Props) => {
     training_pack_code,
     training_style,
   } = trainingPackInfo;
-  const ref = useRef<HTMLTextAreaElement>(null);
-  const [showCopiedMessage, setShowCopiedMessage] = useState<boolean>(false);
-
-  const copyCodeToClipboard = () => {
-    if (showCopiedMessage) return;
-    ref.current.select();
-    document.execCommand('copy');
-    setShowCopiedMessage(true);
-  };
-
-  useEffect(() => {
-    setTimeout(() => {
-      setShowCopiedMessage(false);
-    }, 2000);
-  }, [showCopiedMessage]);
 
   return (
     <TrainingPackContainer role="container">
@@ -44,19 +26,8 @@ export const FeaturedTrainingPack = ({ trainingPackInfo }: Props) => {
         style={{ maxHeight: '170px' }}
       />
       <TraningPackNameContaier>{training_pack_name} </TraningPackNameContaier>
-      <TrainingPackCodeContainer>
-        <TrainingPackCodeTextContainer
-          ref={ref}
-          value={showCopiedMessage ? 'Copied!' : training_pack_code}
-          readOnly={true}
-        />
-        <TrainingPackCodeIconContainer
-          data-testid="clipboard button"
-          onClick={copyCodeToClipboard}
-        >
-          <ClipboardCopyIcon />
-        </TrainingPackCodeIconContainer>
-      </TrainingPackCodeContainer>
+      <ImageCodeSpacer />
+      <TrainingPackCode training_pack_code={training_pack_code} />
       <TrainingPackCategories
         categories={JSON.parse(training_style as string)}
       />

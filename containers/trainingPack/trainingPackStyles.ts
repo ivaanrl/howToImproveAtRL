@@ -57,7 +57,6 @@ export const TrainingPackCodeContainer = styled.div`
   align-items: center;
   background-color: ${(props) => (props.theme as ThemeInterface).bgColorDark};
   border-radius: 10px;
-  margin-top: 15px;
   padding: 4px;
   padding-right: 0px;
   height: 30px;
@@ -165,4 +164,8 @@ export const TrainingPackCategoryContainer = styled.button<{
           (props.theme as ThemeInterface).supportHoverColor};
       }
     `};
+`;
+
+export const ImageCodeSpacer = styled.div`
+  height: 15px;
 `;
