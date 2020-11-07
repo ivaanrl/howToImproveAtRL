@@ -69,7 +69,7 @@ const getTrainingPackSearch = async (query: searchTrainingPack) => {
       await executeQuery({
         query: `
         SELECT training_pack_id,field_image,difficulty,training_pack_code,training_style, 
-        training_pack_name, content_creators.name, content_creators.picture 
+        training_pack_name,youtube_explanation, content_creators.name, content_creators.picture 
         FROM training_packs
         INNER JOIN(
                 SELECT name, content_creator_id, featured,picture FROM content_creators
