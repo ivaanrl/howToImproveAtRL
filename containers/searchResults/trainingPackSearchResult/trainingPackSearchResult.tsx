@@ -30,6 +30,15 @@ const TrainingPackSearchResult = ({ trainingPackInfo }: Props) => {
     youtube_explanation,
   } = trainingPackInfo;
 
+  const openInNewTab = () => {
+    const newWindow = window.open(
+      youtube_explanation,
+      '_blank',
+      'noopener,noreferrer',
+    );
+    if (newWindow) newWindow.opener = null;
+  };
+
   return (
     <SearchResultContainer>
       <SearchResultHeader>
@@ -49,13 +58,16 @@ const TrainingPackSearchResult = ({ trainingPackInfo }: Props) => {
             </ContentCreatorName>
           </Link>
         </ContentCreatorNameContainer>
-        {/*<TrainingPackCategories
-          categories={JSON.parse(training_style as string)}
-        />*/}
         <DraggableCategories
           categories={JSON.parse(training_style as string)}
         />
-        <LinkButton active={!!youtube_explanation}>Explanation</LinkButton>
+        <LinkButton
+          active={!!youtube_explanation}
+          disabled={!youtube_explanation}
+          onClick={openInNewTab}
+        >
+          Explanation
+        </LinkButton>
       </SearchResultBodyContainer>
     </SearchResultContainer>
   );

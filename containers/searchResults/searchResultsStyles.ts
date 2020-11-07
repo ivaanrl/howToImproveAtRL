@@ -2,16 +2,19 @@ import styled, { css } from 'styled-components';
 import { ThemeInterface } from '../../styles/theme';
 
 export const SearchResultsContainer = styled.div`
-  height: 55%;
-  max-height: 550px;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
+  margin-bottom: 70px;
 
   @media (min-width: 850px) {
+    margin-top: 20px;
+    margin-bottom: 0px;
+    height: 55%;
     grid-template-columns: repeat(2, 1fr);
   }
 
   @media (min-width: 1280px) {
+    margin-top: 0px;
     grid-template-columns: repeat(3, 1fr);
   }
 `;
@@ -134,7 +137,7 @@ export const LinkButton = styled.button<{ active: boolean }>`
 `;
 
 export const ReactPaginateContainer = styled.div`
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
   bottom: 0;

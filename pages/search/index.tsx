@@ -13,7 +13,6 @@ import {
 } from '../../shared/interfaces';
 import { actions as searchResultsActions } from '../../redux/reducers/searchResults';
 import SearchBar from '../../containers/searchbar/searchbar';
-import { BackgroundDefault } from '../../shared/ui/backgroundStyles';
 import TrainingStyleSelector from '../../shared/modules/react-select/TrainingStyleSelector';
 import ContentCreatorSelector from '../../shared/modules/react-select/ContentCreatorSelector';
 import DifficultySelector from '../../shared/modules/react-select/difficultySelector';
@@ -75,7 +74,7 @@ export default function SearchPage({
   };
 
   return (
-    <BackgroundDefault>
+    <>
       <Head>
         <title>The Best Rocket League Trainings</title>
       </Head>
@@ -128,7 +127,7 @@ export default function SearchPage({
         ) : null}
       </FilterContainer>
       <SearchResults />
-    </BackgroundDefault>
+    </>
   );
 }
 

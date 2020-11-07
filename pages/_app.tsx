@@ -1,14 +1,23 @@
 import '../styles/globals.css';
-import { ThemeProvider } from 'styled-components';
-import { theme } from '../styles/theme';
+import { ThemeProvider, createGlobalStyle } from 'styled-components';
+import { theme, ThemeInterface } from '../styles/theme';
 import { Provider as NextAuthProvider } from 'next-auth/client';
 import Navbar from '../containers/navbar/navbar';
 import { Provider } from 'react-redux';
 import { store } from '../redux/store';
 
 function MyApp({ Component, pageProps }) {
+  const GlobalStyle = createGlobalStyle`
+  
+    body{
+      background-color: ${(props) =>
+        (props.theme as ThemeInterface).bgColorDark}
+    }
+  `;
+
   return (
     <ThemeProvider theme={theme}>
+      <GlobalStyle />
       <NextAuthProvider session={pageProps.session}>
         <Provider store={store}>
           <Navbar />

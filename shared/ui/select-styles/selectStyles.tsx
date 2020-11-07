@@ -17,10 +17,15 @@ export const FilterContainer = styled.div`
 export const SelectContainer = styled.div`
   display: flex;
   flex-direction: column;
-  flex-basis: 50%;
+  flex-basis: 95%;
+  margin: auto;
   padding: 20px;
   padding-top: 5px;
   padding-bottom: 10px;
+  @media (min-width: 705px) {
+    margin: 0;
+    flex-basis: 50%;
+  }
 `;
 
 export const SelectLabel = styled.label`
