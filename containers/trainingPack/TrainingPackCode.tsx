@@ -36,7 +36,10 @@ const TrainingPackCode = ({ training_pack_code }: Props) => {
         onClick={copyCodeToClipboard}
       />
       <TrainingPackCodeIconContainer>
-        <ClipboardCopyIcon onClick={copyCodeToClipboard} />
+        <ClipboardCopyIcon
+          onClick={copyCodeToClipboard}
+          data-testid="clipboard button"
+        />
       </TrainingPackCodeIconContainer>
     </TrainingPackCodeContainer>
   );

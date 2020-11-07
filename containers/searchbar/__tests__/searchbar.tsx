@@ -11,6 +11,7 @@ test('renders properly', () => {
       searchValue=""
       setSearchValue={mockSetSearchValue}
       search={mockSearch}
+      id="test-search-bar"
     />,
   );
   expect(getByPlaceholderText(/search.../i)).toBeInTheDocument();
@@ -23,6 +24,7 @@ test('calls function to update input value', () => {
       searchValue=""
       setSearchValue={mockSetSearchValue}
       search={mockSearch}
+      id="test-search-bar"
     />,
   );
   const searchInput = getByPlaceholderText(/search.../i);
@@ -31,30 +33,17 @@ test('calls function to update input value', () => {
 });
 
 describe('calls search function', () => {
-  test('when clicking search icon', () => {
-    const { getByLabelText } = render(
-      <SearchBar
-        searchValue=""
-        setSearchValue={mockSetSearchValue}
-        search={mockSearch}
-      />,
-    );
-    const searchIcon = getByLabelText('search icon');
-    user.click(searchIcon);
-    expect(mockSearch).toHaveBeenCalled();
-    expect(mockSearch).toHaveBeenCalledTimes(1);
-  });
-
   test('when pressing Enter', () => {
     const { getByPlaceholderText } = render(
       <SearchBar
         searchValue=""
         setSearchValue={mockSetSearchValue}
         search={mockSearch}
+        id="test-search-bar"
       />,
     );
     const searchInput = getByPlaceholderText(/search.../i);
-    user.type(searchInput, '{Enter}');
+    user.type(searchInput, '{enter}');
     expect(mockSearch).toHaveBeenCalled();
     expect(mockSearch).toHaveBeenCalledTimes(1);
   });

@@ -14,7 +14,7 @@ const initialState: RootState = {
     { name: `${faker.internet.userName}` },
     { name: `${faker.internet.userName}` },
   ],
-  searchResults: { searchResults: [] },
+  searchResults: { searchResults: [], total_count: 0 },
 };
 
 const configureMockStore = configureStore();
