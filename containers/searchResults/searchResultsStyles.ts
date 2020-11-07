@@ -7,19 +7,35 @@ export const SearchResultsContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(1, 1fr);
 
-  @media (min-width: 840px) {
+  @media (min-width: 850px) {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media (min-width: 1200px) {
+  @media (min-width: 1280px) {
     grid-template-columns: repeat(3, 1fr);
   }
 `;
 
 export const SearchResultContainer = styled.div`
-  width: 80%;
   margin: auto;
   margin-bottom: 20px;
+  width: 95%;
+
+  @media (min-width: 1200px) {
+    width: 90%;
+  }
+
+  @media (min-width: 1200px) {
+    width: 95%;
+  }
+
+  @media (min-width: 1360px) {
+    width: 90%;
+  }
+
+  @media (min-width: 1530px) {
+    width: 80%;
+  }
 `;
 
 export const SearchResultHeader = styled.div`
