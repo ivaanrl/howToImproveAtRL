@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import { ThemeInterface } from '../../styles/theme';
 
 export const SearchResultsContainer = styled.div`
+  height: 55%;
   max-height: 550px;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
@@ -114,4 +115,12 @@ export const LinkButton = styled.button<{ active: boolean }>`
         cursor: not-allowed;
       }
     `}
+`;
+
+export const ReactPaginateContainer = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin-bottom: 30px;
 `;

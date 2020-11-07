@@ -124,7 +124,6 @@ export const TrainingPackCategoryContainer = styled.button<{
   margin-right: 10px;
   border-radius: 10px;
   color: ${(props) => (props.theme as ThemeInterface).mainTextColor};
-
   &:hover {
     cursor: pointer;
   }
@@ -164,6 +163,11 @@ export const TrainingPackCategoryContainer = styled.button<{
           (props.theme as ThemeInterface).supportHoverColor};
       }
     `};
+`;
+
+export const TrainingPackCategoryName = styled.span`
+  white-space: nowrap;
+  display: inline;
 `;
 
 export const ImageCodeSpacer = styled.div`

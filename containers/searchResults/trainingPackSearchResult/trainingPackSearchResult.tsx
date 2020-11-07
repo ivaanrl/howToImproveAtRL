@@ -15,6 +15,7 @@ import {
 } from '../searchResultsStyles';
 import { TrainingPackCodeContainer } from './trainingPackSearchResultStyles';
 import Link from 'next/link';
+import DraggableCategories from './draggableCategories';
 
 interface Props {
   trainingPackInfo: TrainingPack;
@@ -48,7 +49,10 @@ const TrainingPackSearchResult = ({ trainingPackInfo }: Props) => {
             </ContentCreatorName>
           </Link>
         </ContentCreatorNameContainer>
-        <TrainingPackCategories
+        {/*<TrainingPackCategories
+          categories={JSON.parse(training_style as string)}
+        />*/}
+        <DraggableCategories
           categories={JSON.parse(training_style as string)}
         />
         <LinkButton active={!!youtube_explanation}>Explanation</LinkButton>

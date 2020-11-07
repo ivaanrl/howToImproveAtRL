@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
-import { TrainingPackCategoryContainer } from './trainingPackStyles';
+import {
+  TrainingPackCategoryContainer,
+  TrainingPackCategoryName,
+} from './trainingPackStyles';
 
 export interface Props {
   label: string;
@@ -50,7 +53,9 @@ const TrainingPackCategory = ({ label }: Props) => {
       defensive={color === 'blue'}
       support={color === 'green'}
     >
-      {label.replace('_', ' ')}{' '}
+      <TrainingPackCategoryName>
+        {label.replace('_', ' ')}{' '}
+      </TrainingPackCategoryName>
     </TrainingPackCategoryContainer>
   );
 };

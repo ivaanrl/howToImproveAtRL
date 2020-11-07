@@ -17,6 +17,7 @@
     "next-auth": "^3.1.0",
     "react": "16.14.0",
     "react-dom": "16.14.0",
+    "react-indiana-drag-scroll": "^1.8.0",
     "react-paginate": "^6.5.0",
     "react-popper": "^2.2.3",
     "react-redux": "^7.2.2",
