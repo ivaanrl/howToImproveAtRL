@@ -60,13 +60,13 @@ export default function SearchPage({
       query: {
         searchType: category.value,
         name: searchValue,
-        training_styles: trainingPackValue.map((selectedOption) => {
+        training_styles: trainingPackValue?.map((selectedOption) => {
           return selectedOption?.value;
         }),
-        contentCreators: contentCreatorValue.map((selectedOption) => {
+        contentCreators: contentCreatorValue?.map((selectedOption) => {
           return selectedOption?.value;
         }),
-        difficulties: difficultyValue.map((selectedOption) => {
+        difficulties: difficultyValue?.map((selectedOption) => {
           return selectedOption?.value;
         }),
       },
@@ -87,7 +87,7 @@ export default function SearchPage({
             setValue={setCategory}
           />
         </SelectContainer>
-        <FilterSearchButton>Search</FilterSearchButton>
+        <FilterSearchButton onClick={search}>Search</FilterSearchButton>
         <SelectContainer>
           <SelectLabel htmlFor="filter-searchbar">Name</SelectLabel>
           <SearchBar

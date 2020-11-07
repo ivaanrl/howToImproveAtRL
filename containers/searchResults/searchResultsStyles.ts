@@ -23,6 +23,9 @@ export const SearchResultContainer = styled.div`
   margin: auto;
   margin-bottom: 20px;
   width: 95%;
+  -webkit-box-shadow: 1px 25px 64px -16px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px 25px 64px -16px rgba(0, 0, 0, 0.75);
+  box-shadow: 1px 25px 64px -16px rgba(0, 0, 0, 0.75);
 
   @media (min-width: 1200px) {
     width: 90%;

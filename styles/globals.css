@@ -48,6 +48,9 @@ CHECK COLORS FROM styles/theme.ts TO APPLY STYLINGS.
   margin: auto;
   background-color: #002233; /*bgColorDark*/
   border-radius: 7px;
+  -webkit-box-shadow: 1px 25px 42px -3px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px 25px 42px -3px rgba(0, 0, 0, 0.75);
+  box-shadow: 1px 25px 42px -3px rgba(0, 0, 0, 0.75);
 }
 
 .react-pagination-break-me {

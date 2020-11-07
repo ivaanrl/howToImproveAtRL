@@ -1,6 +1,5 @@
 import { TrainingPack } from '../../../shared/interfaces';
 import TrainingPackCode from '../../trainingPack/TrainingPackCode';
-import TrainingPackCategories from '../../trainingPack/trainingPackCategories';
 import {
   SearchResultBodyContainer,
   SearchResultContainer,

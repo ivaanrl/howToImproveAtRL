@@ -12,6 +12,9 @@ export const FilterContainer = styled.div`
   margin-top: 10px;
   margin-bottom: 10px;
   border-radius: 10px;
+  -webkit-box-shadow: 1px 25px 78px -8px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px 25px 78px -8px rgba(0, 0, 0, 0.75);
+  box-shadow: 1px 25px 78px -8px rgba(0, 0, 0, 0.75);
 `;
 
 export const SelectContainer = styled.div`

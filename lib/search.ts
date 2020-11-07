@@ -23,6 +23,7 @@ export const getSearchResults = async (
 };
 
 const getTrainingPackSearch = async (query: searchTrainingPack) => {
+  console.log(query);
   const page = parseInt(query.page, 10) || 0;
 
   const difficulties = query.difficulties
@@ -58,11 +59,43 @@ const getTrainingPackSearch = async (query: searchTrainingPack) => {
     }
   });
 
+  const content_creators = query.contentCreators
+    ? Array.isArray(query.contentCreators)
+      ? query.contentCreators
+      : [query.contentCreators]
+    : [];
+  let content_creators_query: string;
+  if (content_creators.length > 0) {
+    content_creators_query = '(';
+    content_creators.forEach((content_creator, index: number) => {
+      if (index < content_creators.length - 1) {
+        content_creators_query += `'${content_creator}',`;
+      } else {
+        content_creators_query += `'${content_creator}')`;
+      }
+    });
+  } else {
+    content_creators_query = '';
+  }
+
   const whereQuery = `
   training_pack_name LIKE '%${
     query.name ? query.name : ''
-  }%' AND difficulty IN ${difficultyQuery} ${training_style_query}
+  }%' AND difficulty IN ${difficultyQuery} ${training_style_query} ${
+    content_creators.length > 0 ? ' AND content_creators.name IN ' : ''
+  } ${content_creators_query}
   `;
+
+  console.log(`
+  SELECT training_pack_id,field_image,difficulty,training_pack_code,training_style, 
+  training_pack_name,youtube_explanation, content_creators.name, content_creators.picture 
+  FROM training_packs
+  INNER JOIN(
+          SELECT name, content_creator_id, featured,picture FROM content_creators
+  ) AS content_creators ON training_packs.training_pack_author = content_creators.content_creator_id 
+  WHERE ${whereQuery}
+  LIMIT ${PAGE_LIMIT} OFFSET ${page * PAGE_LIMIT}
+  `);
 
   const queryResult: (TrainingPack | Mechanic | Tutorial)[] = JSON.parse(
     JSON.stringify(
