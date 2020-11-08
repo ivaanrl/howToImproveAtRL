@@ -52,10 +52,11 @@ export const getStaticProps: GetStaticProps = async () => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const featuredCreators = await getFeaturedContentCreatorsName();
+  const paths = featuredCreators.map((featuredCreator: { name: string }) => {
+    return { params: { creatorName: featuredCreator.name } };
+  });
   return {
-    paths: featuredCreators.map((featuredCreator: { name: string }) => {
-      return { params: { creatorName: featuredCreator.name } };
-    }),
-    fallback: true,
+    paths,
+    fallback: false,
   };
 };
