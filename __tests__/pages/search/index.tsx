@@ -84,7 +84,7 @@ describe('correct queries are sent', () => {
     expect(mockRouterPush).toHaveBeenCalledWith({
       query: {
         searchType: 'training pack',
-        name: undefined,
+        name: '',
         contentCreators: [undefined],
         difficulties: [undefined],
         training_styles: ['Striker', 'Offense', 'Passing'],
@@ -109,7 +109,7 @@ describe('correct queries are sent', () => {
     expect(mockRouterPush).toHaveBeenCalledTimes(2);
     expect(mockRouterPush).toHaveBeenCalledWith({
       query: {
-        name: undefined,
+        name: '',
         page: 0,
         contentCreators: [undefined],
         difficulties: ['Easy', 'Hard'],
@@ -135,9 +135,31 @@ describe('correct queries are sent', () => {
     expect(mockRouterPush).toHaveBeenCalledTimes(2);
     expect(mockRouterPush).toHaveBeenCalledWith({
       query: {
-        name: undefined,
+        name: '',
         page: 0,
         contentCreators: ['ivanrl'],
+        difficulties: [undefined],
+        searchType: 'training pack',
+        training_styles: [undefined],
+      },
+    });
+  });
+
+  test('only with name', async () => {
+    const { getByPlaceholderText, getByRole } = render(
+      <SearchPage searchResults={searchResults} total_count={total_count} />,
+    );
+    user.type(getByPlaceholderText(/search.../i), 'search name');
+
+    const searchButton = getByRole('button', { name: /search/i });
+    user.click(searchButton);
+
+    expect(mockRouterPush).toHaveBeenCalledTimes(2);
+    expect(mockRouterPush).toHaveBeenCalledWith({
+      query: {
+        name: 'search name',
+        page: 0,
+        contentCreators: [undefined],
         difficulties: [undefined],
         searchType: 'training pack',
         training_styles: [undefined],

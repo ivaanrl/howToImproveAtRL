@@ -40,7 +40,7 @@ export default function SearchPage({
     dispatch(searchResultsActions.update_total_count(total_count));
   }, [router.query]);
 
-  const [searchValue, setSearchValue] = useState<string>();
+  const [searchValue, setSearchValue] = useState<string>('');
   const [category, setCategory] = useState<{ value: string; label: string }>({
     value: 'training pack',
     label: 'Training Packs',
@@ -96,6 +96,7 @@ export default function SearchPage({
             searchValue={searchValue}
             setSearchValue={setSearchValue}
             search={search}
+            initialValue={router.query.name as string}
           />
         </SelectContainer>
         {category.label === 'Training Packs' ? (

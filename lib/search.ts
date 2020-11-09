@@ -13,8 +13,8 @@ export const getSearchResults = async (
   query: searchAny | searchTrainingPack,
 ) => {
   switch (query.searchType) {
-    /*case 'any':
-      return await getAnySearch(query);*/
+    case 'any':
+      return await getAnySearch(query);
     case 'training pack':
       return await getTrainingPackSearch(query);
     default:
@@ -133,4 +133,7 @@ const getTrainingPackSearch = async (query: searchTrainingPack) => {
   return { queryResult, total_count: numberOfResults[0].total_count };
 };
 
-//const getAnySearch = async (_query: searchAny) => {};
+const getAnySearch = async (_query: searchAny) => {
+  const queryResult: (TrainingPack | Mechanic | Tutorial)[] = [];
+  return { queryResult, total_count: 0 };
+};

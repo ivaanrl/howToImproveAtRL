@@ -88,18 +88,6 @@ export const TrainingStyleOptions = [
   },
 ];
 
-export const ContentCreatorOptions = () => {
-  const contentCreators = useSelector(
-    (state: RootState) => state.contentCreators,
-  );
-
-  const contentCreatorOptionsArray = contentCreators.map((contentCreator) => {
-    return { value: contentCreator.name, label: contentCreator.name };
-  });
-
-  return contentCreatorOptionsArray;
-};
-
 export const DifficultyOptions = [
   {
     value: 'Easy',

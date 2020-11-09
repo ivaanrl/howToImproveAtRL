@@ -23,7 +23,10 @@ const Navbar = () => {
   const [search, setSearch] = useState<string>('');
 
   const handleSearch = () => {
-    router.push({ pathname: '/search', query: { name: search } });
+    router.push({
+      pathname: '/search',
+      query: { name: search, searchType: 'any' },
+    });
   };
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {

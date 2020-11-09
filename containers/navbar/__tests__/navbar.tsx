@@ -82,6 +82,6 @@ test('search redirects to correct path', () => {
   expect(mockPushRouter).toHaveBeenCalledTimes(1);
   expect(mockPushRouter).toHaveBeenCalledWith({
     pathname: '/search',
-    query: { name: searchQuery },
+    query: { name: searchQuery, searchType: 'any' },
   });
 });
