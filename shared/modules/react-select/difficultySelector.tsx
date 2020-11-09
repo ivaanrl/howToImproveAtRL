@@ -11,11 +11,12 @@ interface Props {
   value: { value: string; label: string }[];
   setValue: (value: { value: string; label: string }[]) => void;
   initialValue: string | string[] | undefined;
+  id: string;
 }
 
 const animatedComponents = makeAnimated();
 
-const DifficultySelector = ({ value, setValue, initialValue }: Props) => {
+const DifficultySelector = ({ value, setValue, initialValue, id }: Props) => {
   const getOptionsColor = (
     label: string,
   ): { color: string; backgroundColor: string; hoverColor: string } => {
@@ -89,6 +90,10 @@ const DifficultySelector = ({ value, setValue, initialValue }: Props) => {
       onChange={setValue}
       value={value}
       placeholder="Select Difficulty..."
+      aria-label="difficulty-selector"
+      id={id}
+      name={id}
+      inputId={id}
     />
   );
 };

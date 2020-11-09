@@ -69,6 +69,7 @@ export default function SearchPage({
         difficulties: difficultyValue?.map((selectedOption) => {
           return selectedOption?.value;
         }),
+        page: 0,
       },
     });
   };
@@ -79,7 +80,7 @@ export default function SearchPage({
         <title>The Best Rocket League Trainings</title>
       </Head>
       <FilterContainer>
-        <SelectContainer>
+        <SelectContainer data-testid="category-selector-form">
           <SelectLabel htmlFor="category-selector">Category</SelectLabel>
           <CategorySelector
             id="category-selector"
@@ -99,28 +100,38 @@ export default function SearchPage({
         </SelectContainer>
         {category.label === 'Training Packs' ? (
           <>
-            <SelectContainer>
-              <SelectLabel>Training Style</SelectLabel>
+            <SelectContainer data-testid="training-style-selector-form">
+              <SelectLabel htmlFor="training-style-selector">
+                Training Style
+              </SelectLabel>
+
               <TrainingStyleSelector
                 value={trainingPackValue}
                 setValue={setTrainingPackValue}
                 initialValue={router.query.training_styles}
+                selectId="training-style-selector"
               />
             </SelectContainer>
-            <SelectContainer>
-              <SelectLabel>Creator</SelectLabel>
+            <SelectContainer data-testid="content-creator-selector-form">
+              <SelectLabel htmlFor="content-creator-selector">
+                Creator
+              </SelectLabel>
               <ContentCreatorSelector
                 value={contentCreatorValue}
                 setValue={setContentCreatorValue}
                 initialValue={router.query.contentCreators}
+                id="content-creator-selector"
               />
             </SelectContainer>
-            <SelectContainer>
-              <SelectLabel>Difficulty</SelectLabel>
+            <SelectContainer data-testid="difficulty-selector-form">
+              <SelectLabel htmlFor="difficulty-selector">
+                Difficulty
+              </SelectLabel>
               <DifficultySelector
                 value={difficultyValue}
                 setValue={setDifficultyValue}
                 initialValue={router.query.difficulties}
+                id="difficulty-selector"
               />
             </SelectContainer>
           </>

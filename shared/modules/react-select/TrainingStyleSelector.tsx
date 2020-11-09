@@ -11,11 +11,17 @@ interface Props {
   value: { value: string; label: string }[];
   setValue: (value: { value: string; label: string }[]) => void;
   initialValue: string | string[] | undefined;
+  selectId: string;
 }
 
 const animatedComponents = makeAnimated();
 
-const TrainingStyleSelector = ({ value, setValue, initialValue }: Props) => {
+const TrainingStyleSelector = ({
+  value,
+  setValue,
+  initialValue,
+  selectId,
+}: Props) => {
   const getOptionsColor = (
     label: string,
   ): { color: string; backgroundColor: string; hoverColor: string } => {
@@ -114,6 +120,10 @@ const TrainingStyleSelector = ({ value, setValue, initialValue }: Props) => {
       onChange={setValue}
       value={value}
       placeholder="Select Training Packs..."
+      aria-label={selectId}
+      id={selectId}
+      name={selectId}
+      inputId={selectId}
     />
   );
 };

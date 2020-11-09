@@ -17,7 +17,7 @@ export const FilterContainer = styled.div`
   box-shadow: 1px 25px 78px -8px rgba(0, 0, 0, 0.75);
 `;
 
-export const SelectContainer = styled.div`
+export const SelectContainer = styled.form`
   display: flex;
   flex-direction: column;
   flex-basis: 95%;

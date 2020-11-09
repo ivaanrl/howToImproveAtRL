@@ -24,6 +24,7 @@ const SearchBar = ({ searchValue, setSearchValue, search, id }: Props) => {
         value={searchValue}
         onChange={handleChange}
         onKeyPress={handleKeyPress}
+        name={id}
       />
     </SearchBarContainer>
   );

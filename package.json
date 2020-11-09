@@ -50,6 +50,7 @@
     "jest-dom": "^4.0.0",
     "jest-styled-components": "^7.0.3",
     "prettier": "^2.1.2",
+    "react-select-event": "^5.1.0",
     "redux-mock-store": "^1.5.4",
     "ts-jest": "^26.4.3",
     "ts-node": "^9.0.0",

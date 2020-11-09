@@ -133,5 +133,6 @@ export const getDefaultValues = (
       (trainingStyleOption) => trainingStyleOption.value === selectedOption,
     );
   });
+
   return defaultValues;
 };
